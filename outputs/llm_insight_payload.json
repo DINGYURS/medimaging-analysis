@@ -1,0 +1,59 @@
+{
+  "status": "ready_for_llm_inference",
+  "patient_context": {
+    "patient_id": "LIDC-IDRI-0402",
+    "modality": "CT",
+    "study_description": "CT CHEST O CONTR",
+    "slice_count": 268,
+    "slice_thickness_mm": 1.25,
+    "pixel_spacing_mm": [
+      0.742188,
+      0.742188
+    ]
+  },
+  "lesion_count": 1,
+  "lesions": [
+    {
+      "lesion_id": 1,
+      "spatial_location": {
+        "world_lps_coords_mm": [
+          52.47,
+          12.95,
+          -37.82
+        ],
+        "centroid_voxel": [
+          298.7,
+          291.6,
+          240.9
+        ]
+      },
+      "clinical_measurements": {
+        "longest_diameter_mm": 32.31,
+        "major_axis_mm": 26.56,
+        "volume_mm3": 4574.96,
+        "equivalent_spherical_diameter_mm": 20.72
+      },
+      "density_and_attenuation": {
+        "mean_hu": -506.6,
+        "median_hu": -561.0,
+        "attenuation_type": "纯磨玻璃结节 (pGGO / Non-solid)",
+        "hu_range": [
+          -1065.0,
+          301.0
+        ]
+      },
+      "morphological_features": {
+        "sphericity": 0.6547,
+        "compactness": 0.0,
+        "surface_to_volume_ratio": 0.445,
+        "margin_evaluation": "形态轻度欠规则，可见分叶或轻度切迹"
+      },
+      "internal_heterogeneity": {
+        "entropy": 5.2206,
+        "glcm_contrast": 94.2312,
+        "texture_complexity": 5984.22
+      }
+    }
+  ],
+  "llm_prompt_template": "你是一名资深的放射科临床专家与胸部影像诊断医师。请根据以下患者胸部 CT 扫描的结构化量化分析数据（包括病灶解剖定位、体积测算、三维形态组学与密度分布特征），撰写一份专业的【影像学所见】、【影像学诊断意见】与【下一步临床随访建议】：\n\n### 患者与检查信息\n- 检查类型：CT (CT CHEST O CONTR)\n- 检查层数与层厚：268 层，层厚 1.25 mm\n\n### 算法识别病灶与定量组学指标（检出病灶共 1 处）\n#### 病灶 #1:\n- 三维解剖空间坐标 (LPS mm): [52.47, 12.95, -37.82]\n- 尺寸与体积：最大长径 32.31 mm，长轴 26.56 mm，三维体积 4574.96 mm³\n- 密度特征：平均 CT 值 -506.6 HU（区间 -1065.0 ~ 301.0 HU），属于【纯磨玻璃结节 (pGGO / Non-solid)】\n- 形态特征：球形度 0.6547，形态评估：形态轻度欠规则，可见分叶或轻度切迹\n- 内部异质性：灰度熵值 5.2206，纹理复杂度 5984.22\n\n### 输出要求\n1. 【影像所见】：客观详述病灶的位置、形态、大小（长径/体积）、密度特点及边缘情况；\n2. 【影像诊断】：给出定性或鉴别诊断倾向（参考 Fleischner 指南或 Lung-RADS 分级倾向）；\n3. 【临床建议】：给出具体随访周期（如 3/6/12 个月复查薄层 CT）或进一步检查建议（增强扫描/PET-CT/穿刺活检等）。"
+}

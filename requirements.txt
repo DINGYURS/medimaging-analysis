@@ -1,0 +1,11 @@
+# Core medical imaging stack
+SimpleITK==2.5.3
+pydicom==3.0.2
+nibabel==5.4.2
+numpy==1.26.4
+pandas==2.2.3
+scipy==1.17.1
+
+# Radiomics engine (IBSI standardized)
+# Note: install with `pip install --no-build-isolation pyradiomics==3.0.1`
+pyradiomics==3.0.1

@@ -1,0 +1,37 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "1. 启动后端服务 (Background)",
+      "type": "shell",
+      "command": "/data/medimaging-analysis/backend/service.sh restart",
+      "problemMatcher": []
+    },
+    {
+      "label": "2. 启动前端服务 (Background)",
+      "type": "shell",
+      "command": "/data/medimaging-analysis/frontend/service.sh restart",
+      "problemMatcher": []
+    },
+    {
+      "label": "一键启动全部服务",
+      "dependsOn": ["1. 启动后端服务 (Background)", "2. 启动前端服务 (Background)"],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "查看服务状态",
+      "type": "shell",
+      "command": "/data/medimaging-analysis/backend/service.sh status; echo '---'; /data/medimaging-analysis/frontend/service.sh status",
+      "problemMatcher": []
+    },
+    {
+      "label": "停止全部服务",
+      "type": "shell",
+      "command": "/data/medimaging-analysis/backend/service.sh stop; /data/medimaging-analysis/frontend/service.sh stop",
+      "problemMatcher": []
+    }
+  ]
+}

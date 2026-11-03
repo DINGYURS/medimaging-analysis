@@ -1,0 +1,128 @@
+# ==============================================================================
+# Python & Byte-compiled files
+# ==============================================================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.dylib
+*.dll
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# ==============================================================================
+# Virtual Environments & Packages
+# ==============================================================================
+.env
+.env.*
+!.env.example
+.venv
+venv/
+env/
+ENV/
+conda-env/
+
+# ==============================================================================
+# Node & Frontend Build Artifacts
+# ==============================================================================
+node_modules/
+frontend/node_modules/
+frontend/dist/
+frontend/dist-ssr/
+*.tsbuildinfo
+.npm/
+.pnpm-store/
+
+# ==============================================================================
+# Logs, Process IDs & Cache
+# ==============================================================================
+*.log
+*.pid
+logs/
+backend/*.log
+backend/*.pid
+frontend/*.log
+frontend/*.pid
+.cache/
+tmp/
+temp/
+
+# ==============================================================================
+# Medical Imaging & Large Datasets (医学影像、体数据与数据集)
+# ==============================================================================
+# Data directories
+data/
+storage/
+dicom_data/
+raw_data/
+datasets/
+inputs/
+
+# Medical imaging file formats
+*.dcm
+*.DCM
+*.dicom
+*.DICOM
+*.nii
+*.nii.gz
+*.nii.bz2
+*.mhd
+*.raw
+*.mha
+*.nrrd
+*.nhdr
+*.hdr
+*.img
+*.h5
+*.hdf5
+*.npy
+*.npz
+
+# Deep learning weights & checkpoints
+*.pt
+*.pth
+*.ckpt
+*.bin
+*.onnx
+*.safetensors
+*.engine
+nnUNet_raw/
+nnUNet_preprocessed/
+nnUNet_results/
+
+# Outputs directory: ignore large images and segmentation folders
+outputs/*.nii.gz
+outputs/*.nii
+outputs/*.dcm
+outputs/*.raw
+outputs/*.mhd
+outputs/*.mha
+outputs/*.nrrd
+outputs/segmentation/
+
+# ==============================================================================
+# Archives & Compressed files
+# ==============================================================================
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.rar
+*.7z
+*.gz
+
+# ==============================================================================
+# IDEs and Editors
+# ==============================================================================
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
