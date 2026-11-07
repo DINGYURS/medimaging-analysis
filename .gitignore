@@ -92,15 +92,9 @@ nnUNet_raw/
 nnUNet_preprocessed/
 nnUNet_results/
 
-# Outputs directory: ignore large images and segmentation folders
-outputs/*.nii.gz
-outputs/*.nii
-outputs/*.dcm
-outputs/*.raw
-outputs/*.mhd
-outputs/*.mha
-outputs/*.nrrd
-outputs/segmentation/
+# Generated analysis results and exports
+/outputs/
+/output/
 
 # ==============================================================================
 # Archives & Compressed files
@@ -126,3 +120,34 @@ outputs/segmentation/
 *.swo
 .DS_Store
 Thumbs.db
+
+# ==============================================================================
+# Deployment backups, local QA artifacts & temporary source copies
+# ==============================================================================
+/.deployment/
+/.playwright-cli/
+/.playwright-mcp/
+/playwright-report/
+/test-results/
+*.bak
+*.orig
+*.rej
+*~
+_tmp_*
+
+# Python test, lint & notebook caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+.ipynb_checkpoints/
+
+# Local databases & private keys
+*.sqlite
+*.sqlite3
+*.db
+*.db-journal
+*.pem
+*.key
