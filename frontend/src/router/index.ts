@@ -2,11 +2,15 @@ import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import { useAuthStore } from '@/stores/auth';
 
 import Login from '@/views/Login.vue';
+import Register from '@/views/Register.vue';
 import StudyDashboard from '@/views/StudyDashboard.vue';
 import MedicalWorkspace from '@/views/MedicalWorkspace.vue';
 import AdminUsers from '@/views/AdminUsers.vue';
+import FeatureExportView from '@/views/FeatureExportView.vue';
+
 
 const routes: RouteRecordRaw[] = [
+  { path: '/register', name: 'Register', component: Register, meta: { public: true } },
   {
     path: '/login',
     name: 'Login',
@@ -27,6 +31,12 @@ const routes: RouteRecordRaw[] = [
     path: '/workspace/:studyId',
     name: 'MedicalWorkspace',
     component: MedicalWorkspace,
+    meta: { requiresAuth: true },
+  },
+  {
+    path: '/tasks/feature-export',
+    name: 'FeatureExport',
+    component: FeatureExportView,
     meta: { requiresAuth: true },
   },
   {

@@ -22,7 +22,6 @@ async def init_database():
                 hashed_password=get_password_hash("admin123"),
                 real_name="系统管理员",
                 role="ADMIN",
-                department="信息中心",
                 is_active=True
             )
             session.add(admin_user)
@@ -37,7 +36,6 @@ async def init_database():
                 hashed_password=get_password_hash("doctor123"),
                 real_name="张医生",
                 role="DOCTOR",
-                department="胸部放射科",
                 is_active=True
             )
             session.add(doctor_user)

@@ -1,4 +1,5 @@
 import os
+import asyncio
 import io
 from typing import List, Optional, Dict
 from pathlib import Path
@@ -101,6 +102,7 @@ async def upload_dicom_study(
     return res.scalar_one()
 
 @router.get("", response_model=List[StudyOut])
+@router.get("/", response_model=List[StudyOut], include_in_schema=False)
 async def list_doctor_studies(
     db: AsyncSession = Depends(get_db),
     doctor: User = Depends(require_doctor)
@@ -403,3 +405,17 @@ async def get_study_volume_pack(
         media_type="application/octet-stream",
         headers={"Content-Encoding": "gzip", "X-Cache": "MISS"}
     )
+
+
+@router.get("/{study_id}/intensity-unit")
+async def get_study_intensity_unit(study_id: int, db: AsyncSession = Depends(get_db), doctor: User = Depends(require_doctor)):
+    """Verify saved voxel units from original DICOM without modifying the database."""
+    query = select(Study).where(Study.id == study_id)
+    if doctor.role != "ADMIN":
+        query = query.where(Study.doctor_id == doctor.id)
+    study = (await db.execute(query)).scalar_one_or_none()
+    if not study:
+        raise HTTPException(status_code=404, detail="检查记录不存在或无权访问")
+    from src.dicom_io import verify_dicom_intensity_unit
+    metadata = study.metadata_json or {}
+    return await asyncio.to_thread(verify_dicom_intensity_unit, study.dicom_dir, study.nifti_path, metadata.get('series_instance_uid'))

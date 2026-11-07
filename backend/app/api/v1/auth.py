@@ -2,10 +2,11 @@ from datetime import datetime
 from fastapi import APIRouter, Depends, HTTPException, status, Body
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
+from sqlalchemy.exc import IntegrityError
 from app.api.deps import get_db, get_current_user
 from app.db.models import User
-from app.core.security import verify_password, create_access_token
-from app.schemas.user import UserLogin, Token, UserOut
+from app.core.security import verify_password, create_access_token, get_password_hash
+from app.schemas.user import UserLogin, Token, UserOut, UserRegister
 
 router = APIRouter()
 
@@ -42,3 +43,23 @@ async def login(
 @router.get("/me", response_model=UserOut)
 async def get_me(current_user: User = Depends(get_current_user)):
     return current_user
+
+
+@router.post("/register", response_model=UserOut, status_code=status.HTTP_201_CREATED)
+async def register(payload: UserRegister, db: AsyncSession = Depends(get_db)):
+    existing = await db.execute(select(User).where(User.username == payload.username))
+    if existing.scalar_one_or_none():
+        raise HTTPException(status_code=409, detail="该登录账号已被使用，请更换账号")
+    user = User(username=payload.username, hashed_password=get_password_hash(payload.password),
+                real_name=payload.real_name, role="DOCTOR", is_active=True)
+    db.add(user)
+    try:
+        await db.commit()
+    except IntegrityError as exc:
+        await db.rollback()
+        # MySQL duplicate key, including concurrent registrations.
+        if getattr(exc.orig, "args", (None,))[0] == 1062:
+            raise HTTPException(status_code=409, detail="该登录账号已被使用，请更换账号") from exc
+        raise
+    await db.refresh(user)
+    return user

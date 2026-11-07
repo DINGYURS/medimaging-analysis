@@ -11,7 +11,6 @@ class User(Base):
     hashed_password = Column(String(255), nullable=False)
     real_name = Column(String(64), nullable=False)
     role = Column(String(20), nullable=False, default="DOCTOR", index=True)  # ADMIN / DOCTOR
-    department = Column(String(64), nullable=True, default="放射科")
     is_active = Column(Boolean, default=True, nullable=False)
     last_login_at = Column(DateTime, nullable=True)
     created_at = Column(DateTime, default=datetime.utcnow, nullable=False)

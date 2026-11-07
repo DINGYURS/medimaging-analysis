@@ -19,6 +19,12 @@ class Settings(BaseSettings):
     def SQLALCHEMY_DATABASE_URI(self) -> str:
         return f"mysql+asyncmy://{self.MYSQL_USER}:{self.MYSQL_PASSWORD}@{self.MYSQL_SERVER}:{self.MYSQL_PORT}/{self.MYSQL_DB}?charset=utf8mb4"
     
+    # 候选病灶检测模型服务端点 (对接服务器常驻运行的 Dataset712 模型服务集群)
+    LUNG_NODULE_CANDIDATE_ENDPOINT: str = os.getenv(
+        "LUNG_NODULE_CANDIDATE_ENDPOINT",
+        "http://127.0.0.1:8112,http://127.0.0.1:8113,http://127.0.0.1:8114,http://127.0.0.1:8115"
+    )
+
     # GPU 并发限流配置 (用户要求默认最多 2 个并行推理，支持动态调整)
     MAX_GPU_CONCURRENT_TASKS: int = int(os.getenv("MAX_GPU_CONCURRENT_TASKS", "2"))
     

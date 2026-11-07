@@ -1,3 +1,4 @@
+from typing import Any
 import os
 import sys
 import time
@@ -17,7 +18,8 @@ from src.dicom_io import load_dicom_series
 from src.lesion_detector import run_nnunet_inference, analyze_lesion_components
 from src.radiomics_engine import (
     extract_lesion_radiomics,
-    get_default_radiomics_extractor
+    get_default_radiomics_extractor,
+    get_configurable_radiomics_extractor
 )
 from src.report_adapter import format_llm_clinical_insight_payload
 
@@ -202,3 +204,124 @@ async def run_task_pipeline_background(task_id: int):
             task.error_message = f"流水线执行异常: {str(e)}\n{traceback.format_exc()[:500]}"
             task.total_execution_time = round(time.time() - start_time, 2)
             await db.commit()
+
+
+async def recalculate_task_radiomics(
+    task_id: int,
+    config: Any
+) -> list[dict[str, Any]]:
+    """
+    ????? IBSI ?????????????????????
+    ???????? JSON ????????????.
+    """
+    from sqlalchemy.orm import selectinload
+
+    async with AsyncSessionLocal() as db:
+        res = await db.execute(
+            select(AnalysisTask)
+            .options(
+                selectinload(AnalysisTask.study),
+                selectinload(AnalysisTask.lesions).selectinload(Lesion.radiomics)
+            )
+            .where(AnalysisTask.id == task_id)
+        )
+        task = res.scalar_one_or_none()
+        if not task or not task.lesions:
+            raise ValueError("????????????")
+
+        study = task.study
+        if not study or not study.nifti_path or not os.path.exists(study.nifti_path):
+            raise ValueError("??????????")
+
+        mask_file = task.lesions[0].mask_nifti_path
+        if not mask_file or not os.path.exists(mask_file):
+            raise ValueError("???????????")
+
+        resampled_spacing = None
+        if config.resampling_mode == "isotropic_1mm":
+            resampled_spacing = (1.0, 1.0, 1.0)
+        elif config.resampling_mode == "custom" and config.custom_spacing:
+            resampled_spacing = tuple(config.custom_spacing)
+
+        resegment_range = None
+        if config.resegmentation_enabled:
+            resegment_range = (config.resegment_min_hu, config.resegment_max_hu)
+
+        config_summary = {
+            "resampling_mode": config.resampling_mode,
+            "custom_spacing": list(resampled_spacing) if resampled_spacing else "native",
+            "bin_width": config.bin_width,
+            "interpolator": config.interpolator,
+            "resegmentation_enabled": config.resegmentation_enabled,
+            "resegment_min_hu": config.resegment_min_hu,
+            "resegment_max_hu": config.resegment_max_hu,
+            "selected_classes": config.selected_classes
+        }
+
+        def _sync_recalculate():
+            image_sitk = sitk.ReadImage(study.nifti_path)
+            mask_sitk = sitk.ReadImage(mask_file)
+
+            if mask_sitk.GetSize() != image_sitk.GetSize():
+                resampler = sitk.ResampleImageFilter()
+                resampler.SetReferenceImage(image_sitk)
+                resampler.SetInterpolator(sitk.sitkNearestNeighbor)
+                mask_sitk = resampler.Execute(mask_sitk)
+
+            from scipy import ndimage as ndi
+            mask_arr = sitk.GetArrayFromImage(mask_sitk)
+            labeled_mask, num_labels = ndi.label(mask_arr > 0)
+
+            extractor = get_configurable_radiomics_extractor(
+                bin_width=config.bin_width,
+                resampled_spacing=resampled_spacing,
+                interpolator=config.interpolator,
+                feature_classes=config.selected_classes,
+                resegment_range=resegment_range
+            )
+
+            new_results = []
+            for lesion in task.lesions:
+                lid = lesion.lesion_index
+                single_lesion_arr = (labeled_mask == lid).astype(np.uint8)
+                if np.sum(single_lesion_arr) == 0:
+                    single_lesion_arr = (mask_arr > 0).astype(np.uint8)
+
+                single_mask_img = sitk.GetImageFromArray(single_lesion_arr)
+                single_mask_img.CopyInformation(image_sitk)
+
+                radiomics_data = extract_lesion_radiomics(
+                    image=image_sitk,
+                    mask=single_mask_img,
+                    lesion_id=lid,
+                    extractor=extractor,
+                    config_summary=config_summary
+                )
+                new_results.append(radiomics_data)
+
+            return new_results
+
+        new_results = await asyncio.to_thread(_sync_recalculate)
+
+        # Update JSON file
+        rad_json_file = Path(settings.RADIOMICS_DIR) / f"task_{task.id}_features.json"
+        with open(rad_json_file, "w", encoding="utf-8") as f:
+            json.dump(new_results, f, ensure_ascii=False, indent=2)
+
+        # Update DB records
+        for idx, lesion in enumerate(task.lesions):
+            if idx < len(new_results):
+                rad_data = new_results[idx]
+                rad_rec = lesion.radiomics
+                if rad_rec:
+                    rad_rec.feature_count = rad_data.get("total_extracted_features_count", len(rad_data.get("all_raw_features", {})))
+                    rad_rec.shape_features = rad_data.get("features_by_class", {}).get("shape", {})
+                    rad_rec.firstorder_features = rad_data.get("features_by_class", {}).get("firstorder", {})
+                    rad_rec.texture_features = rad_data.get("features_by_class", {}).get("texture", {})
+                    rad_rec.full_features_json_path = str(rad_json_file)
+                sum_data = rad_data.get("clinical_summary", {})
+                if sum_data.get("attenuation_category"):
+                    lesion.density_type = sum_data["attenuation_category"]
+
+        await db.commit()
+        return new_results

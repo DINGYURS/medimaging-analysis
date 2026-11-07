@@ -40,7 +40,6 @@ async def create_doctor(
         hashed_password=get_password_hash(payload.password),
         real_name=payload.real_name,
         role=payload.role or "DOCTOR",
-        department=payload.department or "放射科",
         is_active=payload.is_active if payload.is_active is not None else True
     )
     db.add(new_user)

@@ -17,7 +17,10 @@ api.interceptors.request.use((config) => {
 api.interceptors.response.use(
   (response) => response.data,
   (error) => {
-    const detail = error.response?.data?.detail || error.message || '请求服务发生异常';
+    const rawDetail = error.response?.data?.detail;
+    const detail = typeof rawDetail === 'string' ? rawDetail
+      : Array.isArray(rawDetail) ? '请检查填写内容是否符合要求'
+      : error.message || '请求服务发生异常';
     if (error.response?.status === 401) {
       localStorage.removeItem('token');
       localStorage.removeItem('user');

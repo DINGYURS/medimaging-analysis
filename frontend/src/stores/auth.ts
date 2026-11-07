@@ -6,7 +6,6 @@ export interface User {
   username: string;
   real_name: string;
   role: 'ADMIN' | 'DOCTOR';
-  department: string;
   is_active: boolean;
 }
 

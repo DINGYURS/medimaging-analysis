@@ -1,117 +1,25 @@
 <template>
-  <div class="min-h-screen bg-slate-50 flex flex-col justify-center items-center px-4">
-    <div class="max-w-md w-full bg-white rounded-2xl shadow-xl border border-slate-200/80 p-8">
-      <!-- Header -->
-      <div class="text-center mb-8">
-        <div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-blue-50 text-blue-600 mb-4 shadow-sm border border-blue-100">
-          <el-icon :size="32"><Monitor /></el-icon>
-        </div>
-        <h2 class="text-2xl font-bold text-slate-800 tracking-tight">医学影像智能分析平台</h2>
-        <p class="text-sm text-slate-500 mt-2">单医生轻量级辅助诊断与影像组学系统</p>
-      </div>
-
-      <!-- Form -->
-      <el-form :model="form" @submit.prevent="handleLogin" label-position="top">
-        <el-form-item label="登录账号">
-          <el-input 
-            v-model="form.username" 
-            placeholder="请输入账号 (如: doctor)" 
-            size="large"
-            :prefix-icon="User"
-            clearable
-          />
-        </el-form-item>
-
-        <el-form-item label="登录密码">
-          <el-input 
-            v-model="form.password" 
-            type="password" 
-            placeholder="请输入密码" 
-            size="large"
-            :prefix-icon="Lock"
-            show-password
-          />
-        </el-form-item>
-
-        <div class="mt-6">
-          <el-button 
-            type="primary" 
-            size="large" 
-            class="w-full !rounded-xl !bg-blue-600 hover:!bg-blue-700 !font-medium"
-            :loading="loading"
-            native-type="submit"
-          >
-            立即登录进入工作台
-          </el-button>
-        </div>
-      </el-form>
-
-      <!-- Quick Demo Accounts -->
-      <div class="mt-8 pt-6 border-t border-slate-100">
-        <p class="text-xs text-slate-400 text-center mb-3 font-medium">快速体验账号填充</p>
-        <div class="grid grid-cols-2 gap-3">
-          <button 
-            @click="fillAccount('doctor', 'doctor123')"
-            class="py-2 px-3 text-xs font-medium text-slate-700 bg-slate-100 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-colors border border-slate-200"
-          >
-            👨‍⚕️ 医生 (doctor)
-          </button>
-          <button 
-            @click="fillAccount('admin', 'admin123')"
-            class="py-2 px-3 text-xs font-medium text-slate-700 bg-slate-100 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-colors border border-slate-200"
-          >
-            🛡️ 管理员 (admin)
-          </button>
-        </div>
-      </div>
-    </div>
-    
-    <div class="mt-6 text-center text-xs text-slate-400">
-      &copy; 2026 医学影像智能分析平台 (MedImaging Analysis) &bull; A100 GPU 加速内核
-    </div>
-  </div>
+  <ClinicalShell public-page>
+    <main class="c-login-main"><section class="c-login-card" aria-labelledby="login-title"><BrandMark /><h1 id="login-title">登录医生工作空间</h1><p class="c-muted">检查管理、病灶分析与影像组学。</p>
+      <form @submit.prevent="login" :aria-busy="loading"><label class="c-field">登录账号<input v-model="username" class="c-input" autocomplete="username" required maxlength="64" placeholder="请输入登录账号" :disabled="loading"></label><label class="c-field">登录密码<div class="c-password-field"><input v-model="password" class="c-input" :type="showPassword?'text':'password'" autocomplete="current-password" required placeholder="请输入密码" :disabled="loading"><button type="button" class="c-button c-ghost c-password-toggle" :disabled="loading" :aria-pressed="showPassword" :aria-label="showPassword?'隐藏密码':'显示密码'" :title="showPassword?'隐藏密码':'显示密码'" @click="showPassword=!showPassword"><el-icon :size="19" aria-hidden="true"><View v-if="showPassword" /><Hide v-else /></el-icon></button></div></label><p v-if="error" role="alert" class="c-alert" style="margin-top:16px">{{ error }}</p><button class="c-button c-primary" type="submit" :disabled="loading">{{ loading?'正在登录…':'登录' }}</button></form>
+      <p class="c-muted" style="margin-top:20px;text-align:center">还没有账号？<RouterLink to="/register">注册医生账号</RouterLink></p>
+    </section></main>
+  </ClinicalShell>
 </template>
-
 <script setup lang="ts">
-import { reactive, ref } from 'vue';
+import BrandMark from '@/components/BrandMark.vue';
+import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import { User, Lock, Monitor } from '@element-plus/icons-vue';
-import { ElMessage } from 'element-plus';
+import { View, Hide } from '@element-plus/icons-vue';
+import ClinicalShell from '@/components/ClinicalShell.vue';
 import { useAuthStore } from '@/stores/auth';
-
-const router = useRouter();
-const authStore = useAuthStore();
-
-const form = reactive({
-  username: 'doctor',
-  password: 'doctor123',
-});
-
-const loading = ref(false);
-
-const fillAccount = (u: string, p: string) => {
-  form.username = u;
-  form.password = p;
-};
-
-const handleLogin = async () => {
-  if (!form.username || !form.password) {
-    ElMessage.warning('请输入用户名和密码');
-    return;
-  }
-  loading.value = true;
-  try {
-    const user = await authStore.login(form.username, form.password);
-    ElMessage.success(`欢迎回来，${user.real_name}`);
-    if (user.role === 'ADMIN') {
-      router.push('/dashboard');
-    } else {
-      router.push('/dashboard');
-    }
-  } catch (err) {
-    // Handled in axios interceptor
-  } finally {
-    loading.value = false;
-  }
-};
+const auth=useAuthStore(),router=useRouter();
+const username=ref(''),password=ref(''),showPassword=ref(false),loading=ref(false),error=ref('');
+async function login(){if(loading.value||!username.value.trim()||!password.value)return;loading.value=true;error.value='';try{await auth.login(username.value.trim(),password.value);await router.push('/dashboard');}catch{error.value='登录未完成，请核对账号、密码或联系管理员。';}finally{loading.value=false;}}
 </script>
+
+<style scoped>
+.c-password-field{position:relative;width:100%}
+.c-password-field .c-input{width:100%;padding-right:48px}
+.c-password-field .c-password-toggle{position:absolute;right:4px;top:50%;transform:translateY(-50%);width:36px;height:34px;min-height:0;padding:0;display:flex;align-items:center;justify-content:center}
+</style>

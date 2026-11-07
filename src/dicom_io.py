@@ -9,6 +9,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 from typing import Any, Dict, Tuple, Optional
+from functools import lru_cache
 
 import nibabel as nib
 import numpy as np
@@ -110,3 +111,69 @@ def load_nifti_image(nifti_path: str | Path) -> Tuple[sitk.Image, Dict[str, Any]
         "volume_direction": list(image.GetDirection()),
     }
     return image, metadata
+
+
+def _dicom_hu_evidence(ds):
+    """Resolve classic CT output units conservatively from DICOM PS3.3 C.8.2."""
+    if str(getattr(ds, 'SOPClassUID', '')) != '1.2.840.10008.5.1.4.1.1.2' or str(getattr(ds, 'Modality', '')) != 'CT':
+        return None
+    if int(getattr(ds, 'NumberOfFrames', 1)) != 1 or int(getattr(ds, 'SamplesPerPixel', 1)) != 1:
+        return None
+    if any(key in ds for key in ['ModalityLUTSequence', 'RealWorldValueMappingSequence', 'PixelValueTransformationSequence']):
+        return None
+    try:
+        slope, intercept = float(ds.RescaleSlope), float(ds.RescaleIntercept)
+        if not np.isfinite([slope, intercept]).all() or slope == 0:
+            return None
+    except (AttributeError, ValueError, TypeError):
+        return None
+    unit = str(getattr(ds, 'RescaleType', '')).strip().upper()
+    if unit:
+        return 'dicom_rescale_type' if unit == 'HU' else None
+    image_type = list(getattr(ds, 'ImageType', []))
+    if len(image_type) >= 3 and image_type[0] == 'ORIGINAL' and image_type[2] != 'LOCALIZER' and str(getattr(ds, 'MultienergyCTAcquisition', 'NO')).upper() == 'NO':
+        return 'dicom_original_ct_standard'
+    return None
+
+
+@lru_cache(maxsize=16)
+def _verify_hu_pixels(file_signatures, volume_signature):
+    volume = sitk.GetArrayFromImage(sitk.ReadImage(volume_signature[0]))
+    if volume.ndim != 3 or volume.shape[0] != len(file_signatures):
+        return {'unit': None, 'reason': 'volume_depth_mismatch'}
+    sources = set()
+    for index, signature in enumerate(file_signatures):
+        ds = pydicom.dcmread(signature[0])
+        source = _dicom_hu_evidence(ds)
+        if source is None:
+            return {'unit': None, 'reason': 'insufficient_or_unsupported_dicom_evidence'}
+        expected = ds.pixel_array.astype(np.float64) * float(ds.RescaleSlope) + float(ds.RescaleIntercept)
+        if expected.shape != volume[index].shape or not np.allclose(expected, volume[index], rtol=0, atol=1e-4):
+            return {'unit': None, 'reason': 'stored_values_do_not_match_dicom_rescale'}
+        sources.add(source)
+    return {'unit': 'HU', 'source': '+'.join(sorted(sources)), 'verified_slices': len(file_signatures)}
+
+
+def verify_dicom_intensity_unit(dicom_dir, nifti_path, series_uid=None):
+    """Read-only verification against originals; cache invalidates on source file changes."""
+    try:
+        if not dicom_dir or not nifti_path:
+            return {'unit': None, 'reason': 'original_files_unavailable'}
+        ids = sitk.ImageSeriesReader.GetGDCMSeriesIDs(str(dicom_dir)) or []
+        if series_uid:
+            if series_uid not in ids:
+                return {'unit': None, 'reason': 'source_series_unavailable'}
+            chosen = series_uid
+        elif len(ids) == 1:
+            chosen = ids[0]
+        else:
+            return {'unit': None, 'reason': 'ambiguous_source_series'}
+        files = sitk.ImageSeriesReader.GetGDCMSeriesFileNames(str(dicom_dir), chosen)
+        if not files:
+            return {'unit': None, 'reason': 'original_files_unavailable'}
+        def signature(path):
+            stat = Path(path).stat()
+            return (str(path), stat.st_size, stat.st_mtime_ns)
+        return dict(_verify_hu_pixels(tuple(signature(f) for f in files), signature(nifti_path)))
+    except Exception:
+        return {'unit': None, 'reason': 'original_verification_unavailable'}
