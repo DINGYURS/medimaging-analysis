@@ -1,3 +1,5 @@
+![医学影像分析](frontend/public/brand/logo.svg)
+
 # 医学影像智能分析平台 (核心流程验证版)
 
 面向单个医生使用的轻量级医学影像智能分析核心流程。无需配置庞大的云端数据库和复杂微服务，采用纯 Python 本地文件流与标准化算法管道，实现：
@@ -58,15 +60,78 @@ medimaging-analysis/
 
 ---
 
-## 四、 服务器执行方法
+## 四、 项目启动与运行方法
 
-连接到 A100 服务器并在虚拟环境下运行：
+### 方式一：一键后台启动/管理（推荐，日常运行）
+
+在项目根目录提供了全套前后端服务的统一管理脚本 `service.sh`，支持一键在后台守护启动、停止与查看服务状态：
 
 ```bash
-# 1. 激活虚拟环境
+# 1. 连接到 A100 服务器
+ssh A100
+
+# 2. 进入项目主目录
+cd /data/medimaging-analysis
+
+# 3. 查看当前服务运行状态
+./service.sh status
+
+# 4. 启动前后端服务（后台守护运行，后端 8020 + 前端 5180）
+./service.sh start
+
+# 5. 停止或重启服务
+./service.sh stop
+./service.sh restart
+```
+
+> **实时日志查看：**
+> - 查看后端运行日志：`tail -f /data/medimaging-analysis/backend/backend.log`
+> - 查看前端运行日志：`tail -f /data/medimaging-analysis/frontend/frontend.log`
+
+---
+
+### 方式二：前台开发调试模式（实时输出日志与热更新）
+
+若在代码开发过程中需要分别在前台查看实时请求、排查报错或体验前端热重载，可新开两个终端分别运行：
+
+#### 1. 启动后端服务 (FastAPI，监听 8020 端口)
+```bash
+# 激活 Python 虚拟环境
 source /data/miniconda3/etc/profile.d/conda.sh
 conda activate medimaging-analysis
 
-# 2. 运行核心流程验证脚本
+# 进入后端目录并启动 (带热重载 --reload)
+cd /data/medimaging-analysis/backend
+export PYTHONPATH=/data/medimaging-analysis/backend:/data/medimaging-analysis
+python -m uvicorn main:app --host 0.0.0.0 --port 8020 --reload
+```
+
+#### 2. 启动前端服务 (Vue 3 + Vite，监听 5180 端口)
+```bash
+# 加载 Node.js 24 环境
+export NVM_DIR="/data/nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+nvm use 24
+
+# 进入前端目录并启动开发服务器 (支持热重载 HMR)
+cd /data/medimaging-analysis/frontend
+pnpm dev --host 0.0.0.0 --port 5180
+```
+
+---
+
+### 方式三：单独运行算法离线推理脚本 (CLI Pipeline)
+
+若无需 Web 界面，仅需单次验证 **DICOM 转换 $\rightarrow$ 3D nnU-Net 病灶分割 $\rightarrow$ 影像组学计算 $\rightarrow$ 大模型 Payload 组装** 全流程：
+
+```bash
+source /data/miniconda3/etc/profile.d/conda.sh
+conda activate medimaging-analysis
+
+# 执行端到端全流程分析（可指定 GPU 编号）
 python /data/medimaging-analysis/scripts/run_pipeline.py --gpu 2
 ```
+
+## 数据库设计
+
+用户账号表结构及字段约束见 [数据库表设计](docs/database-design.md)。
