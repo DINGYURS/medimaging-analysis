@@ -9,3 +9,6 @@ scipy==1.17.1
 # Radiomics engine (IBSI standardized)
 # Note: install with `pip install --no-build-isolation pyradiomics==3.0.1`
 pyradiomics==3.0.1
+
+# Native IBSI 198-output feature calculation
+scikit-image==0.25.2

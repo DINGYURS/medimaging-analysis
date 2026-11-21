@@ -1,0 +1,4 @@
+# Additional runtime dependency for the isolated 198-output feature engine.
+# Not installed into the running environment in this task.
+# Use conda first per project policy; validate in an isolated candidate environment.
+scikit-image==0.25.2

@@ -1,0 +1,126 @@
+{
+  "custom_ctr_threshold_hu": {
+    "en": "Uses the ROI Otsu threshold, falling back to -150 HU when it is unavailable.",
+    "zh": "ROI Otsu 阈值；无法取得时使用 -150 HU"
+  },
+  "custom_ctr_percent": {
+    "en": "Computes solid voxel count divided by nodule voxel count, multiplied by 100%.",
+    "zh": "实性体素数 / 结节体素数 × 100%"
+  },
+  "custom_solid_volume_mm3": {
+    "en": "Computes solid voxel count multiplied by voxel volume.",
+    "zh": "实性体素数 × 体素体积"
+  },
+  "custom_solid_voxel_count": {
+    "en": "Counts ROI voxels whose intensity is at least the Otsu threshold.",
+    "zh": "ROI 内强度不小于 Otsu 阈值的体素数"
+  },
+  "custom_nodule_volume_mm3": {
+    "en": "Computes nodule voxel count multiplied by voxel volume.",
+    "zh": "结节体素数 × 体素体积"
+  },
+  "custom_nodule_voxel_count": {
+    "en": "Counts voxels in the nodule ROI.",
+    "zh": "结节 ROI 内体素数"
+  },
+  "custom_area_2d_mm2": {
+    "en": "Computes ROI pixel count on the largest-area slice multiplied by in-plane pixel area.",
+    "zh": "最大面积层 ROI 像素数 × 平面像素面积"
+  },
+  "custom_perimeter_2d_mm": {
+    "en": "Uses the original boundary-mask transition-counting perimeter.",
+    "zh": "沿用原边界掩膜转变计数周长"
+  },
+  "custom_equivalent_diameter_2d_mm": {
+    "en": "Computes sqrt(4 × largest-slice area / π).",
+    "zh": "sqrt(4 × 最大层面积 / π)"
+  },
+  "custom_equivalent_diameter_3d_mm": {
+    "en": "Computes (6 × nodule volume / π)^(1/3).",
+    "zh": "(6 × 结节体积 / π)^(1/3)"
+  },
+  "custom_convex_area_2d_mm2": {
+    "en": "Measures the convex-hull area of the largest-slice ROI in physical coordinates.",
+    "zh": "最大层 ROI 物理坐标凸包面积"
+  },
+  "custom_convex_perimeter_2d_mm": {
+    "en": "Measures the convex-hull perimeter of the largest-slice ROI in physical coordinates.",
+    "zh": "最大层 ROI 物理坐标凸包周长"
+  },
+  "custom_circularity_2d": {
+    "en": "Computes 4π × largest-slice area / squared convex-hull perimeter.",
+    "zh": "4π × 最大层面积 / 凸包周长²"
+  },
+  "custom_radial_distance_std_2d_mm": {
+    "en": "Computes the standard deviation of physical distances from the largest-slice boundary to its centroid.",
+    "zh": "最大层边界到质心物理距离的标准差"
+  },
+  "custom_margin_mean_boundary_gradient_hu_per_mm": {
+    "en": "Averages central differences from three pairs of inner and outer samples along boundary normals across slices.",
+    "zh": "各层边界法线方向内外三组采样中心差分的均值"
+  },
+  "custom_margin_mean_abs_boundary_gradient_hu_per_mm": {
+    "en": "Computes the mean absolute boundary gradient.",
+    "zh": "边界梯度绝对值的均值"
+  },
+  "custom_margin_std_boundary_gradient_hu_per_mm": {
+    "en": "Computes the standard deviation of boundary gradients.",
+    "zh": "边界梯度的标准差"
+  },
+  "custom_edge_sharpness_acutance_3d": {
+    "en": "Computes boundary-gradient RMS divided by the maximum absolute gradient.",
+    "zh": "边界梯度 RMS / 最大绝对梯度"
+  },
+  "custom_hsag": {
+    "en": "Computes the interquartile range of boundary gradients divided by their range.",
+    "zh": "边界梯度四分位距 / 极差"
+  },
+  "custom_cdf_slope_mean": {
+    "en": "Averages histogram probability divided by bin width using 128 bins in the largest-slice ROI.",
+    "zh": "最大层 ROI 128 档直方图概率 / 档宽的均值"
+  },
+  "custom_cdf_slope_std": {
+    "en": "Computes the standard deviation of CDF slope samples.",
+    "zh": "CDF 斜率样本的标准差"
+  },
+  "custom_cdf_slope_skewness": {
+    "en": "Computes the third standardised moment of CDF slope samples.",
+    "zh": "CDF 斜率样本的三阶标准化矩"
+  },
+  "custom_cdf_slope_kurtosis": {
+    "en": "Computes the fourth standardised moment of CDF slope samples, without subtracting 3.",
+    "zh": "CDF 斜率样本的四阶标准化矩，不减 3"
+  },
+  "custom_cdf_hu_min": {
+    "en": "Returns the minimum ROI intensity on the largest slice.",
+    "zh": "最大层 ROI 强度最小值"
+  },
+  "custom_cdf_hu_max": {
+    "en": "Returns the maximum ROI intensity on the largest slice.",
+    "zh": "最大层 ROI 强度最大值"
+  },
+  "custom_boundary_convexity": {
+    "en": "Averages the ratio of ROI area to convex-hull area across slices.",
+    "zh": "各层 ROI 面积 / 凸包面积的均值"
+  },
+  "custom_boundary_entropy_ratio": {
+    "en": "Separates core and boundary using two iterations of 2D erosion, then computes the ratio of their mean 32-bin entropies.",
+    "zh": "二维腐蚀两次划分核心与边界；32 档熵均值之比"
+  },
+  "custom_contour_convexity": {
+    "en": "Computes largest-slice convex-hull perimeter divided by ROI perimeter.",
+    "zh": "最大层凸包周长 / ROI 周长"
+  },
+  "custom_contour_solidity": {
+    "en": "Computes largest-slice ROI area divided by convex-hull area.",
+    "zh": "最大层 ROI 面积 / 凸包面积"
+  },
+  "custom_contour_circularity": {
+    "en": "Computes the mean pixel distance from the largest-slice boundary to its centroid divided by the distance standard deviation.",
+    "zh": "最大层边界到质心像素距离的均值 / 标准差"
+  },
+  "custom_contour_compactness": {
+    "en": "Computes 4π × largest-slice area divided by squared ROI perimeter.",
+    "zh": "4π × 最大层面积 / ROI 周长²"
+  }
+}

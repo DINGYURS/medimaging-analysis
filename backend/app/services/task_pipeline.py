@@ -2,6 +2,7 @@ from typing import Any
 import os
 import sys
 import time
+import uuid
 import json
 import asyncio
 from pathlib import Path
@@ -15,40 +16,33 @@ if str(PROJECT_ROOT) not in sys.path:
 import SimpleITK as sitk
 import numpy as np
 from src.dicom_io import load_dicom_series
-from src.lesion_detector import run_nnunet_inference, analyze_lesion_components
+from src.lesion_detector import run_nnunet_inference
 from src.radiomics_engine import (
     extract_lesion_radiomics,
     get_default_radiomics_extractor,
     get_configurable_radiomics_extractor
 )
-from src.report_adapter import format_llm_clinical_insight_payload
+from app.services.liver_mri_detector import analysis_route, detect_liver_mri
+from app.services.insight_service import enqueue_safely
+from app.services.insight_payload import source_record
 
 from app.core.config import settings
 from app.core.queue_gate import gpu_gate
 from app.db.session import AsyncSessionLocal
-from app.db.models import AnalysisTask, Study, Lesion, RadiomicsFeature, ClinicalReport
+from app.db.models import AnalysisTask, Study, Lesion, RadiomicsFeature
 
 def _execute_sync_pipeline(nii_volume_path: str, mask_output_path: str, cuda_device: str = "2"):
     """Synchronous CPU/GPU heavy pipeline executed in thread pool."""
     image_sitk = sitk.ReadImage(nii_volume_path)
     
-    # 1. nnU-Net Inference / Fallback
-    try:
-        mask_path, lesion_findings = run_nnunet_inference(
-            input_nii_path=nii_volume_path,
-            output_dir=Path(mask_output_path).parent,
-            cuda_device=cuda_device,
-            min_volume_mm3=25.0
-        )
-    except Exception as e:
-        print(f"[!] nnU-Net 推理跳过或异常: {e}，尝试使用病例已有金标准掩膜验证...")
-        # Check if sample mask exists in outputs or sample case
-        sample_mask = PROJECT_ROOT / "outputs" / "sample_case.nii.gz"
-        if sample_mask.exists():
-            mask_path = sample_mask
-            lesion_findings = analyze_lesion_components(mask_path, min_volume_mm3=25.0)
-        else:
-            raise RuntimeError(f"未能完成病灶推理且无可用掩膜: {e}")
+    # Never substitute a fixed sample mask for this patient's inference.
+    inference_dir = Path(mask_output_path).parent / (Path(mask_output_path).stem + "_inference")
+    mask_path, lesion_findings = run_nnunet_inference(
+        input_nii_path=nii_volume_path,
+        output_dir=inference_dir,
+        cuda_device=cuda_device,
+        min_volume_mm3=25.0
+    )
 
     # Ensure mask is saved to target path
     if str(mask_path) != mask_output_path:
@@ -85,6 +79,8 @@ def _execute_sync_pipeline(nii_volume_path: str, mask_output_path: str, cuda_dev
         )
         radiomics_results.append(radiomics_data)
 
+    Path(mask_output_path + ".source.json").write_text(
+        json.dumps(source_record(nii_volume_path, mask_output_path)), encoding="utf-8")
     return lesion_findings, radiomics_results
 
 async def run_task_pipeline_background(task_id: int):
@@ -104,6 +100,8 @@ async def run_task_pipeline_background(task_id: int):
             return
 
         try:
+            metadata = study.metadata_json or {}
+            is_mri = analysis_route(study.modality, metadata) == 'liver_mri'
             # 1. Acquire GPU Gate (Queue limit)
             task.status = "QUEUED"
             task.stage_message = "正在等待 GPU 推理资源分配..."
@@ -113,18 +111,24 @@ async def run_task_pipeline_background(task_id: int):
             try:
                 task.status = "SEGMENTING"
                 task.progress = 30
-                task.stage_message = "正在调用 nnU-Net 3D 模型推理肺部病灶..."
+                task.stage_message = "正在识别肝脏 MRI 病灶…" if is_mri else "正在调用 nnU-Net 3D 模型推理肺部病灶..."
                 await db.commit()
 
                 mask_file = Path(settings.MASK_DIR) / f"task_{task.id}_mask.nii.gz"
                 
                 # Execute in thread to keep async event loop responsive
-                lesion_findings, radiomics_results = await asyncio.to_thread(
-                    _execute_sync_pipeline,
-                    nii_volume_path=study.nifti_path,
-                    mask_output_path=str(mask_file),
-                    cuda_device="2"
-                )
+                if is_mri:
+                    lesion_findings = await asyncio.to_thread(
+                        detect_liver_mri, study.nifti_path, str(mask_file), metadata,
+                    )
+                    radiomics_results = []
+                else:
+                    lesion_findings, radiomics_results = await asyncio.to_thread(
+                        _execute_sync_pipeline,
+                        nii_volume_path=study.nifti_path,
+                        mask_output_path=str(mask_file),
+                        cuda_device="2",
+                    )
             finally:
                 # Release GPU lock as soon as segmentation finishes!
                 gpu_gate.release()
@@ -132,13 +136,15 @@ async def run_task_pipeline_background(task_id: int):
             # 2. Extracting & Saving Features
             task.status = "EXTRACTING"
             task.progress = 75
-            task.stage_message = "正在保存 107 维国际标准组学特征并组装临床 Prompt..."
+            task.stage_message = "正在保存肝脏 MRI 病灶掩膜…" if is_mri else "正在保存影像组学定量分析结果..."
             await db.commit()
 
             # Save full radiomics JSON
             rad_json_file = Path(settings.RADIOMICS_DIR) / f"task_{task.id}_features.json"
-            with open(rad_json_file, "w", encoding="utf-8") as f:
-                json.dump(radiomics_results, f, ensure_ascii=False, indent=2)
+            if not is_mri:
+                temp_json_file = rad_json_file.with_suffix("." + uuid.uuid4().hex + ".tmp")
+                temp_json_file.write_text(json.dumps(radiomics_results, ensure_ascii=False, indent=2), encoding="utf-8")
+                temp_json_file.replace(rad_json_file)
 
             # Insert Lesion and RadiomicsFeature rows into MySQL
             for idx, item in enumerate(lesion_findings):
@@ -154,11 +160,13 @@ async def run_task_pipeline_background(task_id: int):
                     center_y=item["centroid_world_lps_mm"][1],
                     center_z=item["centroid_world_lps_mm"][2],
                     mask_nifti_path=str(mask_file),
-                    density_type=summary.get("attenuation_category", "纯磨玻璃结节 (pGGO)")
+                    density_type="MRI 病灶" if is_mri else summary.get("attenuation_category", "纯磨玻璃结节 (pGGO)")
                 )
                 db.add(lesion)
                 await db.flush()
 
+                if is_mri:
+                    continue
                 rad_feature = RadiomicsFeature(
                     lesion_id=lesion.id,
                     feature_count=rad_data.get("total_extracted_features_count", 107),
@@ -169,34 +177,18 @@ async def run_task_pipeline_background(task_id: int):
                 )
                 db.add(rad_feature)
 
-            # 3. Format pre-prompt for LLM (Placeholder mode per user request)
-            llm_payload = format_llm_clinical_insight_payload(
-                dicom_metadata=study.metadata_json or {},
-                lesion_findings=lesion_findings,
-                radiomics_results=radiomics_results
-            )
-            
-            prompt_text = llm_payload.get("llm_prompt_template", "")
-
-            report = ClinicalReport(
-                task_id=task.id,
-                status="PENDING_INTEGRATION",
-                llm_model="待接入",
-                pre_prompt_payload=prompt_text,
-                findings="",
-                impression="",
-                recommendations="",
-                audit_status="DRAFT"
-            )
-            db.add(report)
-
             # 4. Mark Task Completed
             task.status = "COMPLETED"
             task.progress = 100
-            task.stage_message = "全流程智能分析完成"
+            if is_mri:
+                task.stage_message = "肝脏 MRI 分割完成，可进入特征计算" if lesion_findings else "肝脏 MRI 分割完成，模型未检出病灶"
+            else:
+                task.stage_message = "全流程智能分析完成"
             task.total_execution_time = round(time.time() - start_time, 2)
             task.finished_at = datetime.utcnow()
             await db.commit()
+            if not is_mri:
+                await enqueue_safely(task_id)
 
         except Exception as e:
             import traceback
@@ -305,8 +297,9 @@ async def recalculate_task_radiomics(
 
         # Update JSON file
         rad_json_file = Path(settings.RADIOMICS_DIR) / f"task_{task.id}_features.json"
-        with open(rad_json_file, "w", encoding="utf-8") as f:
-            json.dump(new_results, f, ensure_ascii=False, indent=2)
+        temp_json_file = rad_json_file.with_suffix("." + uuid.uuid4().hex + ".tmp")
+        temp_json_file.write_text(json.dumps(new_results, ensure_ascii=False, indent=2), encoding="utf-8")
+        temp_json_file.replace(rad_json_file)
 
         # Update DB records
         for idx, lesion in enumerate(task.lesions):
@@ -324,4 +317,5 @@ async def recalculate_task_radiomics(
                     lesion.density_type = sum_data["attenuation_category"]
 
         await db.commit()
+        await enqueue_safely(task_id)
         return new_results

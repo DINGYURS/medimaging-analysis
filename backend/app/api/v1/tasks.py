@@ -8,6 +8,8 @@ from sqlalchemy import select, func
 from app.api.deps import get_db, require_doctor
 from app.db.models import User, Study, AnalysisTask
 from app.schemas.task import TaskCreate, TaskStatusOut
+from app.services.study_activity import record_study_operation
+from app.services.liver_mri_detector import analysis_route
 from app.services.task_pipeline import run_task_pipeline_background
 from app.core.queue_gate import gpu_gate
 
@@ -29,13 +31,19 @@ async def submit_analysis_task(
     if not study:
         raise HTTPException(status_code=404, detail="检查记录不存在或无权访问")
 
+    try:
+        analysis_route(study.modality, study.metadata_json or {})
+    except ValueError as exc:
+        raise HTTPException(status_code=422, detail=str(exc)) from exc
+
     # 2. Calculate current queue position
     q_count_res = await db.execute(
         select(func.count(AnalysisTask.id)).where(AnalysisTask.status.in_(["QUEUED", "SEGMENTING"]))
     )
     current_waiting = q_count_res.scalar() or 0
 
-    task_code = f"TASK_{datetime.utcnow().strftime('%Y%m%d')}_{uuid.uuid4().hex[:6].upper()}"
+    submitted_at = datetime.utcnow()
+    task_code = f"TASK_{submitted_at.strftime('%Y%m%d')}_{uuid.uuid4().hex[:6].upper()}"
     task = AnalysisTask(
         study_id=study.id,
         doctor_id=doctor.id,
@@ -43,8 +51,12 @@ async def submit_analysis_task(
         status="QUEUED",
         queue_position=current_waiting,
         progress=0,
-        stage_message=f"任务已加入排队队列 (当前前方等待任务: {current_waiting})"
+        stage_message=f"任务已加入排队队列 (当前前方等待任务: {current_waiting})",
+        created_at=submitted_at,
     )
+    # Lock the parent before inserting the task, which references the same study.
+    if study.doctor_id == doctor.id:
+        await record_study_operation(db, study.id, doctor.id, submitted_at)
     db.add(task)
     await db.commit()
     await db.refresh(task)

@@ -2,11 +2,7 @@
  <div class="c-processing-grid c-parameters">
   <section class="c-parameter-group">
    <h3 class="c-parameter-label">空间网格重采样</h3>
-   <el-select v-model="form.resampling_mode" aria-label="空间网格重采样" class="c-parameter-control">
-    <el-option label="各向同性 1.0 × 1.0 × 1.0 mm" value="isotropic_1mm" />
-    <el-option label="保留原生网格（不重采样）" value="native" />
-    <el-option label="自定义间距" value="custom" />
-   </el-select>
+   <ClinicalSelect v-model="form.resampling_mode" aria-label="空间网格重采样" class="c-parameter-control" :options="[{value:'isotropic_1mm',label:'各向同性 1.0 × 1.0 × 1.0 mm'},{value:'native',label:'保留原生网格',description:'保留影像原始体素间距，不执行重采样'},{value:'custom',label:'自定义间距',description:'分别设置 X、Y、Z 方向的目标体素间距'}]" />
    <div v-if="form.resampling_mode==='custom'" class="c-parameter-extra c-spacing-inputs">
     <label v-for="(_,index) in form.custom_spacing" :key="index" class="c-axis-field"><span>{{ ['X','Y','Z'][index] }} <span class="c-muted">(mm)</span></span><el-input-number v-model="form.custom_spacing[index]" :min="0.1" :max="10" :step="0.1" :precision="1" controls-position="right" :aria-label="['X 间距','Y 间距','Z 间距'][index]" /></label>
    </div>
@@ -26,6 +22,7 @@
  </div>
 </template>
 <script setup lang="ts">
+import ClinicalSelect from '@/components/ClinicalSelect.vue';
 
 
 defineProps<{form:{resampling_mode:string;custom_spacing:number[];interpolator:string;bin_width:number;resegmentation_enabled:boolean;resegment_min_hu:number;resegment_max_hu:number}}>();

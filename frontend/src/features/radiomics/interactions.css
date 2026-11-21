@@ -1,0 +1,72 @@
+/* Scoped to the feature export page, including its shared header and teleported selector. */
+.clinical-ui:has(.c-radiomics), .radiomics-select-popper {
+  --r-control-ring: rgba(56, 66, 80, .23);
+  --r-control-shadow: rgba(27, 41, 61, .13);
+  --r-control-active-ring: rgba(56, 66, 80, .42);
+  --r-control-active-shadow: rgba(27, 41, 61, .20);
+}
+.clinical-ui[data-appearance=dark]:has(.c-radiomics),
+html:has(.clinical-ui[data-appearance=dark] .c-radiomics) .radiomics-select-popper {
+  --r-control-ring: rgba(190, 204, 222, .26);
+  --r-control-shadow: rgba(0, 0, 0, .35);
+  --r-control-active-ring: rgba(210, 222, 238, .49);
+  --r-control-active-shadow: rgba(0, 0, 0, .55);
+}
+.clinical-ui:has(.c-radiomics) :is(button, a, summary, input, select, textarea, .el-select__wrapper, .el-input__wrapper) {
+  transition: box-shadow .16s ease, border-color .16s ease, background-color .16s ease;
+}
+.clinical-ui:has(.c-radiomics) :is(a, summary, .c-link):not(.c-back-link) { border-radius: 6px; }
+.clinical-ui:has(.c-radiomics) :is(input[type=checkbox], input[type=radio]) { border-radius: 3px; }
+.clinical-ui:has(.c-radiomics) input[type=radio] { border-radius: 50%; }
+.clinical-ui:has(.c-radiomics) :is(button, a, summary, input, select, textarea):not(.c-back-link):focus,
+.clinical-ui:has(.c-radiomics) :is(button, a, summary, input, select, textarea):not(.c-back-link):focus-visible {
+  outline: none;
+}
+/* Native controls and actions: quiet elevation plus an inset ring. */
+.clinical-ui:has(.c-radiomics) :is(button, a, input:not(.el-select__input):not(.el-input__inner), select, textarea):not(:disabled):not([aria-disabled=true]):not(.c-back-link):hover {
+  border-color: var(--r-control-ring);
+  box-shadow: 0 2px 7px var(--r-control-shadow), inset 0 0 0 1px var(--r-control-ring);
+}
+.clinical-ui:has(.c-radiomics) :is(input:not(.el-select__input):not(.el-input__inner), select, textarea):not(:disabled):focus,
+.clinical-ui:has(.c-radiomics) :is(button, a, summary):not(:disabled):not([aria-disabled=true]):not(.c-back-link):focus-visible {
+  border-color: var(--r-control-active-ring);
+  box-shadow: 0 3px 10px var(--r-control-active-shadow), inset 0 0 0 1px var(--r-control-active-ring);
+}
+/* Element Plus draws its focus ring on a wrapper, not on the inner input. */
+.clinical-ui:has(.c-radiomics) :is(.el-select__wrapper, .el-input__wrapper):not(.is-disabled):hover {
+  box-shadow: 0 2px 7px var(--r-control-shadow), inset 0 0 0 1px var(--r-control-ring);
+}
+.clinical-ui:has(.c-radiomics) :is(.el-select__wrapper.is-focused, .el-select__wrapper:focus-within, .el-input__wrapper.is-focus, .el-input__wrapper:focus-within):not(.is-disabled) {
+  outline: none;
+  box-shadow: 0 3px 10px var(--r-control-active-shadow), inset 0 0 0 1px var(--r-control-active-ring);
+}
+.clinical-ui:has(.c-radiomics) :is(.el-select__input, .el-input__inner):focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+.radiomics-select-popper .el-select-dropdown__item { border-radius: 5px; margin: 2px 5px; }
+.radiomics-select-popper .el-select-dropdown__item:is(:hover, .is-hovering) {
+  background: var(--el-fill-color-light);
+  box-shadow: 0 2px 7px var(--r-control-shadow), inset 0 0 0 1px var(--r-control-ring);
+}
+@media (prefers-reduced-motion: reduce) {
+  .clinical-ui:has(.c-radiomics) :is(button, a, summary, input, select, textarea, .el-select__wrapper, .el-input__wrapper) { transition: none; }
+}
+
+/* Section header actions use a theme-aware blue fill without a hover shadow. */
+.clinical-ui .c-radiomics .review-heading button.c-button:not(:disabled):not([aria-disabled=true]):hover {
+  background: var(--c-blue-soft);
+  border-color: color-mix(in srgb, var(--c-blue) 35%, var(--c-line));
+  color: var(--c-blue);
+  box-shadow: none;
+}
+
+/* Disclosure rows and dropdown options stay flat on pointer hover. */
+.clinical-ui:has(.c-radiomics) summary:hover:not(:focus-visible) {
+  box-shadow: none;
+  background: transparent;
+  border-color: transparent;
+}
+html:has(.clinical-ui .c-radiomics) :is(.clinical-select-popper, .radiomics-select-popper) .el-select-dropdown__item:is(:hover, .is-hovering) {
+  box-shadow: none;
+}

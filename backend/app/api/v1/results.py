@@ -27,7 +27,7 @@ from sqlalchemy import select
 from sqlalchemy.orm import selectinload
 
 from app.api.deps import get_db, require_doctor
-from app.db.models import User, AnalysisTask, Lesion, RadiomicsFeature, ClinicalReport
+from app.db.models import User, AnalysisTask, Lesion, RadiomicsFeature, ClinicalReport, Study
 from app.api.v1.studies import stream_file_with_range
 
 router = APIRouter()
@@ -203,6 +203,9 @@ async def recalculate_task_features(
     if not task:
         raise HTTPException(status_code=404, detail="分析任务不存在或未检出有效病灶")
 
+    modality = await db.scalar(select(Study.modality).where(Study.id == task.study_id))
+    if modality in {"MR", "MRI"}:
+        raise HTTPException(422, "MRI 请使用特征计算页面选择 3D 特征")
     try:
         await recalculate_task_radiomics(task_id, config)
     except Exception as e:

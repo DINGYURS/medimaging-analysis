@@ -1,6 +1,12 @@
 import axios from 'axios';
 import { ElMessage } from 'element-plus';
 
+declare module 'axios' {
+  interface AxiosRequestConfig {
+    suppressErrorToast?: boolean;
+  }
+}
+
 const api = axios.create({
   baseURL: '/api/v1',
   timeout: 120000,
@@ -28,7 +34,7 @@ api.interceptors.response.use(
         window.location.href = '/login';
       }
     }
-    ElMessage.error(detail);
+    if (!error.config?.suppressErrorToast) ElMessage.error(detail);
     return Promise.reject(error);
   }
 );

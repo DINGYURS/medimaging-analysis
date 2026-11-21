@@ -1,5 +1,6 @@
 from datetime import datetime
 from sqlalchemy import Column, BigInteger, String, Integer, Float, Text, Boolean, DateTime, ForeignKey, JSON
+from sqlalchemy.dialects.mysql import DATETIME
 from sqlalchemy.orm import relationship
 from app.db.base import Base
 
@@ -53,6 +54,7 @@ class Study(Base):
     nifti_path = Column(String(512), nullable=True)
     metadata_json = Column(JSON, nullable=True)
     created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
+    last_operation_at = Column(DateTime().with_variant(DATETIME(fsp=6), "mysql"), nullable=True)
 
     patient = relationship("Patient", back_populates="studies", lazy="selectin")
     doctor = relationship("User", back_populates="studies")
@@ -134,3 +136,26 @@ class ClinicalReport(Base):
     created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
 
     task = relationship("AnalysisTask", back_populates="reports")
+
+class AIInsightRun(Base):
+    """Independent advisory generations; never overwrite doctor reports."""
+    __tablename__ = "ai_insight_runs"
+
+    id = Column(BigInteger, primary_key=True, autoincrement=True)
+    task_id = Column(BigInteger, ForeignKey("analysis_tasks.id", ondelete="CASCADE"), nullable=False, index=True)
+    active_task_id = Column(BigInteger, nullable=True, unique=True)
+    input_hash = Column(String(64), nullable=False)
+    prompt_hash = Column(String(64), nullable=False)
+    prompt_version = Column(String(64), nullable=False)
+    model = Column(String(128), nullable=False)
+    status = Column(String(32), nullable=False, index=True)
+    input_snapshot = Column(JSON, nullable=False)
+    result_json = Column(JSON, nullable=True)
+    usage_json = Column(JSON, nullable=True)
+    error_message = Column(Text, nullable=True)
+    attempts = Column(Integer, default=0, nullable=False)
+    available_at = Column(DateTime, default=datetime.utcnow, nullable=False)
+    lease_token = Column(String(64), nullable=True)
+    lease_until = Column(DateTime, nullable=True)
+    created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
+    finished_at = Column(DateTime, nullable=True)

@@ -20,5 +20,5 @@ export function readWorkspaceView(value: unknown, studyId: number, taskId: numbe
       !Number.isFinite(v.maskOpacity) || v.maskOpacity < 10 || v.maskOpacity > 90 ||
       typeof v.preset !== 'string' || typeof v.collapsed !== 'boolean' || typeof v.showMask !== 'boolean' ||
       !['lesions', 'features', 'insights'].includes(v.activeTab) || !['volume', 'slice'].includes(v.sort)) return null;
-  return { ...v, selectedId: lesionIds.includes(v.selectedId as number) ? v.selectedId : null };
+  return { ...v, activeTab: v.activeTab === 'features' ? 'lesions' : v.activeTab, selectedId: lesionIds.includes(v.selectedId as number) ? v.selectedId : null };
 }

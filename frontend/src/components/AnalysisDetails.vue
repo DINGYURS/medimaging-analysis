@@ -7,14 +7,14 @@
       <template v-if="isActive(current)"><h3 style="margin-top:23px">当前处理阶段</h3><div v-for="(step,index) in steps" :key="step.title" class="c-step" :class="{done:index<stage,current:index===stage}"><span class="c-step-number">{{ index<stage?'✓':index+1 }}</span><div><h3>{{ step.title }}</h3><p class="c-small c-muted">{{ step.description }}</p></div></div><p class="c-small c-muted">阶段状态由分析服务提供，未提供连续计算百分比。</p></template>
       <div v-if="current?.status==='FAILED'" class="c-alert" style="margin-top:20px"><h3>本次分析未完成</h3><p style="margin-top:6px">{{ failureReason }}</p></div>
       <h3 style="margin:23px 0 12px">分析记录</h3>
-      <p v-if="tasks.length" class="c-muted c-small" style="margin-bottom:10px">点击记录编号，查看该次分析的影像与结果。</p>
+      <p v-if="tasks.length" class="c-muted c-small" style="margin-bottom:10px">点击任意分析记录卡片，查看该次分析的影像与结果。</p>
       <p v-if="!tasks.length" class="c-muted c-small">尚无分析记录。</p>
-      <div v-for="task in tasks" :key="taskId(task) || task.task_code" class="c-history">
-        <div class="c-between"><button class="c-link" type="button" @click="emit('open',taskId(task))">{{ task.task_code || ('任务 #'+taskId(task)) }}</button><span class="c-badge" :class="statusTone(task)">{{ statusLabel(task) }}</span></div>
-        <p class="c-subline">提交于 {{ dateTime(task.created_at) }}</p><p v-if="task.total_execution_time" class="c-subline">处理耗时 {{ numberText(task.total_execution_time,1,true) }} 秒</p>
-      </div>
+      <button v-for="task in tasks" :key="taskId(task) || task.task_code" class="c-history" type="button" :aria-label="'查看分析记录 '+(task.task_code || taskId(task))" @click="emit('open',taskId(task))">
+        <span class="c-between"><span class="c-link">{{ task.task_code || ('任务 #'+taskId(task)) }}</span><span class="c-badge" :class="statusTone(task)">{{ statusLabel(task) }}</span></span>
+        <span class="c-subline c-history-line">提交于 {{ dateTime(task.created_at) }}</span><span v-if="task.total_execution_time" class="c-subline c-history-line">处理耗时 {{ numberText(task.total_execution_time,1,true) }} 秒</span>
+      </button>
     </template>
-    <template #footer><button class="c-button" @click="emit('open',selectedId)">阅览影像</button><button v-if="!current || current.status==='FAILED'" class="c-button c-primary" @click="emit('submit')">{{ current?'重新提交':'提交分析' }}</button></template>
+    <template v-if="!current || current.status==='FAILED'" #footer><button class="c-button c-primary" @click="emit('submit')">{{ current?'重新提交':'提交分析' }}</button></template>
   </ClinicalDialog>
 </template>
 <script setup lang="ts">
@@ -47,3 +47,8 @@ function selectTask(task:AnalysisTask){generation++;if(timer)clearTimeout(timer)
 watch(()=>[props.modelValue,props.study?.id],()=>{generation++;if(timer)clearTimeout(timer);live.value=null;statusError.value='';if(props.modelValue)selectTask(displayTask(props.study)||{status:'NEW'});});
 onBeforeUnmount(()=>{generation++;if(timer)clearTimeout(timer);});
 </script>
+
+<style scoped>
+button.c-history{display:block;width:100%;border:0;border-top:1px solid var(--c-line);background:transparent;color:var(--c-text);text-align:left}
+.c-history-line{display:block}
+</style>

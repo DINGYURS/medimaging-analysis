@@ -5,6 +5,7 @@ export interface AnalysisTask {
 }
 export interface Study {
   id: number; modality: string; slice_count: number; study_description?: string | null; study_date?: string | null; created_at?: string;
+  last_operation_at?: string | null;
   metadata_json?: Record<string, any>; patient?: { patient_id?: string | null } | null; tasks?: AnalysisTask[];
 }
 export interface Lesion {
@@ -25,6 +26,18 @@ export function serverDate(value?: string) {
   if (!value) return '';
   return value.length > 10 && !/(Z|[+-]\d\d:\d\d)$/i.test(value) ? value + 'Z' : value;
 }
+export function compareStudies(a: Study, b: Study, order: string) {
+  if (order === 'last_operation') {
+    // The API sends fixed-width UTC timestamps, including microseconds.
+    const aOperation = a.last_operation_at ?? '';
+    const bOperation = b.last_operation_at ?? '';
+    if (aOperation !== bOperation) return aOperation > bOperation ? -1 : 1;
+  }
+  const importOrder = (Date.parse(serverDate(a.created_at)) || 0)
+    - (Date.parse(serverDate(b.created_at)) || 0) || a.id - b.id;
+  return order === 'import_asc' ? importOrder : -importOrder;
+}
+
 export function dateTime(value?: string) {
   if (!value) return '—';
   const date = new Date(serverDate(value));
@@ -32,9 +45,9 @@ export function dateTime(value?: string) {
   return new Intl.DateTimeFormat('zh-CN', { timeZone:'Asia/Shanghai', year:'numeric', month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hour12:false }).format(date);
 }
 export function studyDate(value?: string | null) {
-  if (!value) return '—';
-  const date = value.slice(0,10);
-  return /^\d{4}-\d{2}-\d{2}$/.test(date) ? date : '—';
+  if (!value) return '无';
+  const date = value.slice(0, 10);
+  return /^\d{4}-\d{2}-\d{2}$/.test(date) ? date : '无';
 }
 export function statusLabel(task?: AnalysisTask | null) {
   if (!task) return '未分析';

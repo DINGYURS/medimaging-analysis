@@ -1,4 +1,6 @@
 import os
+from pathlib import Path
+from pydantic import SecretStr, Field
 from pydantic_settings import BaseSettings
 
 class Settings(BaseSettings):
@@ -25,6 +27,10 @@ class Settings(BaseSettings):
         "http://127.0.0.1:8112,http://127.0.0.1:8113,http://127.0.0.1:8114,http://127.0.0.1:8115"
     )
 
+    LIVER_MRI_ENDPOINT: str = "http://127.0.0.1:8123"
+    LIVER_MRI_RUN_ROOT: str = "/data/medicine_image_mask/liver_mri_detector/api_runs/liver_mri"
+    LIVER_MRI_CHECKPOINT_SHA256: str = "b42c809e66011cc48c4869d79c3d40bace6867792b166d323b1ace3ea01ff152"
+
     # GPU 并发限流配置 (用户要求默认最多 2 个并行推理，支持动态调整)
     MAX_GPU_CONCURRENT_TASKS: int = int(os.getenv("MAX_GPU_CONCURRENT_TASKS", "2"))
     
@@ -37,7 +43,31 @@ class Settings(BaseSettings):
     RADIOMICS_DIR: str = os.path.join(STORAGE_DIR, "radiomics")
     REPORTS_DIR: str = os.path.join(STORAGE_DIR, "reports")
 
+    CT_REFERENCE_ENABLED: bool = False
+    CT_REFERENCE_LOBE_PYTHON: str = ""
+    CT_REFERENCE_LOBE_WEIGHTS: str = ""
+    CT_REFERENCE_LOBE_GPU: int = Field(default=3, ge=0)
+    CT_REFERENCE_TEXTURE_PYTHON: str = ""
+    CT_REFERENCE_TEXTURE_WEIGHTS: str = ""
+
+    # No schema initialization or cloud job writes until migration approval.
+    INITIALIZE_DATABASE_ON_STARTUP: bool = False
+    LLM_WORKER_ENABLED: bool = False
+    LLM_API_BASE_URL: str = "https://token.aigcit.com/v1"
+    LLM_MODEL: str = "deepseek-v4-flash"
+    LLM_API_KEY: SecretStr = SecretStr("")
+    LLM_JSON_MODE: bool = True
+    LLM_TIMEOUT_SECONDS: float = Field(default=90, ge=5, le=300)
+    LLM_MAX_LESIONS: int = Field(default=50, ge=1, le=100)
+    LLM_MAX_INPUT_BYTES: int = Field(default=100000, ge=4096, le=500000)
+    LLM_MAX_TOKENS: int = Field(default=4096, ge=512, le=16384)
+    LLM_MAX_ATTEMPTS: int = Field(default=2, ge=1, le=3)
+    LLM_POLL_INTERVAL_SECONDS: float = Field(default=3, ge=1, le=60)
+
     class Config:
         case_sensitive = True
+        env_file = str(Path(__file__).resolve().parents[2] / ".env")
+        env_file_encoding = "utf-8"
+        extra = "ignore"
 
 settings = Settings()

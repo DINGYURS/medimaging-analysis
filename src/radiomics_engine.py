@@ -489,6 +489,18 @@ def extract_lesion_radiomics(
         "features_by_class": features_by_class,
         "total_extracted_features_count": len(features),
         "all_raw_features": features,
+        "computation_protocol": {
+            "software": "PyRadiomics",
+            "software_version": __import__("radiomics").__version__,
+            "dimensionality": "2D" if extractor.settings.get("force2D") else "3D",
+            "image_types": sorted(extractor.enabledImagetypes),
+            "settings": {k: extractor.settings.get(k) for k in (
+                "binWidth", "binCount", "resampledPixelSpacing", "interpolator",
+                "resegmentRange", "resegmentMode", "force2D", "force2Ddimension",
+                "distances", "symmetricalGLCM", "weightingNorm", "normalize",
+                "normalizeScale", "voxelArrayShift", "label")},
+            "ibsi_benchmark_status": "not_recorded"
+        },
         "provenance": provenance
     }
 

@@ -1,0 +1,6141 @@
+{
+  "catalog_version": "sha256:8ab6093dc00428b413d5f15ea5dbbd8bbcab9778c2ac127d3ffd73c4ff542ab0",
+  "source_sha256": {
+    "backend/app/services/ibsi_feature_catalog.py": "adc2754908b7581684b8d7b0867e7cf2af3fb055e43132c86b14c11f8e9721a5",
+    "backend/app/services/research_feature_catalog.py": "b2e2e471af84850c3a825a1de2f57bc7ca63b5eda1c71615642d498f0f33442e",
+    "backend/app/services/lung_nodule_custom_features.py": "b716f240d2c8dca20dd4810b08c2c6c486b871962f7129c6833615473555b488",
+    "frontend/src/lib/radiomicsPlan.ts": "5c26d12de35a3f91ec0565a68bf3775acfeee19693581aae204fa6af4ead7759"
+  },
+  "review_only": true,
+  "features": [
+    {
+      "section": "3.1",
+      "family": "morphology",
+      "name": "Volume (mesh)",
+      "code": "RNU0",
+      "definition": "absolute signed volume of the closed ROI marching-cubes mesh",
+      "required_mask": "morphological",
+      "requires_discretisation": false,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_RNU0",
+      "status": "computed",
+      "reason": null,
+      "unit": "mm3",
+      "required_masks": [
+        "morphological"
+      ],
+      "requires_image_intensity": false,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "3d"
+      ],
+      "discretisation_group": "none",
+      "calculation_module": "morphology",
+      "legacy_pyradiomics_class": "shape",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。",
+        "当前 IBSI 引擎仅在 3D 模式计算本指标。"
+      ]
+    },
+    {
+      "section": "3.1",
+      "family": "morphology",
+      "name": "Volume (voxel counting)",
+      "code": "YEKZ",
+      "definition": "number of morphological ROI voxels multiplied by voxel volume",
+      "required_mask": "morphological",
+      "requires_discretisation": false,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_YEKZ",
+      "status": "computed",
+      "reason": null,
+      "unit": "mm3",
+      "required_masks": [
+        "morphological"
+      ],
+      "requires_image_intensity": false,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "3d"
+      ],
+      "discretisation_group": "none",
+      "calculation_module": "morphology",
+      "legacy_pyradiomics_class": "shape",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。",
+        "当前 IBSI 引擎仅在 3D 模式计算本指标。"
+      ]
+    },
+    {
+      "section": "3.1",
+      "family": "morphology",
+      "name": "Surface area (mesh)",
+      "code": "C0JK",
+      "definition": "sum of triangle areas of the closed ROI mesh",
+      "required_mask": "morphological",
+      "requires_discretisation": false,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_C0JK",
+      "status": "computed",
+      "reason": null,
+      "unit": "mm2",
+      "required_masks": [
+        "morphological"
+      ],
+      "requires_image_intensity": false,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "3d"
+      ],
+      "discretisation_group": "none",
+      "calculation_module": "morphology",
+      "legacy_pyradiomics_class": "shape",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。",
+        "当前 IBSI 引擎仅在 3D 模式计算本指标。"
+      ]
+    },
+    {
+      "section": "3.1",
+      "family": "morphology",
+      "name": "Surface to volume ratio",
+      "code": "2PR5",
+      "definition": "mesh surface area divided by mesh volume",
+      "required_mask": "morphological",
+      "requires_discretisation": false,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_2PR5",
+      "status": "computed",
+      "reason": null,
+      "unit": "mm^-1",
+      "required_masks": [
+        "morphological"
+      ],
+      "requires_image_intensity": false,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "3d"
+      ],
+      "discretisation_group": "none",
+      "calculation_module": "morphology",
+      "legacy_pyradiomics_class": "shape",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。",
+        "当前 IBSI 引擎仅在 3D 模式计算本指标。"
+      ]
+    },
+    {
+      "section": "3.1",
+      "family": "morphology",
+      "name": "Compactness 1",
+      "code": "SKGS",
+      "definition": "V / (sqrt(pi) * A^(3/2))",
+      "required_mask": "morphological",
+      "requires_discretisation": false,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_SKGS",
+      "status": "computed",
+      "reason": null,
+      "unit": "dimensionless",
+      "required_masks": [
+        "morphological"
+      ],
+      "requires_image_intensity": false,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "3d"
+      ],
+      "discretisation_group": "none",
+      "calculation_module": "morphology",
+      "legacy_pyradiomics_class": "shape",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。",
+        "当前 IBSI 引擎仅在 3D 模式计算本指标。"
+      ]
+    },
+    {
+      "section": "3.1",
+      "family": "morphology",
+      "name": "Compactness 2",
+      "code": "BQWJ",
+      "definition": "36*pi*V^2 / A^3",
+      "required_mask": "morphological",
+      "requires_discretisation": false,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_BQWJ",
+      "status": "computed",
+      "reason": null,
+      "unit": "dimensionless",
+      "required_masks": [
+        "morphological"
+      ],
+      "requires_image_intensity": false,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "3d"
+      ],
+      "discretisation_group": "none",
+      "calculation_module": "morphology",
+      "legacy_pyradiomics_class": "shape",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。",
+        "当前 IBSI 引擎仅在 3D 模式计算本指标。"
+      ]
+    },
+    {
+      "section": "3.1",
+      "family": "morphology",
+      "name": "Spherical disproportion",
+      "code": "KRCK",
+      "definition": "A / (36*pi*V^2)^(1/3)",
+      "required_mask": "morphological",
+      "requires_discretisation": false,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_KRCK",
+      "status": "computed",
+      "reason": null,
+      "unit": "dimensionless",
+      "required_masks": [
+        "morphological"
+      ],
+      "requires_image_intensity": false,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "3d"
+      ],
+      "discretisation_group": "none",
+      "calculation_module": "morphology",
+      "legacy_pyradiomics_class": "shape",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。",
+        "当前 IBSI 引擎仅在 3D 模式计算本指标。"
+      ]
+    },
+    {
+      "section": "3.1",
+      "family": "morphology",
+      "name": "Sphericity",
+      "code": "QCFX",
+      "definition": "(36*pi*V^2)^(1/3) / A",
+      "required_mask": "morphological",
+      "requires_discretisation": false,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_QCFX",
+      "status": "computed",
+      "reason": null,
+      "unit": "dimensionless",
+      "required_masks": [
+        "morphological"
+      ],
+      "requires_image_intensity": false,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "3d"
+      ],
+      "discretisation_group": "none",
+      "calculation_module": "morphology",
+      "legacy_pyradiomics_class": "shape",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。",
+        "当前 IBSI 引擎仅在 3D 模式计算本指标。"
+      ]
+    },
+    {
+      "section": "3.1",
+      "family": "morphology",
+      "name": "Asphericity",
+      "code": "25C7",
+      "definition": "(A^3/(36*pi*V^2))^(1/3) - 1",
+      "required_mask": "morphological",
+      "requires_discretisation": false,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_25C7",
+      "status": "computed",
+      "reason": null,
+      "unit": "dimensionless",
+      "required_masks": [
+        "morphological"
+      ],
+      "requires_image_intensity": false,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "3d"
+      ],
+      "discretisation_group": "none",
+      "calculation_module": "morphology",
+      "legacy_pyradiomics_class": "shape",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。",
+        "当前 IBSI 引擎仅在 3D 模式计算本指标。"
+      ]
+    },
+    {
+      "section": "3.1",
+      "family": "morphology",
+      "name": "Centre of mass shift",
+      "code": "KLMA",
+      "definition": "Euclidean distance between geometric and intensity-weighted ROI centroids",
+      "required_mask": "morphological + intensity",
+      "requires_discretisation": false,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_KLMA",
+      "status": "computed",
+      "reason": null,
+      "unit": "mm",
+      "required_masks": [
+        "morphological",
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "3d"
+      ],
+      "discretisation_group": "none",
+      "calculation_module": "morphology",
+      "legacy_pyradiomics_class": "shape",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。",
+        "当前 IBSI 引擎仅在 3D 模式计算本指标。"
+      ]
+    },
+    {
+      "section": "3.1",
+      "family": "morphology",
+      "name": "Maximum 3D diameter",
+      "code": "L0JK",
+      "definition": "maximum Euclidean distance between mesh vertices",
+      "required_mask": "morphological",
+      "requires_discretisation": false,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_L0JK",
+      "status": "computed",
+      "reason": null,
+      "unit": "mm",
+      "required_masks": [
+        "morphological"
+      ],
+      "requires_image_intensity": false,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "3d"
+      ],
+      "discretisation_group": "none",
+      "calculation_module": "morphology",
+      "legacy_pyradiomics_class": "shape",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。",
+        "当前 IBSI 引擎仅在 3D 模式计算本指标。",
+        "精确成对计算受引擎 max_pairwise_voxels 资源上限限制，不进行抽样替代。"
+      ]
+    },
+    {
+      "section": "3.1",
+      "family": "morphology",
+      "name": "Major axis length",
+      "code": "TDIC",
+      "definition": "4*sqrt(largest eigenvalue of physical voxel-centre covariance)",
+      "required_mask": "morphological",
+      "requires_discretisation": false,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_TDIC",
+      "status": "computed",
+      "reason": null,
+      "unit": "mm",
+      "required_masks": [
+        "morphological"
+      ],
+      "requires_image_intensity": false,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "3d"
+      ],
+      "discretisation_group": "none",
+      "calculation_module": "morphology",
+      "legacy_pyradiomics_class": "shape",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。",
+        "当前 IBSI 引擎仅在 3D 模式计算本指标。"
+      ]
+    },
+    {
+      "section": "3.1",
+      "family": "morphology",
+      "name": "Minor axis length",
+      "code": "P9VJ",
+      "definition": "4*sqrt(second physical covariance eigenvalue)",
+      "required_mask": "morphological",
+      "requires_discretisation": false,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_P9VJ",
+      "status": "computed",
+      "reason": null,
+      "unit": "mm",
+      "required_masks": [
+        "morphological"
+      ],
+      "requires_image_intensity": false,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "3d"
+      ],
+      "discretisation_group": "none",
+      "calculation_module": "morphology",
+      "legacy_pyradiomics_class": "shape",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。",
+        "当前 IBSI 引擎仅在 3D 模式计算本指标。"
+      ]
+    },
+    {
+      "section": "3.1",
+      "family": "morphology",
+      "name": "Least axis length",
+      "code": "7J51",
+      "definition": "4*sqrt(smallest physical covariance eigenvalue)",
+      "required_mask": "morphological",
+      "requires_discretisation": false,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_7J51",
+      "status": "computed",
+      "reason": null,
+      "unit": "mm",
+      "required_masks": [
+        "morphological"
+      ],
+      "requires_image_intensity": false,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "3d"
+      ],
+      "discretisation_group": "none",
+      "calculation_module": "morphology",
+      "legacy_pyradiomics_class": "shape",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。",
+        "当前 IBSI 引擎仅在 3D 模式计算本指标。"
+      ]
+    },
+    {
+      "section": "3.1",
+      "family": "morphology",
+      "name": "Elongation",
+      "code": "Q3CK",
+      "definition": "sqrt(second covariance eigenvalue / largest covariance eigenvalue)",
+      "required_mask": "morphological",
+      "requires_discretisation": false,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_Q3CK",
+      "status": "computed",
+      "reason": null,
+      "unit": "dimensionless",
+      "required_masks": [
+        "morphological"
+      ],
+      "requires_image_intensity": false,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "3d"
+      ],
+      "discretisation_group": "none",
+      "calculation_module": "morphology",
+      "legacy_pyradiomics_class": "shape",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。",
+        "当前 IBSI 引擎仅在 3D 模式计算本指标。"
+      ]
+    },
+    {
+      "section": "3.1",
+      "family": "morphology",
+      "name": "Flatness",
+      "code": "N17B",
+      "definition": "sqrt(smallest covariance eigenvalue / largest covariance eigenvalue)",
+      "required_mask": "morphological",
+      "requires_discretisation": false,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_N17B",
+      "status": "computed",
+      "reason": null,
+      "unit": "dimensionless",
+      "required_masks": [
+        "morphological"
+      ],
+      "requires_image_intensity": false,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "3d"
+      ],
+      "discretisation_group": "none",
+      "calculation_module": "morphology",
+      "legacy_pyradiomics_class": "shape",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。",
+        "当前 IBSI 引擎仅在 3D 模式计算本指标。"
+      ]
+    },
+    {
+      "section": "3.1",
+      "family": "morphology",
+      "name": "Volume density (axis-aligned bounding box)",
+      "code": "PBX1",
+      "definition": "mesh volume divided by axis-aligned bounding-box volume",
+      "required_mask": "morphological",
+      "requires_discretisation": false,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_PBX1",
+      "status": "computed",
+      "reason": null,
+      "unit": "dimensionless",
+      "required_masks": [
+        "morphological"
+      ],
+      "requires_image_intensity": false,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "3d"
+      ],
+      "discretisation_group": "none",
+      "calculation_module": "morphology",
+      "legacy_pyradiomics_class": "shape",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。",
+        "当前 IBSI 引擎仅在 3D 模式计算本指标。"
+      ]
+    },
+    {
+      "section": "3.1",
+      "family": "morphology",
+      "name": "Area density (axis-aligned bounding box)",
+      "code": "R59B",
+      "definition": "mesh area divided by axis-aligned bounding-box area",
+      "required_mask": "morphological",
+      "requires_discretisation": false,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_R59B",
+      "status": "computed",
+      "reason": null,
+      "unit": "dimensionless",
+      "required_masks": [
+        "morphological"
+      ],
+      "requires_image_intensity": false,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "3d"
+      ],
+      "discretisation_group": "none",
+      "calculation_module": "morphology",
+      "legacy_pyradiomics_class": "shape",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。",
+        "当前 IBSI 引擎仅在 3D 模式计算本指标。"
+      ]
+    },
+    {
+      "section": "3.1",
+      "family": "morphology",
+      "name": "Volume density (oriented minimum bounding box)",
+      "code": "ZH1A",
+      "definition": "mesh volume divided by oriented minimum bounding-box volume",
+      "required_mask": "morphological",
+      "requires_discretisation": false,
+      "standard_status": "not_standardized",
+      "source_note": "IBSI explicitly reports no reference values and says this feature should not be used.",
+      "key": "ibsi_ZH1A",
+      "status": "not_standardized",
+      "reason": "IBSI explicitly reports no reference values and says this feature should not be used.",
+      "unit": "dimensionless",
+      "required_masks": [
+        "morphological"
+      ],
+      "requires_image_intensity": false,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "3d"
+      ],
+      "discretisation_group": "none",
+      "calculation_module": "morphology",
+      "legacy_pyradiomics_class": "shape",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。",
+        "当前 IBSI 引擎仅在 3D 模式计算本指标。"
+      ]
+    },
+    {
+      "section": "3.1",
+      "family": "morphology",
+      "name": "Area density (oriented minimum bounding box)",
+      "code": "IQYR",
+      "definition": "mesh area divided by oriented minimum bounding-box area",
+      "required_mask": "morphological",
+      "requires_discretisation": false,
+      "standard_status": "not_standardized",
+      "source_note": "IBSI explicitly reports no reference values and says this feature should not be used.",
+      "key": "ibsi_IQYR",
+      "status": "not_standardized",
+      "reason": "IBSI explicitly reports no reference values and says this feature should not be used.",
+      "unit": "dimensionless",
+      "required_masks": [
+        "morphological"
+      ],
+      "requires_image_intensity": false,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "3d"
+      ],
+      "discretisation_group": "none",
+      "calculation_module": "morphology",
+      "legacy_pyradiomics_class": "shape",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。",
+        "当前 IBSI 引擎仅在 3D 模式计算本指标。"
+      ]
+    },
+    {
+      "section": "3.1",
+      "family": "morphology",
+      "name": "Volume density (approximate enclosing ellipsoid)",
+      "code": "6BDE",
+      "definition": "mesh volume divided by PCA approximate enclosing-ellipsoid volume",
+      "required_mask": "morphological",
+      "requires_discretisation": false,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_6BDE",
+      "status": "computed",
+      "reason": null,
+      "unit": "dimensionless",
+      "required_masks": [
+        "morphological"
+      ],
+      "requires_image_intensity": false,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "3d"
+      ],
+      "discretisation_group": "none",
+      "calculation_module": "morphology",
+      "legacy_pyradiomics_class": "shape",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。",
+        "当前 IBSI 引擎仅在 3D 模式计算本指标。"
+      ]
+    },
+    {
+      "section": "3.1",
+      "family": "morphology",
+      "name": "Area density (approximate enclosing ellipsoid)",
+      "code": "RDD2",
+      "definition": "mesh area divided by PCA approximate enclosing-ellipsoid area",
+      "required_mask": "morphological",
+      "requires_discretisation": false,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_RDD2",
+      "status": "computed",
+      "reason": null,
+      "unit": "dimensionless",
+      "required_masks": [
+        "morphological"
+      ],
+      "requires_image_intensity": false,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "3d"
+      ],
+      "discretisation_group": "none",
+      "calculation_module": "morphology",
+      "legacy_pyradiomics_class": "shape",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。",
+        "当前 IBSI 引擎仅在 3D 模式计算本指标。"
+      ]
+    },
+    {
+      "section": "3.1",
+      "family": "morphology",
+      "name": "Volume density (minimum volume enclosing ellipsoid)",
+      "code": "SWZ1",
+      "definition": "mesh volume divided by minimum-volume enclosing-ellipsoid volume",
+      "required_mask": "morphological",
+      "requires_discretisation": false,
+      "standard_status": "not_standardized",
+      "source_note": "IBSI explicitly reports no reference values and says this feature should not be used.",
+      "key": "ibsi_SWZ1",
+      "status": "not_standardized",
+      "reason": "IBSI explicitly reports no reference values and says this feature should not be used.",
+      "unit": "dimensionless",
+      "required_masks": [
+        "morphological"
+      ],
+      "requires_image_intensity": false,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "3d"
+      ],
+      "discretisation_group": "none",
+      "calculation_module": "morphology",
+      "legacy_pyradiomics_class": "shape",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。",
+        "当前 IBSI 引擎仅在 3D 模式计算本指标。"
+      ]
+    },
+    {
+      "section": "3.1",
+      "family": "morphology",
+      "name": "Area density (minimum volume enclosing ellipsoid)",
+      "code": "BRI8",
+      "definition": "mesh area divided by minimum-volume enclosing-ellipsoid area",
+      "required_mask": "morphological",
+      "requires_discretisation": false,
+      "standard_status": "not_standardized",
+      "source_note": "IBSI explicitly reports no reference values and says this feature should not be used.",
+      "key": "ibsi_BRI8",
+      "status": "not_standardized",
+      "reason": "IBSI explicitly reports no reference values and says this feature should not be used.",
+      "unit": "dimensionless",
+      "required_masks": [
+        "morphological"
+      ],
+      "requires_image_intensity": false,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "3d"
+      ],
+      "discretisation_group": "none",
+      "calculation_module": "morphology",
+      "legacy_pyradiomics_class": "shape",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。",
+        "当前 IBSI 引擎仅在 3D 模式计算本指标。"
+      ]
+    },
+    {
+      "section": "3.1",
+      "family": "morphology",
+      "name": "Volume density (convex hull)",
+      "code": "R3ER",
+      "definition": "mesh volume divided by physical convex-hull volume",
+      "required_mask": "morphological",
+      "requires_discretisation": false,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_R3ER",
+      "status": "computed",
+      "reason": null,
+      "unit": "dimensionless",
+      "required_masks": [
+        "morphological"
+      ],
+      "requires_image_intensity": false,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "3d"
+      ],
+      "discretisation_group": "none",
+      "calculation_module": "morphology",
+      "legacy_pyradiomics_class": "shape",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。",
+        "当前 IBSI 引擎仅在 3D 模式计算本指标。"
+      ]
+    },
+    {
+      "section": "3.1",
+      "family": "morphology",
+      "name": "Area density (convex hull)",
+      "code": "7T7F",
+      "definition": "mesh area divided by physical convex-hull area",
+      "required_mask": "morphological",
+      "requires_discretisation": false,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_7T7F",
+      "status": "computed",
+      "reason": null,
+      "unit": "dimensionless",
+      "required_masks": [
+        "morphological"
+      ],
+      "requires_image_intensity": false,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "3d"
+      ],
+      "discretisation_group": "none",
+      "calculation_module": "morphology",
+      "legacy_pyradiomics_class": "shape",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。",
+        "当前 IBSI 引擎仅在 3D 模式计算本指标。"
+      ]
+    },
+    {
+      "section": "3.1",
+      "family": "morphology",
+      "name": "Integrated intensity",
+      "code": "99N0",
+      "definition": "mesh volume multiplied by mean intensity in the intensity mask",
+      "required_mask": "morphological + intensity",
+      "requires_discretisation": false,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_99N0",
+      "status": "computed",
+      "reason": null,
+      "unit": "intensity*mm3",
+      "required_masks": [
+        "morphological",
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "3d"
+      ],
+      "discretisation_group": "none",
+      "calculation_module": "morphology",
+      "legacy_pyradiomics_class": "shape",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。",
+        "当前 IBSI 引擎仅在 3D 模式计算本指标。"
+      ]
+    },
+    {
+      "section": "3.1",
+      "family": "morphology",
+      "name": "Moran's I index",
+      "code": "N365",
+      "definition": "inverse-distance spatial autocorrelation over intensity-mask voxels",
+      "required_mask": "intensity",
+      "requires_discretisation": false,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_N365",
+      "status": "computed",
+      "reason": null,
+      "unit": "dimensionless",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "3d"
+      ],
+      "discretisation_group": "none",
+      "calculation_module": "morphology",
+      "legacy_pyradiomics_class": "shape",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。",
+        "当前 IBSI 引擎仅在 3D 模式计算本指标。",
+        "精确成对计算受引擎 max_pairwise_voxels 资源上限限制，不进行抽样替代。"
+      ]
+    },
+    {
+      "section": "3.1",
+      "family": "morphology",
+      "name": "Geary's C measure",
+      "code": "NPT7",
+      "definition": "inverse-distance spatial local autocorrelation over intensity-mask voxels",
+      "required_mask": "intensity",
+      "requires_discretisation": false,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_NPT7",
+      "status": "computed",
+      "reason": null,
+      "unit": "dimensionless",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "3d"
+      ],
+      "discretisation_group": "none",
+      "calculation_module": "morphology",
+      "legacy_pyradiomics_class": "shape",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。",
+        "当前 IBSI 引擎仅在 3D 模式计算本指标。",
+        "精确成对计算受引擎 max_pairwise_voxels 资源上限限制，不进行抽样替代。"
+      ]
+    },
+    {
+      "section": "3.2",
+      "family": "local_intensity",
+      "name": "Local intensity peak",
+      "code": "VJGA",
+      "definition": "mean intensity in a 1 cm^3 sphere centred on an ROI maximum",
+      "required_mask": "intensity",
+      "requires_discretisation": false,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_VJGA",
+      "status": "computed",
+      "reason": null,
+      "unit": "intensity",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": true,
+      "supported_dimensions": [
+        "3d"
+      ],
+      "discretisation_group": "none",
+      "calculation_module": "local",
+      "legacy_pyradiomics_class": null,
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。",
+        "当前 IBSI 引擎仅在 3D 模式计算本指标。",
+        "保留 ROI 外的 1 cm³ 球形邻域图像。"
+      ]
+    },
+    {
+      "section": "3.2",
+      "family": "local_intensity",
+      "name": "Global intensity peak",
+      "code": "0F91",
+      "definition": "maximum 1 cm^3 spherical-neighbourhood mean over ROI centres",
+      "required_mask": "intensity",
+      "requires_discretisation": false,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_0F91",
+      "status": "computed",
+      "reason": null,
+      "unit": "intensity",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": true,
+      "supported_dimensions": [
+        "3d"
+      ],
+      "discretisation_group": "none",
+      "calculation_module": "local",
+      "legacy_pyradiomics_class": null,
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。",
+        "当前 IBSI 引擎仅在 3D 模式计算本指标。",
+        "保留 ROI 外的 1 cm³ 球形邻域图像。"
+      ]
+    },
+    {
+      "section": "3.3",
+      "family": "intensity_statistics",
+      "name": "Mean intensity",
+      "code": "Q4LE",
+      "definition": "arithmetic mean of continuous ROI intensities",
+      "required_mask": "intensity",
+      "requires_discretisation": false,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_Q4LE",
+      "status": "computed",
+      "reason": null,
+      "unit": "intensity",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "none",
+      "calculation_module": "statistics",
+      "legacy_pyradiomics_class": "firstorder",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.3",
+      "family": "intensity_statistics",
+      "name": "Intensity variance",
+      "code": "ECT3",
+      "definition": "population variance of continuous ROI intensities",
+      "required_mask": "intensity",
+      "requires_discretisation": false,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_ECT3",
+      "status": "computed",
+      "reason": null,
+      "unit": "intensity^2",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "none",
+      "calculation_module": "statistics",
+      "legacy_pyradiomics_class": "firstorder",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.3",
+      "family": "intensity_statistics",
+      "name": "Intensity skewness",
+      "code": "KE2A",
+      "definition": "third central moment divided by variance^(3/2)",
+      "required_mask": "intensity",
+      "requires_discretisation": false,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_KE2A",
+      "status": "computed",
+      "reason": null,
+      "unit": "dimensionless",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "none",
+      "calculation_module": "statistics",
+      "legacy_pyradiomics_class": "firstorder",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.3",
+      "family": "intensity_statistics",
+      "name": "(Excess) intensity kurtosis",
+      "code": "IPH6",
+      "definition": "fourth standardized central moment minus three",
+      "required_mask": "intensity",
+      "requires_discretisation": false,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_IPH6",
+      "status": "computed",
+      "reason": null,
+      "unit": "dimensionless",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "none",
+      "calculation_module": "statistics",
+      "legacy_pyradiomics_class": "firstorder",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.3",
+      "family": "intensity_statistics",
+      "name": "Median intensity",
+      "code": "Y12H",
+      "definition": "sample median of continuous ROI intensities",
+      "required_mask": "intensity",
+      "requires_discretisation": false,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_Y12H",
+      "status": "computed",
+      "reason": null,
+      "unit": "intensity",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "none",
+      "calculation_module": "statistics",
+      "legacy_pyradiomics_class": "firstorder",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.3",
+      "family": "intensity_statistics",
+      "name": "Minimum intensity",
+      "code": "1GSF",
+      "definition": "minimum continuous ROI intensity",
+      "required_mask": "intensity",
+      "requires_discretisation": false,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_1GSF",
+      "status": "computed",
+      "reason": null,
+      "unit": "intensity",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "none",
+      "calculation_module": "statistics",
+      "legacy_pyradiomics_class": "firstorder",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.3",
+      "family": "intensity_statistics",
+      "name": "10th intensity percentile",
+      "code": "QG58",
+      "definition": "10th percentile of continuous ROI intensities",
+      "required_mask": "intensity",
+      "requires_discretisation": false,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_QG58",
+      "status": "computed",
+      "reason": null,
+      "unit": "intensity",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "none",
+      "calculation_module": "statistics",
+      "legacy_pyradiomics_class": "firstorder",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.3",
+      "family": "intensity_statistics",
+      "name": "90th intensity percentile",
+      "code": "8DWT",
+      "definition": "90th percentile of continuous ROI intensities",
+      "required_mask": "intensity",
+      "requires_discretisation": false,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_8DWT",
+      "status": "computed",
+      "reason": null,
+      "unit": "intensity",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "none",
+      "calculation_module": "statistics",
+      "legacy_pyradiomics_class": "firstorder",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.3",
+      "family": "intensity_statistics",
+      "name": "Maximum intensity",
+      "code": "84IY",
+      "definition": "maximum continuous ROI intensity",
+      "required_mask": "intensity",
+      "requires_discretisation": false,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_84IY",
+      "status": "computed",
+      "reason": null,
+      "unit": "intensity",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "none",
+      "calculation_module": "statistics",
+      "legacy_pyradiomics_class": "firstorder",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.3",
+      "family": "intensity_statistics",
+      "name": "Intensity interquartile range",
+      "code": "SALO",
+      "definition": "75th minus 25th continuous-intensity percentile",
+      "required_mask": "intensity",
+      "requires_discretisation": false,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_SALO",
+      "status": "computed",
+      "reason": null,
+      "unit": "intensity",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "none",
+      "calculation_module": "statistics",
+      "legacy_pyradiomics_class": "firstorder",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.3",
+      "family": "intensity_statistics",
+      "name": "Intensity range",
+      "code": "2OJQ",
+      "definition": "maximum minus minimum continuous intensity",
+      "required_mask": "intensity",
+      "requires_discretisation": false,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_2OJQ",
+      "status": "computed",
+      "reason": null,
+      "unit": "intensity",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "none",
+      "calculation_module": "statistics",
+      "legacy_pyradiomics_class": "firstorder",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.3",
+      "family": "intensity_statistics",
+      "name": "Intensity-based mean absolute deviation",
+      "code": "4FUA",
+      "definition": "mean absolute deviation from continuous mean",
+      "required_mask": "intensity",
+      "requires_discretisation": false,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_4FUA",
+      "status": "computed",
+      "reason": null,
+      "unit": "intensity",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "none",
+      "calculation_module": "statistics",
+      "legacy_pyradiomics_class": "firstorder",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.3",
+      "family": "intensity_statistics",
+      "name": "Intensity-based robust mean absolute deviation",
+      "code": "1128",
+      "definition": "mean absolute deviation after 10th-90th percentile trimming",
+      "required_mask": "intensity",
+      "requires_discretisation": false,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_1128",
+      "status": "computed",
+      "reason": null,
+      "unit": "intensity",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "none",
+      "calculation_module": "statistics",
+      "legacy_pyradiomics_class": "firstorder",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.3",
+      "family": "intensity_statistics",
+      "name": "Intensity-based median absolute deviation",
+      "code": "N72L",
+      "definition": "mean absolute deviation from continuous median",
+      "required_mask": "intensity",
+      "requires_discretisation": false,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_N72L",
+      "status": "computed",
+      "reason": null,
+      "unit": "intensity",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "none",
+      "calculation_module": "statistics",
+      "legacy_pyradiomics_class": "firstorder",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.3",
+      "family": "intensity_statistics",
+      "name": "Intensity-based coefficient of variation",
+      "code": "7TET",
+      "definition": "population standard deviation divided by continuous mean",
+      "required_mask": "intensity",
+      "requires_discretisation": false,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_7TET",
+      "status": "computed",
+      "reason": null,
+      "unit": "dimensionless",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "none",
+      "calculation_module": "statistics",
+      "legacy_pyradiomics_class": "firstorder",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.3",
+      "family": "intensity_statistics",
+      "name": "Intensity-based quartile coefficient of dispersion",
+      "code": "9S40",
+      "definition": "IQR divided by the sum of Q25 and Q75",
+      "required_mask": "intensity",
+      "requires_discretisation": false,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_9S40",
+      "status": "computed",
+      "reason": null,
+      "unit": "dimensionless",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "none",
+      "calculation_module": "statistics",
+      "legacy_pyradiomics_class": "firstorder",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.3",
+      "family": "intensity_statistics",
+      "name": "Intensity-based energy",
+      "code": "N8CA",
+      "definition": "sum of squared continuous intensities",
+      "required_mask": "intensity",
+      "requires_discretisation": false,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_N8CA",
+      "status": "computed",
+      "reason": null,
+      "unit": "intensity^2",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "none",
+      "calculation_module": "statistics",
+      "legacy_pyradiomics_class": "firstorder",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.3",
+      "family": "intensity_statistics",
+      "name": "Root mean square intensity",
+      "code": "5ZWQ",
+      "definition": "sqrt(mean squared continuous intensity))",
+      "required_mask": "intensity",
+      "requires_discretisation": false,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_5ZWQ",
+      "status": "computed",
+      "reason": null,
+      "unit": "intensity",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "none",
+      "calculation_module": "statistics",
+      "legacy_pyradiomics_class": "firstorder",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.4",
+      "family": "intensity_histogram",
+      "name": "Mean discretised intensity",
+      "code": "X6K6",
+      "definition": "mean of fixed-bin-width discretised grey levels",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_X6K6",
+      "status": "computed",
+      "reason": null,
+      "unit": "grey_level",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "intensity_histogram",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": "firstorder",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.4",
+      "family": "intensity_histogram",
+      "name": "Discretised intensity variance",
+      "code": "CH89",
+      "definition": "population variance of discretised grey levels",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_CH89",
+      "status": "computed",
+      "reason": null,
+      "unit": "grey_level^2",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "intensity_histogram",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": "firstorder",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.4",
+      "family": "intensity_histogram",
+      "name": "Discretised intensity skewness",
+      "code": "88K1",
+      "definition": "skewness of discretised grey levels",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_88K1",
+      "status": "computed",
+      "reason": null,
+      "unit": "dimensionless",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "intensity_histogram",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": "firstorder",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.4",
+      "family": "intensity_histogram",
+      "name": "(Excess) discretised intensity kurtosis",
+      "code": "C3I7",
+      "definition": "excess kurtosis of discretised grey levels",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_C3I7",
+      "status": "computed",
+      "reason": null,
+      "unit": "dimensionless",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "intensity_histogram",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": "firstorder",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.4",
+      "family": "intensity_histogram",
+      "name": "Median discretised intensity",
+      "code": "WIFQ",
+      "definition": "median of discretised grey levels",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_WIFQ",
+      "status": "computed",
+      "reason": null,
+      "unit": "grey_level",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "intensity_histogram",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": "firstorder",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.4",
+      "family": "intensity_histogram",
+      "name": "Minimum discretised intensity",
+      "code": "1PR8",
+      "definition": "minimum discretised grey level",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_1PR8",
+      "status": "computed",
+      "reason": null,
+      "unit": "grey_level",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "intensity_histogram",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": "firstorder",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.4",
+      "family": "intensity_histogram",
+      "name": "10th discretised intensity percentile",
+      "code": "GPMT",
+      "definition": "10th percentile of discretised grey levels",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_GPMT",
+      "status": "computed",
+      "reason": null,
+      "unit": "grey_level",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "intensity_histogram",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": "firstorder",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.4",
+      "family": "intensity_histogram",
+      "name": "90th discretised intensity percentile",
+      "code": "OZ0C",
+      "definition": "90th percentile of discretised grey levels",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_OZ0C",
+      "status": "computed",
+      "reason": null,
+      "unit": "grey_level",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "intensity_histogram",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": "firstorder",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.4",
+      "family": "intensity_histogram",
+      "name": "Maximum discretised intensity",
+      "code": "3NCY",
+      "definition": "maximum discretised grey level",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_3NCY",
+      "status": "computed",
+      "reason": null,
+      "unit": "grey_level",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "intensity_histogram",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": "firstorder",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.4",
+      "family": "intensity_histogram",
+      "name": "Intensity histogram mode",
+      "code": "AMMC",
+      "definition": "most frequent discretised grey level, ties nearest the mean",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_AMMC",
+      "status": "computed",
+      "reason": null,
+      "unit": "grey_level",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "intensity_histogram",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": "firstorder",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.4",
+      "family": "intensity_histogram",
+      "name": "Discretised intensity interquartile range",
+      "code": "WR0O",
+      "definition": "IQR of discretised grey levels",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_WR0O",
+      "status": "computed",
+      "reason": null,
+      "unit": "grey_level",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "intensity_histogram",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": "firstorder",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.4",
+      "family": "intensity_histogram",
+      "name": "Discretised intensity range",
+      "code": "5Z3W",
+      "definition": "range of discretised grey levels",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_5Z3W",
+      "status": "computed",
+      "reason": null,
+      "unit": "grey_level",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "intensity_histogram",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": "firstorder",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.4",
+      "family": "intensity_histogram",
+      "name": "Intensity histogram mean absolute deviation",
+      "code": "D2ZX",
+      "definition": "mean absolute deviation from discretised mean",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_D2ZX",
+      "status": "computed",
+      "reason": null,
+      "unit": "grey_level",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "intensity_histogram",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": "firstorder",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.4",
+      "family": "intensity_histogram",
+      "name": "Intensity histogram robust mean absolute deviation",
+      "code": "WRZB",
+      "definition": "trimmed mean absolute deviation of discretised levels",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_WRZB",
+      "status": "computed",
+      "reason": null,
+      "unit": "grey_level",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "intensity_histogram",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": "firstorder",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.4",
+      "family": "intensity_histogram",
+      "name": "Intensity histogram median absolute deviation",
+      "code": "4RNL",
+      "definition": "mean absolute deviation from discretised median",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_4RNL",
+      "status": "computed",
+      "reason": null,
+      "unit": "grey_level",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "intensity_histogram",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": "firstorder",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.4",
+      "family": "intensity_histogram",
+      "name": "Intensity histogram coefficient of variation",
+      "code": "CWYJ",
+      "definition": "discretised standard deviation divided by discretised mean",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_CWYJ",
+      "status": "computed",
+      "reason": null,
+      "unit": "dimensionless",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "intensity_histogram",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": "firstorder",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.4",
+      "family": "intensity_histogram",
+      "name": "Intensity histogram quartile coefficient of dispersion",
+      "code": "SLWD",
+      "definition": "discretised IQR divided by Q25+Q75",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_SLWD",
+      "status": "computed",
+      "reason": null,
+      "unit": "dimensionless",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "intensity_histogram",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": "firstorder",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.4",
+      "family": "intensity_histogram",
+      "name": "Discretised intensity entropy",
+      "code": "TLU2",
+      "definition": "Shannon entropy of discretised grey-level probabilities",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_TLU2",
+      "status": "computed",
+      "reason": null,
+      "unit": "bit",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "intensity_histogram",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": "firstorder",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.4",
+      "family": "intensity_histogram",
+      "name": "Discretised intensity uniformity",
+      "code": "BJ5W",
+      "definition": "sum of squared discretised grey-level probabilities",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_BJ5W",
+      "status": "computed",
+      "reason": null,
+      "unit": "dimensionless",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "intensity_histogram",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": "firstorder",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.4",
+      "family": "intensity_histogram",
+      "name": "Maximum histogram gradient",
+      "code": "12CE",
+      "definition": "maximum first finite difference of the dense histogram",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_12CE",
+      "status": "computed",
+      "reason": null,
+      "unit": "voxel_count/grey_level",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "intensity_histogram",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": "firstorder",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.4",
+      "family": "intensity_histogram",
+      "name": "Maximum histogram gradient intensity",
+      "code": "8E6O",
+      "definition": "grey level at maximum histogram gradient",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_8E6O",
+      "status": "computed",
+      "reason": null,
+      "unit": "grey_level",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "intensity_histogram",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": "firstorder",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.4",
+      "family": "intensity_histogram",
+      "name": "Minimum histogram gradient",
+      "code": "VQB3",
+      "definition": "minimum first finite difference of the dense histogram",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_VQB3",
+      "status": "computed",
+      "reason": null,
+      "unit": "voxel_count/grey_level",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "intensity_histogram",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": "firstorder",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.4",
+      "family": "intensity_histogram",
+      "name": "Minimum histogram gradient intensity",
+      "code": "RHQZ",
+      "definition": "grey level at minimum histogram gradient",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_RHQZ",
+      "status": "computed",
+      "reason": null,
+      "unit": "grey_level",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "intensity_histogram",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": "firstorder",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.5",
+      "family": "intensity_volume_histogram",
+      "name": "Volume at intensity fraction",
+      "code": "BC2M",
+      "definition": "largest cumulative volume fraction at gamma >= 10%",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_BC2M",
+      "status": "computed",
+      "reason": null,
+      "unit": "fraction",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "intensity_volume_histogram",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": null,
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.5",
+      "family": "intensity_volume_histogram",
+      "name": "Intensity at volume fraction",
+      "code": "GBPN",
+      "definition": "minimum discretised intensity at cumulative volume <= 10%",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_GBPN",
+      "status": "computed",
+      "reason": null,
+      "unit": "intensity",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "intensity_volume_histogram",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": null,
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.5",
+      "family": "intensity_volume_histogram",
+      "name": "Volume fraction difference between intensity fractions",
+      "code": "DDTU",
+      "definition": "V10 minus V90 from the cumulative IVH",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_DDTU",
+      "status": "computed",
+      "reason": null,
+      "unit": "fraction",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "intensity_volume_histogram",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": null,
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.5",
+      "family": "intensity_volume_histogram",
+      "name": "Intensity fraction difference between volume fractions",
+      "code": "CNV2",
+      "definition": "I10 minus I90 from the cumulative IVH",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_CNV2",
+      "status": "computed",
+      "reason": null,
+      "unit": "intensity",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "intensity_volume_histogram",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": null,
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.5",
+      "family": "intensity_volume_histogram",
+      "name": "Area under the IVH curve",
+      "code": "9CMM",
+      "definition": "trapezoidal area under the cumulative IVH curve",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "not_standardized",
+      "source_note": "IBSI explicitly reports no reference values and says this feature should not be used.",
+      "key": "ibsi_9CMM",
+      "status": "not_standardized",
+      "reason": "IBSI explicitly reports no reference values and says this feature should not be used.",
+      "unit": "fraction",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "intensity_volume_histogram",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": null,
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.6",
+      "family": "glcm",
+      "name": "Joint maximum",
+      "code": "GYBY",
+      "definition": "maximum element of the normalized symmetric GLCM",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_GYBY",
+      "status": "computed",
+      "reason": null,
+      "unit": "dimensionless",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": "glcm",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.6",
+      "family": "glcm",
+      "name": "Joint average",
+      "code": "60VM",
+      "definition": "sum of grey level times joint probability",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_60VM",
+      "status": "computed",
+      "reason": null,
+      "unit": "grey_level",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": "glcm",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.6",
+      "family": "glcm",
+      "name": "Joint variance",
+      "code": "UR99",
+      "definition": "second central moment around joint average",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_UR99",
+      "status": "computed",
+      "reason": null,
+      "unit": "grey_level^2",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": "glcm",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.6",
+      "family": "glcm",
+      "name": "Joint entropy",
+      "code": "TU9B",
+      "definition": "Shannon entropy of joint GLCM probabilities",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_TU9B",
+      "status": "computed",
+      "reason": null,
+      "unit": "bit",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": "glcm",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.6",
+      "family": "glcm",
+      "name": "Difference average",
+      "code": "TF7R",
+      "definition": "mean absolute grey-level difference",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_TF7R",
+      "status": "computed",
+      "reason": null,
+      "unit": "grey_level",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": "glcm",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.6",
+      "family": "glcm",
+      "name": "Difference variance",
+      "code": "D3YU",
+      "definition": "variance of the absolute grey-level difference distribution",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_D3YU",
+      "status": "computed",
+      "reason": null,
+      "unit": "grey_level^2",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": "glcm",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.6",
+      "family": "glcm",
+      "name": "Difference entropy",
+      "code": "NTRS",
+      "definition": "entropy of the absolute grey-level difference distribution",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_NTRS",
+      "status": "computed",
+      "reason": null,
+      "unit": "bit",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": "glcm",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.6",
+      "family": "glcm",
+      "name": "Sum average",
+      "code": "ZGXS",
+      "definition": "mean of the grey-level sum distribution",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_ZGXS",
+      "status": "computed",
+      "reason": null,
+      "unit": "grey_level",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": "glcm",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.6",
+      "family": "glcm",
+      "name": "Sum variance",
+      "code": "OEEB",
+      "definition": "variance of the grey-level sum distribution",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_OEEB",
+      "status": "computed",
+      "reason": null,
+      "unit": "grey_level^2",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": "glcm",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.6",
+      "family": "glcm",
+      "name": "Sum entropy",
+      "code": "P6QZ",
+      "definition": "entropy of the grey-level sum distribution",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_P6QZ",
+      "status": "computed",
+      "reason": null,
+      "unit": "bit",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": "glcm",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.6",
+      "family": "glcm",
+      "name": "Angular second moment",
+      "code": "8ZQL",
+      "definition": "sum of squared normalized GLCM probabilities",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_8ZQL",
+      "status": "computed",
+      "reason": null,
+      "unit": "dimensionless",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": "glcm",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.6",
+      "family": "glcm",
+      "name": "Contrast",
+      "code": "ACUI",
+      "definition": "second moment of grey-level differences",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_ACUI",
+      "status": "computed",
+      "reason": null,
+      "unit": "grey_level^2",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": "glcm",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.6",
+      "family": "glcm",
+      "name": "Dissimilarity",
+      "code": "8S9J",
+      "definition": "mean absolute grey-level difference",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_8S9J",
+      "status": "computed",
+      "reason": null,
+      "unit": "grey_level",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": "glcm",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.6",
+      "family": "glcm",
+      "name": "Inverse difference",
+      "code": "IB1Z",
+      "definition": "sum p/(1+absolute grey-level difference)",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_IB1Z",
+      "status": "computed",
+      "reason": null,
+      "unit": "dimensionless",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": "glcm",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.6",
+      "family": "glcm",
+      "name": "Normalised inverse difference",
+      "code": "NDRX",
+      "definition": "inverse difference normalized by number of grey levels",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_NDRX",
+      "status": "computed",
+      "reason": null,
+      "unit": "dimensionless",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": "glcm",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.6",
+      "family": "glcm",
+      "name": "Inverse difference moment",
+      "code": "WF0Z",
+      "definition": "sum p/(1+grey-level difference squared)",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_WF0Z",
+      "status": "computed",
+      "reason": null,
+      "unit": "dimensionless",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": "glcm",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.6",
+      "family": "glcm",
+      "name": "Normalised inverse difference moment",
+      "code": "1QCO",
+      "definition": "inverse difference moment normalized by grey-level range",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_1QCO",
+      "status": "computed",
+      "reason": null,
+      "unit": "dimensionless",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": "glcm",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.6",
+      "family": "glcm",
+      "name": "Inverse variance",
+      "code": "E8JP",
+      "definition": "sum p/(grey-level difference squared), excluding diagonal",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_E8JP",
+      "status": "computed",
+      "reason": null,
+      "unit": "grey_level^-2",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": "glcm",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.6",
+      "family": "glcm",
+      "name": "Correlation",
+      "code": "NI2N",
+      "definition": "GLCM covariance divided by marginal standard deviations",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_NI2N",
+      "status": "computed",
+      "reason": null,
+      "unit": "dimensionless",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": "glcm",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.6",
+      "family": "glcm",
+      "name": "Autocorrelation",
+      "code": "QWB0",
+      "definition": "sum of grey-level products times joint probability",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_QWB0",
+      "status": "computed",
+      "reason": null,
+      "unit": "grey_level^2",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": "glcm",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.6",
+      "family": "glcm",
+      "name": "Cluster tendency",
+      "code": "DG8W",
+      "definition": "second moment of i+j around twice the marginal mean",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_DG8W",
+      "status": "computed",
+      "reason": null,
+      "unit": "grey_level^2",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": "glcm",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.6",
+      "family": "glcm",
+      "name": "Cluster shade",
+      "code": "7NFM",
+      "definition": "third signed moment of i+j around twice the marginal mean",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_7NFM",
+      "status": "computed",
+      "reason": null,
+      "unit": "grey_level^3",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": "glcm",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.6",
+      "family": "glcm",
+      "name": "Cluster prominence",
+      "code": "AE86",
+      "definition": "fourth moment of i+j around twice the marginal mean",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_AE86",
+      "status": "computed",
+      "reason": null,
+      "unit": "grey_level^4",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": "glcm",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.6",
+      "family": "glcm",
+      "name": "Information correlation 1",
+      "code": "R8DG",
+      "definition": "one minus joint/conditional entropy normalized by marginal entropy",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_R8DG",
+      "status": "computed",
+      "reason": null,
+      "unit": "dimensionless",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": "glcm",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.6",
+      "family": "glcm",
+      "name": "Information correlation 2",
+      "code": "JN9H",
+      "definition": "sqrt(1-exp(-2*(HXY2-HXY)))",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_JN9H",
+      "status": "computed",
+      "reason": null,
+      "unit": "dimensionless",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": "glcm",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.7",
+      "family": "glrlm",
+      "name": "Short runs emphasis",
+      "code": "22OV",
+      "definition": "sum P/(run length squared), normalized by runs",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_22OV",
+      "status": "computed",
+      "reason": null,
+      "unit": "run_length_index^-2",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": "glrlm",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.7",
+      "family": "glrlm",
+      "name": "Long runs emphasis",
+      "code": "W4KF",
+      "definition": "sum P*run length squared, normalized by runs",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_W4KF",
+      "status": "computed",
+      "reason": null,
+      "unit": "run_length_index^2",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": "glrlm",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.7",
+      "family": "glrlm",
+      "name": "Low grey level run emphasis",
+      "code": "V3SW",
+      "definition": "sum P/(grey level squared), normalized by runs",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_V3SW",
+      "status": "computed",
+      "reason": null,
+      "unit": "grey_level^-2",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": "glrlm",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.7",
+      "family": "glrlm",
+      "name": "High grey level run emphasis",
+      "code": "G3QZ",
+      "definition": "sum P*grey level squared, normalized by runs",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_G3QZ",
+      "status": "computed",
+      "reason": null,
+      "unit": "grey_level^2",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": "glrlm",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.7",
+      "family": "glrlm",
+      "name": "Short run low grey level emphasis",
+      "code": "HTZT",
+      "definition": "sum P/(grey level squared*run length squared)",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_HTZT",
+      "status": "computed",
+      "reason": null,
+      "unit": "grey_level^-2*run_length_index^-2",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": "glrlm",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.7",
+      "family": "glrlm",
+      "name": "Short run high grey level emphasis",
+      "code": "GD3A",
+      "definition": "sum P*grey level squared/run length squared",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_GD3A",
+      "status": "computed",
+      "reason": null,
+      "unit": "grey_level^2*run_length_index^-2",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": "glrlm",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.7",
+      "family": "glrlm",
+      "name": "Long run low grey level emphasis",
+      "code": "IVPO",
+      "definition": "sum P*run length squared/grey level squared",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_IVPO",
+      "status": "computed",
+      "reason": null,
+      "unit": "grey_level^-2*run_length_index^2",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": "glrlm",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.7",
+      "family": "glrlm",
+      "name": "Long run high grey level emphasis",
+      "code": "3KUM",
+      "definition": "sum P*grey level squared*run length squared",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_3KUM",
+      "status": "computed",
+      "reason": null,
+      "unit": "grey_level^2*run_length_index^2",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": "glrlm",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.7",
+      "family": "glrlm",
+      "name": "Grey level non-uniformity",
+      "code": "R5YN",
+      "definition": "sum squared grey-level run totals divided by runs",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_R5YN",
+      "status": "computed",
+      "reason": null,
+      "unit": "run_count",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": "glrlm",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.7",
+      "family": "glrlm",
+      "name": "Normalised grey level non-uniformity",
+      "code": "OVBL",
+      "definition": "grey-level non-uniformity divided by runs squared",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_OVBL",
+      "status": "computed",
+      "reason": null,
+      "unit": "dimensionless",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": "glrlm",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.7",
+      "family": "glrlm",
+      "name": "Run length non-uniformity",
+      "code": "W92Y",
+      "definition": "sum squared run-length totals divided by runs",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_W92Y",
+      "status": "computed",
+      "reason": null,
+      "unit": "run_count",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": "glrlm",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.7",
+      "family": "glrlm",
+      "name": "Normalised run length non-uniformity",
+      "code": "IC23",
+      "definition": "run-length non-uniformity divided by runs squared",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_IC23",
+      "status": "computed",
+      "reason": null,
+      "unit": "dimensionless",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": "glrlm",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.7",
+      "family": "glrlm",
+      "name": "Run percentage",
+      "code": "9ZK5",
+      "definition": "number of runs divided by voxel-direction opportunities",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_9ZK5",
+      "status": "computed",
+      "reason": null,
+      "unit": "fraction",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": "glrlm",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.7",
+      "family": "glrlm",
+      "name": "Grey level variance",
+      "code": "8CE5",
+      "definition": "variance of grey-level row totals",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_8CE5",
+      "status": "computed",
+      "reason": null,
+      "unit": "grey_level^2",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": "glrlm",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.7",
+      "family": "glrlm",
+      "name": "Run length variance",
+      "code": "SXLW",
+      "definition": "variance of run-length column totals",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_SXLW",
+      "status": "computed",
+      "reason": null,
+      "unit": "run_length_index^2",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": "glrlm",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.7",
+      "family": "glrlm",
+      "name": "Run entropy",
+      "code": "HJ9O",
+      "definition": "Shannon entropy of normalized run probabilities",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_HJ9O",
+      "status": "computed",
+      "reason": null,
+      "unit": "bit",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": "glrlm",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.8",
+      "family": "glszm",
+      "name": "Small zone emphasis",
+      "code": "5QRC",
+      "definition": "sum P/(zone size squared), normalized by zones",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_5QRC",
+      "status": "computed",
+      "reason": null,
+      "unit": "zone_size_index^-2",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": "glszm",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.8",
+      "family": "glszm",
+      "name": "Large zone emphasis",
+      "code": "48P8",
+      "definition": "sum P*zone size squared, normalized by zones",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_48P8",
+      "status": "computed",
+      "reason": null,
+      "unit": "zone_size_index^2",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": "glszm",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.8",
+      "family": "glszm",
+      "name": "Low grey level zone emphasis",
+      "code": "XMSY",
+      "definition": "sum P/(grey level squared), normalized by zones",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_XMSY",
+      "status": "computed",
+      "reason": null,
+      "unit": "grey_level^-2",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": "glszm",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.8",
+      "family": "glszm",
+      "name": "High grey level zone emphasis",
+      "code": "5GN9",
+      "definition": "sum P*grey level squared, normalized by zones",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_5GN9",
+      "status": "computed",
+      "reason": null,
+      "unit": "grey_level^2",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": "glszm",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.8",
+      "family": "glszm",
+      "name": "Small zone low grey level emphasis",
+      "code": "5RAI",
+      "definition": "sum P/(grey level squared*zone size squared)",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_5RAI",
+      "status": "computed",
+      "reason": null,
+      "unit": "grey_level^-2*zone_size_index^-2",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": "glszm",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.8",
+      "family": "glszm",
+      "name": "Small zone high grey level emphasis",
+      "code": "HW1V",
+      "definition": "sum P*grey level squared/zone size squared",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_HW1V",
+      "status": "computed",
+      "reason": null,
+      "unit": "grey_level^2*zone_size_index^-2",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": "glszm",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.8",
+      "family": "glszm",
+      "name": "Large zone low grey level emphasis",
+      "code": "YH51",
+      "definition": "sum P*zone size squared/grey level squared",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_YH51",
+      "status": "computed",
+      "reason": null,
+      "unit": "grey_level^-2*zone_size_index^2",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": "glszm",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.8",
+      "family": "glszm",
+      "name": "Large zone high grey level emphasis",
+      "code": "J17V",
+      "definition": "sum P*grey level squared*zone size squared",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_J17V",
+      "status": "computed",
+      "reason": null,
+      "unit": "grey_level^2*zone_size_index^2",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": "glszm",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.8",
+      "family": "glszm",
+      "name": "Grey level non-uniformity",
+      "code": "JNSA",
+      "definition": "sum squared grey-level zone totals divided by zones",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_JNSA",
+      "status": "computed",
+      "reason": null,
+      "unit": "zone_count",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": "glszm",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.8",
+      "family": "glszm",
+      "name": "Normalised grey level non-uniformity",
+      "code": "Y1RO",
+      "definition": "grey-level non-uniformity divided by zones squared",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_Y1RO",
+      "status": "computed",
+      "reason": null,
+      "unit": "dimensionless",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": "glszm",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.8",
+      "family": "glszm",
+      "name": "Zone size non-uniformity",
+      "code": "4JP3",
+      "definition": "sum squared zone-size totals divided by zones",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_4JP3",
+      "status": "computed",
+      "reason": null,
+      "unit": "zone_count",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": "glszm",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.8",
+      "family": "glszm",
+      "name": "Normalised zone size non-uniformity",
+      "code": "VB3A",
+      "definition": "zone-size non-uniformity divided by zones squared",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_VB3A",
+      "status": "computed",
+      "reason": null,
+      "unit": "dimensionless",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": "glszm",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.8",
+      "family": "glszm",
+      "name": "Zone percentage",
+      "code": "P30P",
+      "definition": "number of zones divided by ROI voxels",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_P30P",
+      "status": "computed",
+      "reason": null,
+      "unit": "fraction",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": "glszm",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.8",
+      "family": "glszm",
+      "name": "Grey level variance",
+      "code": "BYLV",
+      "definition": "variance of grey-level zone totals",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_BYLV",
+      "status": "computed",
+      "reason": null,
+      "unit": "grey_level^2",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": "glszm",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.8",
+      "family": "glszm",
+      "name": "Zone size variance",
+      "code": "3NSA",
+      "definition": "variance of zone-size totals",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_3NSA",
+      "status": "computed",
+      "reason": null,
+      "unit": "zone_size_index^2",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": "glszm",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.8",
+      "family": "glszm",
+      "name": "Zone size entropy",
+      "code": "GU8N",
+      "definition": "Shannon entropy of normalized zone probabilities",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_GU8N",
+      "status": "computed",
+      "reason": null,
+      "unit": "bit",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": "glszm",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.9",
+      "family": "gldzm",
+      "name": "Small distance emphasis",
+      "code": "0GBI",
+      "definition": "sum P/(distance squared), normalized by zones",
+      "required_mask": "morphological + intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_0GBI",
+      "status": "computed",
+      "reason": null,
+      "unit": "distance_index^-2",
+      "required_masks": [
+        "morphological",
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "gldzm",
+      "legacy_pyradiomics_class": null,
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.9",
+      "family": "gldzm",
+      "name": "Large distance emphasis",
+      "code": "MB4I",
+      "definition": "sum P*distance squared, normalized by zones",
+      "required_mask": "morphological + intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_MB4I",
+      "status": "computed",
+      "reason": null,
+      "unit": "distance_index^2",
+      "required_masks": [
+        "morphological",
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "gldzm",
+      "legacy_pyradiomics_class": null,
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.9",
+      "family": "gldzm",
+      "name": "Low grey level zone emphasis",
+      "code": "S1RA",
+      "definition": "sum P/(grey level squared), normalized by zones",
+      "required_mask": "morphological + intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_S1RA",
+      "status": "computed",
+      "reason": null,
+      "unit": "grey_level^-2",
+      "required_masks": [
+        "morphological",
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "gldzm",
+      "legacy_pyradiomics_class": null,
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.9",
+      "family": "gldzm",
+      "name": "High grey level zone emphasis",
+      "code": "K26C",
+      "definition": "sum P*grey level squared, normalized by zones",
+      "required_mask": "morphological + intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_K26C",
+      "status": "computed",
+      "reason": null,
+      "unit": "grey_level^2",
+      "required_masks": [
+        "morphological",
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "gldzm",
+      "legacy_pyradiomics_class": null,
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.9",
+      "family": "gldzm",
+      "name": "Small distance low grey level emphasis",
+      "code": "RUVG",
+      "definition": "sum P/(grey level squared*distance squared)",
+      "required_mask": "morphological + intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_RUVG",
+      "status": "computed",
+      "reason": null,
+      "unit": "grey_level^-2*distance_index^-2",
+      "required_masks": [
+        "morphological",
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "gldzm",
+      "legacy_pyradiomics_class": null,
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.9",
+      "family": "gldzm",
+      "name": "Small distance high grey level emphasis",
+      "code": "DKNJ",
+      "definition": "sum P*grey level squared/distance squared",
+      "required_mask": "morphological + intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_DKNJ",
+      "status": "computed",
+      "reason": null,
+      "unit": "grey_level^2*distance_index^-2",
+      "required_masks": [
+        "morphological",
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "gldzm",
+      "legacy_pyradiomics_class": null,
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.9",
+      "family": "gldzm",
+      "name": "Large distance low grey level emphasis",
+      "code": "A7WM",
+      "definition": "sum P*distance squared/grey level squared",
+      "required_mask": "morphological + intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_A7WM",
+      "status": "computed",
+      "reason": null,
+      "unit": "grey_level^-2*distance_index^2",
+      "required_masks": [
+        "morphological",
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "gldzm",
+      "legacy_pyradiomics_class": null,
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.9",
+      "family": "gldzm",
+      "name": "Large distance high grey level emphasis",
+      "code": "KLTH",
+      "definition": "sum P*grey level squared*distance squared",
+      "required_mask": "morphological + intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_KLTH",
+      "status": "computed",
+      "reason": null,
+      "unit": "grey_level^2*distance_index^2",
+      "required_masks": [
+        "morphological",
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "gldzm",
+      "legacy_pyradiomics_class": null,
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.9",
+      "family": "gldzm",
+      "name": "Grey level non-uniformity",
+      "code": "VFT7",
+      "definition": "sum squared grey-level zone totals divided by zones",
+      "required_mask": "morphological + intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_VFT7",
+      "status": "computed",
+      "reason": null,
+      "unit": "zone_count",
+      "required_masks": [
+        "morphological",
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "gldzm",
+      "legacy_pyradiomics_class": null,
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.9",
+      "family": "gldzm",
+      "name": "Normalised grey level non-uniformity",
+      "code": "7HP3",
+      "definition": "grey-level non-uniformity divided by zones squared",
+      "required_mask": "morphological + intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_7HP3",
+      "status": "computed",
+      "reason": null,
+      "unit": "dimensionless",
+      "required_masks": [
+        "morphological",
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "gldzm",
+      "legacy_pyradiomics_class": null,
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.9",
+      "family": "gldzm",
+      "name": "Zone distance non-uniformity",
+      "code": "V294",
+      "definition": "sum squared distance totals divided by zones",
+      "required_mask": "morphological + intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_V294",
+      "status": "computed",
+      "reason": null,
+      "unit": "zone_count",
+      "required_masks": [
+        "morphological",
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "gldzm",
+      "legacy_pyradiomics_class": null,
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.9",
+      "family": "gldzm",
+      "name": "Normalised zone distance non-uniformity",
+      "code": "IATH",
+      "definition": "distance non-uniformity divided by zones squared",
+      "required_mask": "morphological + intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_IATH",
+      "status": "computed",
+      "reason": null,
+      "unit": "dimensionless",
+      "required_masks": [
+        "morphological",
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "gldzm",
+      "legacy_pyradiomics_class": null,
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.9",
+      "family": "gldzm",
+      "name": "Zone percentage",
+      "code": "VIWW",
+      "definition": "number of distance zones divided by ROI voxels",
+      "required_mask": "morphological + intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_VIWW",
+      "status": "computed",
+      "reason": null,
+      "unit": "fraction",
+      "required_masks": [
+        "morphological",
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "gldzm",
+      "legacy_pyradiomics_class": null,
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.9",
+      "family": "gldzm",
+      "name": "Grey level variance",
+      "code": "QK93",
+      "definition": "variance of grey-level zone totals",
+      "required_mask": "morphological + intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_QK93",
+      "status": "computed",
+      "reason": null,
+      "unit": "grey_level^2",
+      "required_masks": [
+        "morphological",
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "gldzm",
+      "legacy_pyradiomics_class": null,
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.9",
+      "family": "gldzm",
+      "name": "Zone distance variance",
+      "code": "7WT1",
+      "definition": "variance of distance-zone totals",
+      "required_mask": "morphological + intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_7WT1",
+      "status": "computed",
+      "reason": null,
+      "unit": "distance_index^2",
+      "required_masks": [
+        "morphological",
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "gldzm",
+      "legacy_pyradiomics_class": null,
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.9",
+      "family": "gldzm",
+      "name": "Zone distance entropy",
+      "code": "GBDU",
+      "definition": "Shannon entropy of normalized distance-zone probabilities",
+      "required_mask": "morphological + intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_GBDU",
+      "status": "computed",
+      "reason": null,
+      "unit": "bit",
+      "required_masks": [
+        "morphological",
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "gldzm",
+      "legacy_pyradiomics_class": null,
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.10",
+      "family": "ngtdm",
+      "name": "Coarseness",
+      "code": "QCDE",
+      "definition": "inverse probability-weighted neighbourhood grey-tone difference",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_QCDE",
+      "status": "computed",
+      "reason": null,
+      "unit": "grey_level^-1/voxel_count",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": "ngtdm",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.10",
+      "family": "ngtdm",
+      "name": "Contrast",
+      "code": "65HE",
+      "definition": "grey-level dynamic-range term multiplied by mean neighbourhood difference",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_65HE",
+      "status": "computed",
+      "reason": null,
+      "unit": "grey_level^3",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": "ngtdm",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.10",
+      "family": "ngtdm",
+      "name": "Busyness",
+      "code": "NQ30",
+      "definition": "mean neighbourhood difference divided by absolute intensity-probability changes",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_NQ30",
+      "status": "computed",
+      "reason": null,
+      "unit": "voxel_count",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": "ngtdm",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.10",
+      "family": "ngtdm",
+      "name": "Complexity",
+      "code": "HDEZ",
+      "definition": "probability-weighted pairwise grey-level differences and tone differences",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_HDEZ",
+      "status": "computed",
+      "reason": null,
+      "unit": "grey_level^2",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": "ngtdm",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.10",
+      "family": "ngtdm",
+      "name": "Strength",
+      "code": "1X9X",
+      "definition": "pairwise grey-level contrast divided by total neighbourhood difference",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_1X9X",
+      "status": "computed",
+      "reason": null,
+      "unit": "grey_level/voxel_count",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": "ngtdm",
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.11",
+      "family": "ngldm",
+      "name": "Low dependence emphasis",
+      "code": "SODN",
+      "definition": "sum S/(dependence count squared), normalized by dependences",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_SODN",
+      "status": "computed",
+      "reason": null,
+      "unit": "dependence_size_index^-2",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": null,
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.11",
+      "family": "ngldm",
+      "name": "High dependence emphasis",
+      "code": "IMOQ",
+      "definition": "sum S*dependence count squared, normalized by dependences",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_IMOQ",
+      "status": "computed",
+      "reason": null,
+      "unit": "dependence_size_index^2",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": null,
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.11",
+      "family": "ngldm",
+      "name": "Low grey level count emphasis",
+      "code": "TL9H",
+      "definition": "sum S/(grey level squared), normalized by dependences",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_TL9H",
+      "status": "computed",
+      "reason": null,
+      "unit": "grey_level^-2",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": null,
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.11",
+      "family": "ngldm",
+      "name": "High grey level count emphasis",
+      "code": "OAE7",
+      "definition": "sum S*grey level squared, normalized by dependences",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_OAE7",
+      "status": "computed",
+      "reason": null,
+      "unit": "grey_level^2",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": null,
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.11",
+      "family": "ngldm",
+      "name": "Low dependence low grey level emphasis",
+      "code": "EQ3F",
+      "definition": "sum S/(grey level squared*dependence squared)",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_EQ3F",
+      "status": "computed",
+      "reason": null,
+      "unit": "grey_level^-2*dependence_size_index^-2",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": null,
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.11",
+      "family": "ngldm",
+      "name": "Low dependence high grey level emphasis",
+      "code": "JA6D",
+      "definition": "sum S*grey level squared/dependence squared",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_JA6D",
+      "status": "computed",
+      "reason": null,
+      "unit": "grey_level^2*dependence_size_index^-2",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": null,
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.11",
+      "family": "ngldm",
+      "name": "High dependence low grey level emphasis",
+      "code": "NBZI",
+      "definition": "sum S*dependence squared/grey level squared",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_NBZI",
+      "status": "computed",
+      "reason": null,
+      "unit": "grey_level^-2*dependence_size_index^2",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": null,
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.11",
+      "family": "ngldm",
+      "name": "High dependence high grey level emphasis",
+      "code": "9QMG",
+      "definition": "sum S*grey level squared*dependence squared",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_9QMG",
+      "status": "computed",
+      "reason": null,
+      "unit": "grey_level^2*dependence_size_index^2",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": null,
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.11",
+      "family": "ngldm",
+      "name": "Grey level non-uniformity",
+      "code": "FP8K",
+      "definition": "sum squared grey-level dependence totals divided by dependences",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_FP8K",
+      "status": "computed",
+      "reason": null,
+      "unit": "dependence_count",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": null,
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.11",
+      "family": "ngldm",
+      "name": "Normalised grey level non-uniformity",
+      "code": "5SPA",
+      "definition": "grey-level non-uniformity divided by dependences squared",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_5SPA",
+      "status": "computed",
+      "reason": null,
+      "unit": "dimensionless",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": null,
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.11",
+      "family": "ngldm",
+      "name": "Dependence count non-uniformity",
+      "code": "Z87G",
+      "definition": "sum squared dependence totals divided by dependences",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_Z87G",
+      "status": "computed",
+      "reason": null,
+      "unit": "dependence_count",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": null,
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.11",
+      "family": "ngldm",
+      "name": "Normalised dependence count non-uniformity",
+      "code": "OKJI",
+      "definition": "dependence non-uniformity divided by dependences squared",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_OKJI",
+      "status": "computed",
+      "reason": null,
+      "unit": "dimensionless",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": null,
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.11",
+      "family": "ngldm",
+      "name": "Dependence count percentage",
+      "code": "6XV8",
+      "definition": "number of dependences divided by ROI voxels",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_6XV8",
+      "status": "computed",
+      "reason": null,
+      "unit": "fraction",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": null,
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.11",
+      "family": "ngldm",
+      "name": "Grey level variance",
+      "code": "1PFV",
+      "definition": "variance of grey-level dependence totals",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_1PFV",
+      "status": "computed",
+      "reason": null,
+      "unit": "grey_level^2",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": null,
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.11",
+      "family": "ngldm",
+      "name": "Dependence count variance",
+      "code": "DNX2",
+      "definition": "variance of dependence-count totals",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_DNX2",
+      "status": "computed",
+      "reason": null,
+      "unit": "dependence_size_index^2",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": null,
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.11",
+      "family": "ngldm",
+      "name": "Dependence count entropy",
+      "code": "FCBV",
+      "definition": "Shannon entropy of normalized dependence probabilities",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_FCBV",
+      "status": "computed",
+      "reason": null,
+      "unit": "bit",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": null,
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "3.11",
+      "family": "ngldm",
+      "name": "Dependence count energy",
+      "code": "CAS9",
+      "definition": "sum of squared normalized dependence probabilities",
+      "required_mask": "intensity",
+      "requires_discretisation": true,
+      "standard_status": "computed",
+      "source_note": null,
+      "key": "ibsi_CAS9",
+      "status": "computed",
+      "reason": null,
+      "unit": "dimensionless",
+      "required_masks": [
+        "intensity"
+      ],
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "2d",
+        "3d"
+      ],
+      "discretisation_group": "texture",
+      "calculation_module": "texture",
+      "legacy_pyradiomics_class": null,
+      "runtime_constraints": [
+        "实际输入仍需运行时校验；目录支持不保证每个病例产生有限数值。"
+      ]
+    },
+    {
+      "section": "自定义增量",
+      "family": "custom_lung_nodule",
+      "name": "CTR 最优阈值",
+      "code": "custom_ctr_threshold_hu",
+      "key": "custom_ctr_threshold_hu",
+      "definition": "ROI Otsu 阈值；无法取得时使用 -150 HU",
+      "required_mask": "morphological + intensity",
+      "required_masks": [
+        "morphological",
+        "intensity"
+      ],
+      "requires_discretisation": false,
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "3d"
+      ],
+      "discretisation_group": "none",
+      "calculation_module": "custom",
+      "legacy_pyradiomics_class": null,
+      "standard_status": "custom",
+      "status": "computed",
+      "source_note": "沿用原肺结节自定义公式；独立于 IBSI，不声明为 IBSI 标准指标。",
+      "reason": null,
+      "unit": "HU",
+      "runtime_constraints": [
+        "适用于肺 CT；请选择不归一化或按模态自适应，并关闭重分割。",
+        "无法计算时留空并记录原因；沿用原公式，不使用 IBSI 分箱参数。"
+      ]
+    },
+    {
+      "section": "自定义增量",
+      "family": "custom_lung_nodule",
+      "name": "3D CTR",
+      "code": "custom_ctr_percent",
+      "key": "custom_ctr_percent",
+      "definition": "实性体素数 / 结节体素数 × 100%",
+      "required_mask": "morphological + intensity",
+      "required_masks": [
+        "morphological",
+        "intensity"
+      ],
+      "requires_discretisation": false,
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "3d"
+      ],
+      "discretisation_group": "none",
+      "calculation_module": "custom",
+      "legacy_pyradiomics_class": null,
+      "standard_status": "custom",
+      "status": "computed",
+      "source_note": "沿用原肺结节自定义公式；独立于 IBSI，不声明为 IBSI 标准指标。",
+      "reason": null,
+      "unit": "%",
+      "runtime_constraints": [
+        "适用于肺 CT；请选择不归一化或按模态自适应，并关闭重分割。",
+        "无法计算时留空并记录原因；沿用原公式，不使用 IBSI 分箱参数。"
+      ]
+    },
+    {
+      "section": "自定义增量",
+      "family": "custom_lung_nodule",
+      "name": "实性体积",
+      "code": "custom_solid_volume_mm3",
+      "key": "custom_solid_volume_mm3",
+      "definition": "实性体素数 × 体素体积",
+      "required_mask": "morphological + intensity",
+      "required_masks": [
+        "morphological",
+        "intensity"
+      ],
+      "requires_discretisation": false,
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "3d"
+      ],
+      "discretisation_group": "none",
+      "calculation_module": "custom",
+      "legacy_pyradiomics_class": null,
+      "standard_status": "custom",
+      "status": "computed",
+      "source_note": "沿用原肺结节自定义公式；独立于 IBSI，不声明为 IBSI 标准指标。",
+      "reason": null,
+      "unit": "mm3",
+      "runtime_constraints": [
+        "适用于肺 CT；请选择不归一化或按模态自适应，并关闭重分割。",
+        "无法计算时留空并记录原因；沿用原公式，不使用 IBSI 分箱参数。"
+      ]
+    },
+    {
+      "section": "自定义增量",
+      "family": "custom_lung_nodule",
+      "name": "实性体素数",
+      "code": "custom_solid_voxel_count",
+      "key": "custom_solid_voxel_count",
+      "definition": "ROI 内强度不小于 Otsu 阈值的体素数",
+      "required_mask": "morphological + intensity",
+      "required_masks": [
+        "morphological",
+        "intensity"
+      ],
+      "requires_discretisation": false,
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "3d"
+      ],
+      "discretisation_group": "none",
+      "calculation_module": "custom",
+      "legacy_pyradiomics_class": null,
+      "standard_status": "custom",
+      "status": "computed",
+      "source_note": "沿用原肺结节自定义公式；独立于 IBSI，不声明为 IBSI 标准指标。",
+      "reason": null,
+      "unit": "voxel_count",
+      "runtime_constraints": [
+        "适用于肺 CT；请选择不归一化或按模态自适应，并关闭重分割。",
+        "无法计算时留空并记录原因；沿用原公式，不使用 IBSI 分箱参数。"
+      ]
+    },
+    {
+      "section": "自定义增量",
+      "family": "custom_lung_nodule",
+      "name": "结节体积",
+      "code": "custom_nodule_volume_mm3",
+      "key": "custom_nodule_volume_mm3",
+      "definition": "结节体素数 × 体素体积",
+      "required_mask": "morphological",
+      "required_masks": [
+        "morphological"
+      ],
+      "requires_discretisation": false,
+      "requires_image_intensity": false,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "3d"
+      ],
+      "discretisation_group": "none",
+      "calculation_module": "custom",
+      "legacy_pyradiomics_class": null,
+      "standard_status": "custom",
+      "status": "computed",
+      "source_note": "沿用原肺结节自定义公式；独立于 IBSI，不声明为 IBSI 标准指标。",
+      "reason": null,
+      "unit": "mm3",
+      "runtime_constraints": [
+        "适用于肺 CT；请选择不归一化或按模态自适应，并关闭重分割。",
+        "无法计算时留空并记录原因；沿用原公式，不使用 IBSI 分箱参数。"
+      ]
+    },
+    {
+      "section": "自定义增量",
+      "family": "custom_lung_nodule",
+      "name": "结节体素数",
+      "code": "custom_nodule_voxel_count",
+      "key": "custom_nodule_voxel_count",
+      "definition": "结节 ROI 内体素数",
+      "required_mask": "morphological",
+      "required_masks": [
+        "morphological"
+      ],
+      "requires_discretisation": false,
+      "requires_image_intensity": false,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "3d"
+      ],
+      "discretisation_group": "none",
+      "calculation_module": "custom",
+      "legacy_pyradiomics_class": null,
+      "standard_status": "custom",
+      "status": "computed",
+      "source_note": "沿用原肺结节自定义公式；独立于 IBSI，不声明为 IBSI 标准指标。",
+      "reason": null,
+      "unit": "voxel_count",
+      "runtime_constraints": [
+        "适用于肺 CT；请选择不归一化或按模态自适应，并关闭重分割。",
+        "无法计算时留空并记录原因；沿用原公式，不使用 IBSI 分箱参数。"
+      ]
+    },
+    {
+      "section": "自定义增量",
+      "family": "custom_lung_nodule",
+      "name": "最大层面积",
+      "code": "custom_area_2d_mm2",
+      "key": "custom_area_2d_mm2",
+      "definition": "最大面积层 ROI 像素数 × 平面像素面积",
+      "required_mask": "morphological",
+      "required_masks": [
+        "morphological"
+      ],
+      "requires_discretisation": false,
+      "requires_image_intensity": false,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "3d"
+      ],
+      "discretisation_group": "none",
+      "calculation_module": "custom",
+      "legacy_pyradiomics_class": null,
+      "standard_status": "custom",
+      "status": "computed",
+      "source_note": "沿用原肺结节自定义公式；独立于 IBSI，不声明为 IBSI 标准指标。",
+      "reason": null,
+      "unit": "mm2",
+      "runtime_constraints": [
+        "适用于肺 CT；请选择不归一化或按模态自适应，并关闭重分割。",
+        "无法计算时留空并记录原因；沿用原公式，不使用 IBSI 分箱参数。"
+      ]
+    },
+    {
+      "section": "自定义增量",
+      "family": "custom_lung_nodule",
+      "name": "最大层周长",
+      "code": "custom_perimeter_2d_mm",
+      "key": "custom_perimeter_2d_mm",
+      "definition": "沿用原边界掩膜转变计数周长",
+      "required_mask": "morphological",
+      "required_masks": [
+        "morphological"
+      ],
+      "requires_discretisation": false,
+      "requires_image_intensity": false,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "3d"
+      ],
+      "discretisation_group": "none",
+      "calculation_module": "custom",
+      "legacy_pyradiomics_class": null,
+      "standard_status": "custom",
+      "status": "computed",
+      "source_note": "沿用原肺结节自定义公式；独立于 IBSI，不声明为 IBSI 标准指标。",
+      "reason": null,
+      "unit": "mm",
+      "runtime_constraints": [
+        "适用于肺 CT；请选择不归一化或按模态自适应，并关闭重分割。",
+        "无法计算时留空并记录原因；沿用原公式，不使用 IBSI 分箱参数。"
+      ]
+    },
+    {
+      "section": "自定义增量",
+      "family": "custom_lung_nodule",
+      "name": "二维等效直径",
+      "code": "custom_equivalent_diameter_2d_mm",
+      "key": "custom_equivalent_diameter_2d_mm",
+      "definition": "sqrt(4 × 最大层面积 / π)",
+      "required_mask": "morphological",
+      "required_masks": [
+        "morphological"
+      ],
+      "requires_discretisation": false,
+      "requires_image_intensity": false,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "3d"
+      ],
+      "discretisation_group": "none",
+      "calculation_module": "custom",
+      "legacy_pyradiomics_class": null,
+      "standard_status": "custom",
+      "status": "computed",
+      "source_note": "沿用原肺结节自定义公式；独立于 IBSI，不声明为 IBSI 标准指标。",
+      "reason": null,
+      "unit": "mm",
+      "runtime_constraints": [
+        "适用于肺 CT；请选择不归一化或按模态自适应，并关闭重分割。",
+        "无法计算时留空并记录原因；沿用原公式，不使用 IBSI 分箱参数。"
+      ]
+    },
+    {
+      "section": "自定义增量",
+      "family": "custom_lung_nodule",
+      "name": "三维等效直径",
+      "code": "custom_equivalent_diameter_3d_mm",
+      "key": "custom_equivalent_diameter_3d_mm",
+      "definition": "(6 × 结节体积 / π)^(1/3)",
+      "required_mask": "morphological",
+      "required_masks": [
+        "morphological"
+      ],
+      "requires_discretisation": false,
+      "requires_image_intensity": false,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "3d"
+      ],
+      "discretisation_group": "none",
+      "calculation_module": "custom",
+      "legacy_pyradiomics_class": null,
+      "standard_status": "custom",
+      "status": "computed",
+      "source_note": "沿用原肺结节自定义公式；独立于 IBSI，不声明为 IBSI 标准指标。",
+      "reason": null,
+      "unit": "mm",
+      "runtime_constraints": [
+        "适用于肺 CT；请选择不归一化或按模态自适应，并关闭重分割。",
+        "无法计算时留空并记录原因；沿用原公式，不使用 IBSI 分箱参数。"
+      ]
+    },
+    {
+      "section": "自定义增量",
+      "family": "custom_lung_nodule",
+      "name": "最大层凸包面积",
+      "code": "custom_convex_area_2d_mm2",
+      "key": "custom_convex_area_2d_mm2",
+      "definition": "最大层 ROI 物理坐标凸包面积",
+      "required_mask": "morphological",
+      "required_masks": [
+        "morphological"
+      ],
+      "requires_discretisation": false,
+      "requires_image_intensity": false,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "3d"
+      ],
+      "discretisation_group": "none",
+      "calculation_module": "custom",
+      "legacy_pyradiomics_class": null,
+      "standard_status": "custom",
+      "status": "computed",
+      "source_note": "沿用原肺结节自定义公式；独立于 IBSI，不声明为 IBSI 标准指标。",
+      "reason": null,
+      "unit": "mm2",
+      "runtime_constraints": [
+        "适用于肺 CT；请选择不归一化或按模态自适应，并关闭重分割。",
+        "无法计算时留空并记录原因；沿用原公式，不使用 IBSI 分箱参数。"
+      ]
+    },
+    {
+      "section": "自定义增量",
+      "family": "custom_lung_nodule",
+      "name": "最大层凸包周长",
+      "code": "custom_convex_perimeter_2d_mm",
+      "key": "custom_convex_perimeter_2d_mm",
+      "definition": "最大层 ROI 物理坐标凸包周长",
+      "required_mask": "morphological",
+      "required_masks": [
+        "morphological"
+      ],
+      "requires_discretisation": false,
+      "requires_image_intensity": false,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "3d"
+      ],
+      "discretisation_group": "none",
+      "calculation_module": "custom",
+      "legacy_pyradiomics_class": null,
+      "standard_status": "custom",
+      "status": "computed",
+      "source_note": "沿用原肺结节自定义公式；独立于 IBSI，不声明为 IBSI 标准指标。",
+      "reason": null,
+      "unit": "mm",
+      "runtime_constraints": [
+        "适用于肺 CT；请选择不归一化或按模态自适应，并关闭重分割。",
+        "无法计算时留空并记录原因；沿用原公式，不使用 IBSI 分箱参数。"
+      ]
+    },
+    {
+      "section": "自定义增量",
+      "family": "custom_lung_nodule",
+      "name": "最大层圆形度",
+      "code": "custom_circularity_2d",
+      "key": "custom_circularity_2d",
+      "definition": "4π × 最大层面积 / 凸包周长²",
+      "required_mask": "morphological",
+      "required_masks": [
+        "morphological"
+      ],
+      "requires_discretisation": false,
+      "requires_image_intensity": false,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "3d"
+      ],
+      "discretisation_group": "none",
+      "calculation_module": "custom",
+      "legacy_pyradiomics_class": null,
+      "standard_status": "custom",
+      "status": "computed",
+      "source_note": "沿用原肺结节自定义公式；独立于 IBSI，不声明为 IBSI 标准指标。",
+      "reason": null,
+      "unit": "dimensionless",
+      "runtime_constraints": [
+        "适用于肺 CT；请选择不归一化或按模态自适应，并关闭重分割。",
+        "无法计算时留空并记录原因；沿用原公式，不使用 IBSI 分箱参数。"
+      ]
+    },
+    {
+      "section": "自定义增量",
+      "family": "custom_lung_nodule",
+      "name": "径向距离标准差",
+      "code": "custom_radial_distance_std_2d_mm",
+      "key": "custom_radial_distance_std_2d_mm",
+      "definition": "最大层边界到质心物理距离的标准差",
+      "required_mask": "morphological",
+      "required_masks": [
+        "morphological"
+      ],
+      "requires_discretisation": false,
+      "requires_image_intensity": false,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "3d"
+      ],
+      "discretisation_group": "none",
+      "calculation_module": "custom",
+      "legacy_pyradiomics_class": null,
+      "standard_status": "custom",
+      "status": "computed",
+      "source_note": "沿用原肺结节自定义公式；独立于 IBSI，不声明为 IBSI 标准指标。",
+      "reason": null,
+      "unit": "mm",
+      "runtime_constraints": [
+        "适用于肺 CT；请选择不归一化或按模态自适应，并关闭重分割。",
+        "无法计算时留空并记录原因；沿用原公式，不使用 IBSI 分箱参数。"
+      ]
+    },
+    {
+      "section": "自定义增量",
+      "family": "custom_lung_nodule",
+      "name": "边界平均梯度",
+      "code": "custom_margin_mean_boundary_gradient_hu_per_mm",
+      "key": "custom_margin_mean_boundary_gradient_hu_per_mm",
+      "definition": "各层边界法线方向内外三组采样中心差分的均值",
+      "required_mask": "morphological + intensity",
+      "required_masks": [
+        "morphological",
+        "intensity"
+      ],
+      "requires_discretisation": false,
+      "requires_image_intensity": true,
+      "requires_local_context": true,
+      "supported_dimensions": [
+        "3d"
+      ],
+      "discretisation_group": "none",
+      "calculation_module": "custom",
+      "legacy_pyradiomics_class": null,
+      "standard_status": "custom",
+      "status": "computed",
+      "source_note": "沿用原肺结节自定义公式；独立于 IBSI，不声明为 IBSI 标准指标。",
+      "reason": null,
+      "unit": "HU/mm",
+      "runtime_constraints": [
+        "适用于肺 CT；请选择不归一化或按模态自适应，并关闭重分割。",
+        "无法计算时留空并记录原因；沿用原公式，不使用 IBSI 分箱参数。"
+      ]
+    },
+    {
+      "section": "自定义增量",
+      "family": "custom_lung_nodule",
+      "name": "边界平均绝对梯度",
+      "code": "custom_margin_mean_abs_boundary_gradient_hu_per_mm",
+      "key": "custom_margin_mean_abs_boundary_gradient_hu_per_mm",
+      "definition": "边界梯度绝对值的均值",
+      "required_mask": "morphological + intensity",
+      "required_masks": [
+        "morphological",
+        "intensity"
+      ],
+      "requires_discretisation": false,
+      "requires_image_intensity": true,
+      "requires_local_context": true,
+      "supported_dimensions": [
+        "3d"
+      ],
+      "discretisation_group": "none",
+      "calculation_module": "custom",
+      "legacy_pyradiomics_class": null,
+      "standard_status": "custom",
+      "status": "computed",
+      "source_note": "沿用原肺结节自定义公式；独立于 IBSI，不声明为 IBSI 标准指标。",
+      "reason": null,
+      "unit": "HU/mm",
+      "runtime_constraints": [
+        "适用于肺 CT；请选择不归一化或按模态自适应，并关闭重分割。",
+        "无法计算时留空并记录原因；沿用原公式，不使用 IBSI 分箱参数。"
+      ]
+    },
+    {
+      "section": "自定义增量",
+      "family": "custom_lung_nodule",
+      "name": "边界梯度标准差",
+      "code": "custom_margin_std_boundary_gradient_hu_per_mm",
+      "key": "custom_margin_std_boundary_gradient_hu_per_mm",
+      "definition": "边界梯度的标准差",
+      "required_mask": "morphological + intensity",
+      "required_masks": [
+        "morphological",
+        "intensity"
+      ],
+      "requires_discretisation": false,
+      "requires_image_intensity": true,
+      "requires_local_context": true,
+      "supported_dimensions": [
+        "3d"
+      ],
+      "discretisation_group": "none",
+      "calculation_module": "custom",
+      "legacy_pyradiomics_class": null,
+      "standard_status": "custom",
+      "status": "computed",
+      "source_note": "沿用原肺结节自定义公式；独立于 IBSI，不声明为 IBSI 标准指标。",
+      "reason": null,
+      "unit": "HU/mm",
+      "runtime_constraints": [
+        "适用于肺 CT；请选择不归一化或按模态自适应，并关闭重分割。",
+        "无法计算时留空并记录原因；沿用原公式，不使用 IBSI 分箱参数。"
+      ]
+    },
+    {
+      "section": "自定义增量",
+      "family": "custom_lung_nodule",
+      "name": "边缘锐度 Acutance",
+      "code": "custom_edge_sharpness_acutance_3d",
+      "key": "custom_edge_sharpness_acutance_3d",
+      "definition": "边界梯度 RMS / 最大绝对梯度",
+      "required_mask": "morphological + intensity",
+      "required_masks": [
+        "morphological",
+        "intensity"
+      ],
+      "requires_discretisation": false,
+      "requires_image_intensity": true,
+      "requires_local_context": true,
+      "supported_dimensions": [
+        "3d"
+      ],
+      "discretisation_group": "none",
+      "calculation_module": "custom",
+      "legacy_pyradiomics_class": null,
+      "standard_status": "custom",
+      "status": "computed",
+      "source_note": "沿用原肺结节自定义公式；独立于 IBSI，不声明为 IBSI 标准指标。",
+      "reason": null,
+      "unit": "dimensionless",
+      "runtime_constraints": [
+        "适用于肺 CT；请选择不归一化或按模态自适应，并关闭重分割。",
+        "无法计算时留空并记录原因；沿用原公式，不使用 IBSI 分箱参数。"
+      ]
+    },
+    {
+      "section": "自定义增量",
+      "family": "custom_lung_nodule",
+      "name": "HSAG",
+      "code": "custom_hsag",
+      "key": "custom_hsag",
+      "definition": "边界梯度四分位距 / 极差",
+      "required_mask": "morphological + intensity",
+      "required_masks": [
+        "morphological",
+        "intensity"
+      ],
+      "requires_discretisation": false,
+      "requires_image_intensity": true,
+      "requires_local_context": true,
+      "supported_dimensions": [
+        "3d"
+      ],
+      "discretisation_group": "none",
+      "calculation_module": "custom",
+      "legacy_pyradiomics_class": null,
+      "standard_status": "custom",
+      "status": "computed",
+      "source_note": "沿用原肺结节自定义公式；独立于 IBSI，不声明为 IBSI 标准指标。",
+      "reason": null,
+      "unit": "dimensionless",
+      "runtime_constraints": [
+        "适用于肺 CT；请选择不归一化或按模态自适应，并关闭重分割。",
+        "无法计算时留空并记录原因；沿用原公式，不使用 IBSI 分箱参数。"
+      ]
+    },
+    {
+      "section": "自定义增量",
+      "family": "custom_lung_nodule",
+      "name": "CDF 斜率均值",
+      "code": "custom_cdf_slope_mean",
+      "key": "custom_cdf_slope_mean",
+      "definition": "最大层 ROI 128 档直方图概率 / 档宽的均值",
+      "required_mask": "morphological + intensity",
+      "required_masks": [
+        "morphological",
+        "intensity"
+      ],
+      "requires_discretisation": false,
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "3d"
+      ],
+      "discretisation_group": "none",
+      "calculation_module": "custom",
+      "legacy_pyradiomics_class": null,
+      "standard_status": "custom",
+      "status": "computed",
+      "source_note": "沿用原肺结节自定义公式；独立于 IBSI，不声明为 IBSI 标准指标。",
+      "reason": null,
+      "unit": "HU^-1",
+      "runtime_constraints": [
+        "适用于肺 CT；请选择不归一化或按模态自适应，并关闭重分割。",
+        "无法计算时留空并记录原因；沿用原公式，不使用 IBSI 分箱参数。"
+      ]
+    },
+    {
+      "section": "自定义增量",
+      "family": "custom_lung_nodule",
+      "name": "CDF 斜率标准差",
+      "code": "custom_cdf_slope_std",
+      "key": "custom_cdf_slope_std",
+      "definition": "CDF 斜率样本的标准差",
+      "required_mask": "morphological + intensity",
+      "required_masks": [
+        "morphological",
+        "intensity"
+      ],
+      "requires_discretisation": false,
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "3d"
+      ],
+      "discretisation_group": "none",
+      "calculation_module": "custom",
+      "legacy_pyradiomics_class": null,
+      "standard_status": "custom",
+      "status": "computed",
+      "source_note": "沿用原肺结节自定义公式；独立于 IBSI，不声明为 IBSI 标准指标。",
+      "reason": null,
+      "unit": "HU^-1",
+      "runtime_constraints": [
+        "适用于肺 CT；请选择不归一化或按模态自适应，并关闭重分割。",
+        "无法计算时留空并记录原因；沿用原公式，不使用 IBSI 分箱参数。"
+      ]
+    },
+    {
+      "section": "自定义增量",
+      "family": "custom_lung_nodule",
+      "name": "CDF 斜率偏度",
+      "code": "custom_cdf_slope_skewness",
+      "key": "custom_cdf_slope_skewness",
+      "definition": "CDF 斜率样本的三阶标准化矩",
+      "required_mask": "morphological + intensity",
+      "required_masks": [
+        "morphological",
+        "intensity"
+      ],
+      "requires_discretisation": false,
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "3d"
+      ],
+      "discretisation_group": "none",
+      "calculation_module": "custom",
+      "legacy_pyradiomics_class": null,
+      "standard_status": "custom",
+      "status": "computed",
+      "source_note": "沿用原肺结节自定义公式；独立于 IBSI，不声明为 IBSI 标准指标。",
+      "reason": null,
+      "unit": "dimensionless",
+      "runtime_constraints": [
+        "适用于肺 CT；请选择不归一化或按模态自适应，并关闭重分割。",
+        "无法计算时留空并记录原因；沿用原公式，不使用 IBSI 分箱参数。"
+      ]
+    },
+    {
+      "section": "自定义增量",
+      "family": "custom_lung_nodule",
+      "name": "CDF 斜率峰度",
+      "code": "custom_cdf_slope_kurtosis",
+      "key": "custom_cdf_slope_kurtosis",
+      "definition": "CDF 斜率样本的四阶标准化矩，不减 3",
+      "required_mask": "morphological + intensity",
+      "required_masks": [
+        "morphological",
+        "intensity"
+      ],
+      "requires_discretisation": false,
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "3d"
+      ],
+      "discretisation_group": "none",
+      "calculation_module": "custom",
+      "legacy_pyradiomics_class": null,
+      "standard_status": "custom",
+      "status": "computed",
+      "source_note": "沿用原肺结节自定义公式；独立于 IBSI，不声明为 IBSI 标准指标。",
+      "reason": null,
+      "unit": "dimensionless",
+      "runtime_constraints": [
+        "适用于肺 CT；请选择不归一化或按模态自适应，并关闭重分割。",
+        "无法计算时留空并记录原因；沿用原公式，不使用 IBSI 分箱参数。"
+      ]
+    },
+    {
+      "section": "自定义增量",
+      "family": "custom_lung_nodule",
+      "name": "CDF HU 最小值",
+      "code": "custom_cdf_hu_min",
+      "key": "custom_cdf_hu_min",
+      "definition": "最大层 ROI 强度最小值",
+      "required_mask": "morphological + intensity",
+      "required_masks": [
+        "morphological",
+        "intensity"
+      ],
+      "requires_discretisation": false,
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "3d"
+      ],
+      "discretisation_group": "none",
+      "calculation_module": "custom",
+      "legacy_pyradiomics_class": null,
+      "standard_status": "custom",
+      "status": "computed",
+      "source_note": "沿用原肺结节自定义公式；独立于 IBSI，不声明为 IBSI 标准指标。",
+      "reason": null,
+      "unit": "HU",
+      "runtime_constraints": [
+        "适用于肺 CT；请选择不归一化或按模态自适应，并关闭重分割。",
+        "无法计算时留空并记录原因；沿用原公式，不使用 IBSI 分箱参数。"
+      ]
+    },
+    {
+      "section": "自定义增量",
+      "family": "custom_lung_nodule",
+      "name": "CDF HU 最大值",
+      "code": "custom_cdf_hu_max",
+      "key": "custom_cdf_hu_max",
+      "definition": "最大层 ROI 强度最大值",
+      "required_mask": "morphological + intensity",
+      "required_masks": [
+        "morphological",
+        "intensity"
+      ],
+      "requires_discretisation": false,
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "3d"
+      ],
+      "discretisation_group": "none",
+      "calculation_module": "custom",
+      "legacy_pyradiomics_class": null,
+      "standard_status": "custom",
+      "status": "computed",
+      "source_note": "沿用原肺结节自定义公式；独立于 IBSI，不声明为 IBSI 标准指标。",
+      "reason": null,
+      "unit": "HU",
+      "runtime_constraints": [
+        "适用于肺 CT；请选择不归一化或按模态自适应，并关闭重分割。",
+        "无法计算时留空并记录原因；沿用原公式，不使用 IBSI 分箱参数。"
+      ]
+    },
+    {
+      "section": "自定义增量",
+      "family": "custom_lung_nodule",
+      "name": "边界凸性",
+      "code": "custom_boundary_convexity",
+      "key": "custom_boundary_convexity",
+      "definition": "各层 ROI 面积 / 凸包面积的均值",
+      "required_mask": "morphological",
+      "required_masks": [
+        "morphological"
+      ],
+      "requires_discretisation": false,
+      "requires_image_intensity": false,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "3d"
+      ],
+      "discretisation_group": "none",
+      "calculation_module": "custom",
+      "legacy_pyradiomics_class": null,
+      "standard_status": "custom",
+      "status": "computed",
+      "source_note": "沿用原肺结节自定义公式；独立于 IBSI，不声明为 IBSI 标准指标。",
+      "reason": null,
+      "unit": "dimensionless",
+      "runtime_constraints": [
+        "适用于肺 CT；请选择不归一化或按模态自适应，并关闭重分割。",
+        "无法计算时留空并记录原因；沿用原公式，不使用 IBSI 分箱参数。"
+      ]
+    },
+    {
+      "section": "自定义增量",
+      "family": "custom_lung_nodule",
+      "name": "边界/核心熵比",
+      "code": "custom_boundary_entropy_ratio",
+      "key": "custom_boundary_entropy_ratio",
+      "definition": "二维腐蚀两次划分核心与边界；32 档熵均值之比",
+      "required_mask": "morphological + intensity",
+      "required_masks": [
+        "morphological",
+        "intensity"
+      ],
+      "requires_discretisation": false,
+      "requires_image_intensity": true,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "3d"
+      ],
+      "discretisation_group": "none",
+      "calculation_module": "custom",
+      "legacy_pyradiomics_class": null,
+      "standard_status": "custom",
+      "status": "computed",
+      "source_note": "沿用原肺结节自定义公式；独立于 IBSI，不声明为 IBSI 标准指标。",
+      "reason": null,
+      "unit": "dimensionless",
+      "runtime_constraints": [
+        "适用于肺 CT；请选择不归一化或按模态自适应，并关闭重分割。",
+        "无法计算时留空并记录原因；沿用原公式，不使用 IBSI 分箱参数。"
+      ]
+    },
+    {
+      "section": "自定义增量",
+      "family": "custom_lung_nodule",
+      "name": "轮廓凸性",
+      "code": "custom_contour_convexity",
+      "key": "custom_contour_convexity",
+      "definition": "最大层凸包周长 / ROI 周长",
+      "required_mask": "morphological",
+      "required_masks": [
+        "morphological"
+      ],
+      "requires_discretisation": false,
+      "requires_image_intensity": false,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "3d"
+      ],
+      "discretisation_group": "none",
+      "calculation_module": "custom",
+      "legacy_pyradiomics_class": null,
+      "standard_status": "custom",
+      "status": "computed",
+      "source_note": "沿用原肺结节自定义公式；独立于 IBSI，不声明为 IBSI 标准指标。",
+      "reason": null,
+      "unit": "dimensionless",
+      "runtime_constraints": [
+        "适用于肺 CT；请选择不归一化或按模态自适应，并关闭重分割。",
+        "无法计算时留空并记录原因；沿用原公式，不使用 IBSI 分箱参数。"
+      ]
+    },
+    {
+      "section": "自定义增量",
+      "family": "custom_lung_nodule",
+      "name": "轮廓实心度",
+      "code": "custom_contour_solidity",
+      "key": "custom_contour_solidity",
+      "definition": "最大层 ROI 面积 / 凸包面积",
+      "required_mask": "morphological",
+      "required_masks": [
+        "morphological"
+      ],
+      "requires_discretisation": false,
+      "requires_image_intensity": false,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "3d"
+      ],
+      "discretisation_group": "none",
+      "calculation_module": "custom",
+      "legacy_pyradiomics_class": null,
+      "standard_status": "custom",
+      "status": "computed",
+      "source_note": "沿用原肺结节自定义公式；独立于 IBSI，不声明为 IBSI 标准指标。",
+      "reason": null,
+      "unit": "dimensionless",
+      "runtime_constraints": [
+        "适用于肺 CT；请选择不归一化或按模态自适应，并关闭重分割。",
+        "无法计算时留空并记录原因；沿用原公式，不使用 IBSI 分箱参数。"
+      ]
+    },
+    {
+      "section": "自定义增量",
+      "family": "custom_lung_nodule",
+      "name": "轮廓圆形度",
+      "code": "custom_contour_circularity",
+      "key": "custom_contour_circularity",
+      "definition": "最大层边界到质心像素距离的均值 / 标准差",
+      "required_mask": "morphological",
+      "required_masks": [
+        "morphological"
+      ],
+      "requires_discretisation": false,
+      "requires_image_intensity": false,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "3d"
+      ],
+      "discretisation_group": "none",
+      "calculation_module": "custom",
+      "legacy_pyradiomics_class": null,
+      "standard_status": "custom",
+      "status": "computed",
+      "source_note": "沿用原肺结节自定义公式；独立于 IBSI，不声明为 IBSI 标准指标。",
+      "reason": null,
+      "unit": "dimensionless",
+      "runtime_constraints": [
+        "适用于肺 CT；请选择不归一化或按模态自适应，并关闭重分割。",
+        "无法计算时留空并记录原因；沿用原公式，不使用 IBSI 分箱参数。"
+      ]
+    },
+    {
+      "section": "自定义增量",
+      "family": "custom_lung_nodule",
+      "name": "轮廓紧致度",
+      "code": "custom_contour_compactness",
+      "key": "custom_contour_compactness",
+      "definition": "4π × 最大层面积 / ROI 周长²",
+      "required_mask": "morphological",
+      "required_masks": [
+        "morphological"
+      ],
+      "requires_discretisation": false,
+      "requires_image_intensity": false,
+      "requires_local_context": false,
+      "supported_dimensions": [
+        "3d"
+      ],
+      "discretisation_group": "none",
+      "calculation_module": "custom",
+      "legacy_pyradiomics_class": null,
+      "standard_status": "custom",
+      "status": "computed",
+      "source_note": "沿用原肺结节自定义公式；独立于 IBSI，不声明为 IBSI 标准指标。",
+      "reason": null,
+      "unit": "dimensionless",
+      "runtime_constraints": [
+        "适用于肺 CT；请选择不归一化或按模态自适应，并关闭重分割。",
+        "无法计算时留空并记录原因；沿用原公式，不使用 IBSI 分箱参数。"
+      ]
+    }
+  ]
+}

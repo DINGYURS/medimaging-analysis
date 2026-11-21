@@ -135,3 +135,7 @@ python /data/medimaging-analysis/scripts/run_pipeline.py --gpu 2
 ## 数据库设计
 
 用户账号表结构及字段约束见 [数据库表设计](docs/database-design.md)。
+
+## 独立特征计算（198项目录）
+
+`/tasks/feature-export` 已接入167项原生IBSI与31项自定义增量特征，计算记录与结果独立保存，保留原107项分析流程及旧结果。参数、输入确认、运行限制与迁移说明见 [特征计算说明](docs/FEATURE_CALCULATION.md)。

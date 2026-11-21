@@ -1,0 +1,3416 @@
+{
+  "ibsi_RNU0": {
+    "name": "Volume (mesh)",
+    "code": "RNU0",
+    "description": "Quantifies the 3D volume enclosed by the ROI surface mesh.",
+    "formula": "\\(V_k=\\frac{\\mathbf a\\cdot(\\mathbf b\\times\\mathbf c)}{6},\\quad F_{\\mathrm{morph.vol}}=V=\\left|\\sum_{k=1}^{N_{fc}}V_k\\right|\\)",
+    "family": "morphology",
+    "chinese": "计算 ROI 三角网格包围的三维体积，描述病灶总体大小。",
+    "variables": [
+      "\\(V\\)：ROI 封闭三角网格围成的体积。",
+      "\\(V_k\\)：原点与第 k 个三角面片构成的有向四面体体积。",
+      "\\(\\mathbf a,\\mathbf b,\\mathbf c\\)：第 k 个三角面片的三个顶点坐标。",
+      "\\(N_{fc}\\)：封闭网格三角面片数；k 为面片索引。"
+    ],
+    "chinese_name": "网格体积",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#volume-mesh",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#volume-mesh",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#morphological-features"
+    ],
+    "description_zh": "量化 ROI 表面网格所围成的三维体积。"
+  },
+  "ibsi_YEKZ": {
+    "name": "Volume (voxel counting)",
+    "code": "YEKZ",
+    "description": "Estimates ROI volume by summing the physical volumes of its voxels.",
+    "formula": "\\(F_{\\mathrm{morph.approx.vol}}=\\sum_{k=1}^{N_v}V_k\\)",
+    "family": "morphology",
+    "chinese": "将 ROI 内各体素的物理体积相加，得到体素计数体积估计。",
+    "variables": [
+      "\\(V_k\\)：形态学掩膜中第 k 个体素的物理体积。",
+      "\\(N_v\\)：ROI 形态学掩膜体素数；k 为体素索引。"
+    ],
+    "chinese_name": "体素计数体积",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#volume-voxel-counting",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#volume-voxel-counting",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#morphological-features"
+    ],
+    "description_zh": "通过累加 ROI 内各体素的物理体积来估计 ROI 体积。"
+  },
+  "ibsi_C0JK": {
+    "name": "Surface area (mesh)",
+    "code": "C0JK",
+    "description": "Measures the total area of the triangulated ROI surface.",
+    "formula": "\\(A_k=\\frac{\\|\\mathbf{ab}\\times\\mathbf{ac}\\|_2}{2},\\quad F_{\\mathrm{morph.area}}=A=\\sum_{k=1}^{N_{fc}}A_k\\)",
+    "family": "morphology",
+    "chinese": "计算 ROI 三角网格表面的总面积，反映病灶边界的空间尺度。",
+    "variables": [
+      "\\(A\\)：ROI 三角网格表面积。",
+      "\\(A_k\\)：第 k 个三角面片的面积。",
+      "\\(\\mathbf{ab},\\mathbf{ac}\\)：从顶点 a 指向 b、c 的边向量；叉积的欧氏范数为平行四边形面积。",
+      "\\(N_{fc}\\)：网格三角面片总数；k 为面片索引。"
+    ],
+    "chinese_name": "网格表面积",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#surface-area-mesh",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#surface-area-mesh",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#morphological-features"
+    ],
+    "description_zh": "测量三角化 ROI 表面的总面积。"
+  },
+  "ibsi_2PR5": {
+    "name": "Surface to volume ratio",
+    "code": "2PR5",
+    "description": "Measures surface area relative to volume and therefore the boundary burden per unit volume.",
+    "formula": "\\(F_{\\mathrm{morph.av}}=\\frac{A}{V}\\)",
+    "family": "morphology",
+    "chinese": "计算单位体积对应的表面积，描述边界相对于病灶体量的多少。",
+    "variables": [
+      "\\(A\\)：ROI 三角网格表面积。",
+      "\\(V\\)：ROI 封闭三角网格围成的体积。"
+    ],
+    "chinese_name": "表面积与体积比",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#surface-to-volume-ratio",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#surface-to-volume-ratio",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#morphological-features"
+    ],
+    "description_zh": "测量表面积相对于体积的大小，从而反映单位体积的边界负荷。"
+  },
+  "ibsi_SKGS": {
+    "name": "Compactness 1",
+    "code": "SKGS",
+    "description": "Quantifies dimensionless compactness using surface area and volume; more sphere-like objects have larger values.",
+    "formula": "\\(F_{\\mathrm{morph.comp.1}}=\\frac{V}{\\pi^{1/2}A^{3/2}}\\)",
+    "family": "morphology",
+    "chinese": "用表面积和体积构造无量纲紧致度指标，越接近球形通常越大。",
+    "variables": [
+      "\\(V\\)：ROI 封闭三角网格围成的体积。",
+      "\\(A\\)：ROI 三角网格表面积。"
+    ],
+    "chinese_name": "紧致度1",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#compactness-1",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#compactness-1",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#morphological-features"
+    ],
+    "description_zh": "利用表面积和体积量化无量纲紧致度；物体越接近球形，数值越大。"
+  },
+  "ibsi_BQWJ": {
+    "name": "Compactness 2",
+    "code": "BQWJ",
+    "description": "Measures ROI compactness and equals 1 for an ideal sphere.",
+    "formula": "\\(F_{\\mathrm{morph.comp.2}}=36\\pi\\frac{V^2}{A^3}\\)",
+    "family": "morphology",
+    "chinese": "衡量 ROI 的紧致程度，理想球体取值为 1。",
+    "variables": [
+      "\\(V\\)：ROI 封闭三角网格围成的体积。",
+      "\\(A\\)：ROI 三角网格表面积。"
+    ],
+    "chinese_name": "紧致度2",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#compactness-2",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#compactness-2",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#morphological-features"
+    ],
+    "description_zh": "测量 ROI 的紧致度，理想球体的值为1。"
+  },
+  "ibsi_KRCK": {
+    "name": "Spherical disproportion",
+    "code": "KRCK",
+    "description": "Compares ROI surface area with that of an equal-volume sphere; a sphere has value 1.",
+    "formula": "\\(F_{\\mathrm{morph.sph.dispr}}=\\frac{A}{4\\pi R^2}=\\frac{A}{(36\\pi V^2)^{1/3}}\\)",
+    "family": "morphology",
+    "chinese": "比较 ROI 表面积与等体积球体表面积，反映偏离球形的程度。",
+    "variables": [
+      "\\(A\\)：ROI 三角网格表面积。",
+      "\\(V\\)：ROI 封闭三角网格围成的体积。",
+      "\\(R\\)：与 ROI 等体积的球体半径。"
+    ],
+    "chinese_name": "球形不均衡度",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#spherical-disproportion",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#spherical-disproportion",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#morphological-features"
+    ],
+    "description_zh": "比较 ROI 表面积与等体积球体的表面积；球体的值为1。"
+  },
+  "ibsi_QCFX": {
+    "name": "Sphericity",
+    "code": "QCFX",
+    "description": "Measures how closely the ROI resembles a sphere; an ideal sphere has value 1.",
+    "formula": "\\(F_{\\mathrm{morph.sphericity}}=\\frac{(36\\pi V^2)^{1/3}}{A}\\)",
+    "family": "morphology",
+    "chinese": "衡量 ROI 与理想球体的接近程度，理想球体取值为 1。",
+    "variables": [
+      "\\(V\\)：ROI 封闭三角网格围成的体积。",
+      "\\(A\\)：ROI 三角网格表面积。"
+    ],
+    "chinese_name": "球形度",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#sphericity",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#sphericity",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#morphological-features"
+    ],
+    "description_zh": "测量 ROI 与球体的接近程度；理想球体的值为1。"
+  },
+  "ibsi_25C7": {
+    "name": "Asphericity",
+    "code": "25C7",
+    "description": "Quantifies deviation from a spherical shape; an ideal sphere has value 0.",
+    "formula": "\\(F_{\\mathrm{morph.asphericity}}=\\left(\\frac{A^3}{36\\pi V^2}\\right)^{1/3}-1\\)",
+    "family": "morphology",
+    "chinese": "衡量 ROI 偏离球形的程度，理想球体取值为 0。",
+    "variables": [
+      "\\(A\\)：ROI 三角网格表面积。",
+      "\\(V\\)：ROI 封闭三角网格围成的体积。"
+    ],
+    "chinese_name": "非球形度",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#asphericity",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#asphericity",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#morphological-features"
+    ],
+    "description_zh": "量化偏离球形的程度；理想球体的值为0。"
+  },
+  "ibsi_KLMA": {
+    "name": "Centre of mass shift",
+    "code": "KLMA",
+    "description": "Measures the distance between the geometric centroid and the intensity-weighted centroid.",
+    "formula": "\\(\\mathbf{CoM}_{geom}=\\frac{1}{N_{v,m}}\\sum_{k=1}^{N_{v,m}}\\mathbf X_{c,k},\\quad \\mathbf{CoM}_{gl}=\\frac{\\sum_{k=1}^{N_{v,gl}}X_{gl,k}\\mathbf X_{c,gl,k}}{\\sum_{k=1}^{N_{v,gl}}X_{gl,k}},\\quad F_{\\mathrm{morph.com}}=\\|\\mathbf{CoM}_{geom}-\\mathbf{CoM}_{gl}\\|_2\\)",
+    "family": "morphology",
+    "chinese": "计算几何质心与强度加权质心之间的距离，描述高强度区域相对病灶几何中心的偏移。",
+    "variables": [
+      "\\(\\mathbf{CoM}_{geom},\\mathbf{CoM}_{gl}\\)：分别为形态学掩膜体素中心的几何质心，以及强度掩膜体素中心的强度加权质心。",
+      "\\(N_{v,m},N_{v,gl}\\)：形态学掩膜和强度掩膜各自的体素数。",
+      "\\(\\mathbf X_{c,k},\\mathbf X_{c,gl,k}\\)：相应掩膜中第 k 个体素的中心坐标。",
+      "\\(X_{gl,k}\\)：强度掩膜第 k 个体素的原始强度；欧氏范数测量两个质心的距离。"
+    ],
+    "chinese_name": "质心偏移",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#centre-of-mass-shift",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#centre-of-mass-shift",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#morphological-features"
+    ],
+    "description_zh": "测量几何质心与强度加权质心之间的距离。"
+  },
+  "ibsi_L0JK": {
+    "name": "Maximum 3D diameter",
+    "code": "L0JK",
+    "description": "Measures the largest Euclidean distance between any two ROI mesh vertices.",
+    "formula": "\\(F_{\\mathrm{morph.diam}}=\\max_{u,v\\in\\mathbf X_{vx}}\\|u-v\\|_2\\)",
+    "family": "morphology",
+    "chinese": "计算 ROI 网格顶点之间的最大欧氏距离，描述病灶最大三维跨度。",
+    "variables": [
+      "\\(\\mathbf X_{vx}\\)：ROI 网格顶点集合。",
+      "\\(u,v\\)：集合中的任意两个顶点；取所有顶点对的最大欧氏距离。"
+    ],
+    "chinese_name": "最大三维直径",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#maximum-3d-diameter",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#maximum-3d-diameter",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#morphological-features"
+    ],
+    "description_zh": "测量任意两个 ROI 网格顶点之间的最大欧氏距离。"
+  },
+  "ibsi_TDIC": {
+    "name": "Major axis length",
+    "code": "TDIC",
+    "description": "Measures the length of the longest principal axis obtained by PCA.",
+    "formula": "\\(F_{\\mathrm{morph.pca.major}}=4\\sqrt{\\lambda_{\\mathrm{major}}}\\)",
+    "family": "morphology",
+    "chinese": "通过 PCA 得到 ROI 最长主轴的长度，描述病灶的主要延展方向。",
+    "variables": [
+      "\\(\\lambda_{\\mathrm{major}}\\)：ROI 体素中心坐标协方差矩阵的最大特征值。"
+    ],
+    "chinese_name": "主轴长度",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#major-axis-length",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#major-axis-length",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#morphological-features"
+    ],
+    "description_zh": "测量通过 PCA 得到的最长主轴长度。"
+  },
+  "ibsi_P9VJ": {
+    "name": "Minor axis length",
+    "code": "P9VJ",
+    "description": "Measures the intermediate principal-axis length obtained by PCA.",
+    "formula": "\\(F_{\\mathrm{morph.pca.minor}}=4\\sqrt{\\lambda_{\\mathrm{minor}}}\\)",
+    "family": "morphology",
+    "chinese": "通过 PCA 得到 ROI 中间主轴的长度，描述病灶的次级延展尺度。",
+    "variables": [
+      "\\(\\lambda_{\\mathrm{minor}}\\)：ROI 体素中心坐标协方差矩阵的中间特征值。"
+    ],
+    "chinese_name": "次轴长度",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#minor-axis-length",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#minor-axis-length",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#morphological-features"
+    ],
+    "description_zh": "测量通过 PCA 得到的中间主轴长度。"
+  },
+  "ibsi_7J51": {
+    "name": "Least axis length",
+    "code": "7J51",
+    "description": "Measures the shortest principal-axis length obtained by PCA.",
+    "formula": "\\(F_{\\mathrm{morph.pca.least}}=4\\sqrt{\\lambda_{\\mathrm{least}}}\\)",
+    "family": "morphology",
+    "chinese": "通过 PCA 得到 ROI 最短主轴的长度，描述病灶最薄方向的尺度。",
+    "variables": [
+      "\\(\\lambda_{\\mathrm{least}}\\)：ROI 体素中心坐标协方差矩阵的最小特征值。"
+    ],
+    "chinese_name": "最短轴长度",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#least-axis-length",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#least-axis-length",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#morphological-features"
+    ],
+    "description_zh": "测量通过 PCA 得到的最短主轴长度。"
+  },
+  "ibsi_Q3CK": {
+    "name": "Elongation",
+    "code": "Q3CK",
+    "description": "Measures elongation as the ratio of the intermediate to the major PCA axis scale.",
+    "formula": "\\(F_{\\mathrm{morph.pca.elongation}}=\\sqrt{\\frac{\\lambda_{\\mathrm{minor}}}{\\lambda_{\\mathrm{major}}}}\\)",
+    "family": "morphology",
+    "chinese": "计算中间主轴与最长主轴的尺度比，描述 ROI 的细长程度。",
+    "variables": [
+      "\\(\\lambda_{\\mathrm{minor}},\\lambda_{\\mathrm{major}}\\)：ROI 体素中心坐标协方差矩阵的中间及最大特征值。"
+    ],
+    "chinese_name": "伸长率",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#elongation",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#elongation",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#morphological-features"
+    ],
+    "description_zh": "以 PCA 中间轴与最长轴的尺度比测量伸长程度。"
+  },
+  "ibsi_N17B": {
+    "name": "Flatness",
+    "code": "N17B",
+    "description": "Measures flatness as the ratio of the least to the major PCA axis scale.",
+    "formula": "\\(F_{\\mathrm{morph.pca.flatness}}=\\sqrt{\\frac{\\lambda_{\\mathrm{least}}}{\\lambda_{\\mathrm{major}}}}\\)",
+    "family": "morphology",
+    "chinese": "计算最短主轴与最长主轴的尺度比，描述 ROI 的扁平程度。",
+    "variables": [
+      "\\(\\lambda_{\\mathrm{least}},\\lambda_{\\mathrm{major}}\\)：ROI 体素中心坐标协方差矩阵的最小及最大特征值。"
+    ],
+    "chinese_name": "扁平度",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#flatness",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#flatness",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#morphological-features"
+    ],
+    "description_zh": "以 PCA 最短轴与最长轴的尺度比测量扁平程度。"
+  },
+  "ibsi_PBX1": {
+    "name": "Volume density (axis-aligned bounding box)",
+    "code": "PBX1",
+    "description": "Measures the fraction of the axis-aligned bounding-box volume occupied by the ROI.",
+    "formula": "\\(F_{\\mathrm{morph.v.dens.aabb}}=\\frac{V}{V_{\\mathrm{aabb}}}\\)",
+    "family": "morphology",
+    "chinese": "计算 ROI 体积占其轴对齐包围盒体积的比例，反映包围盒内的体积填充程度。",
+    "variables": [
+      "\\(V\\)：ROI 封闭三角网格围成的体积。",
+      "\\(V_{\\mathrm{aabb}}\\)：轴对齐包围盒的体积。"
+    ],
+    "chinese_name": "体积密度（轴对齐包围盒）",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#volume-density-axis-aligned-bounding-box",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#volume-density-axis-aligned-bounding-box",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#morphological-features"
+    ],
+    "description_zh": "测量轴对齐包围盒体积中被 ROI 占据的比例。"
+  },
+  "ibsi_R59B": {
+    "name": "Area density (axis-aligned bounding box)",
+    "code": "R59B",
+    "description": "Measures ROI surface area relative to the surface area of its axis-aligned bounding box.",
+    "formula": "\\(F_{\\mathrm{morph.a.dens.aabb}}=\\frac{A}{A_{\\mathrm{aabb}}}\\)",
+    "family": "morphology",
+    "chinese": "计算 ROI 表面积与轴对齐包围盒表面积的比例。",
+    "variables": [
+      "\\(A\\)：ROI 三角网格表面积。",
+      "\\(A_{\\mathrm{aabb}}\\)：轴对齐包围盒的表面积。"
+    ],
+    "chinese_name": "面积密度（轴对齐包围盒）",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#area-density-axis-aligned-bounding-box",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#area-density-axis-aligned-bounding-box",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#morphological-features"
+    ],
+    "description_zh": "测量 ROI 表面积与其轴对齐包围盒表面积的比值。"
+  },
+  "ibsi_ZH1A": {
+    "name": "Volume density (oriented minimum bounding box)",
+    "code": "ZH1A",
+    "description": "Measures ROI volume relative to its oriented minimum bounding-box volume; IBSI provides no reference value.",
+    "formula": "\\(F_{\\mathrm{morph.v.dens.ombb}}=\\frac{V}{V_{\\mathrm{ombb}}}\\)",
+    "family": "morphology",
+    "chinese": "计算 ROI 体积占最小定向包围盒体积的比例；IBSI 手册未提供参考值。",
+    "variables": [
+      "\\(V\\)：ROI 封闭三角网格围成的体积。",
+      "\\(V_{\\mathrm{ombb}}\\)：最小定向包围盒的体积。"
+    ],
+    "chinese_name": "体积密度（最小定向包围盒）",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#volume-density-oriented-minimum-bounding-box",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#volume-density-oriented-minimum-bounding-box",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#morphological-features"
+    ],
+    "description_zh": "测量 ROI 体积与其最小定向包围盒体积的比值；IBSI 未提供参考值。"
+  },
+  "ibsi_IQYR": {
+    "name": "Area density (oriented minimum bounding box)",
+    "code": "IQYR",
+    "description": "Measures ROI surface area relative to the oriented minimum bounding-box surface area; IBSI provides no reference value.",
+    "formula": "\\(F_{\\mathrm{morph.a.dens.ombb}}=\\frac{A}{A_{\\mathrm{ombb}}}\\)",
+    "family": "morphology",
+    "chinese": "计算 ROI 表面积与最小定向包围盒表面积的比例；IBSI 手册未提供参考值。",
+    "variables": [
+      "\\(A\\)：ROI 三角网格表面积。",
+      "\\(A_{\\mathrm{ombb}}\\)：最小定向包围盒的表面积。"
+    ],
+    "chinese_name": "面积密度（最小定向包围盒）",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#area-density-oriented-minimum-bounding-box",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#area-density-oriented-minimum-bounding-box",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#morphological-features"
+    ],
+    "description_zh": "测量 ROI 表面积与其最小定向包围盒表面积的比值；IBSI 未提供参考值。"
+  },
+  "ibsi_6BDE": {
+    "name": "Volume density (approximate enclosing ellipsoid)",
+    "code": "6BDE",
+    "description": "Measures ROI volume relative to the volume of its approximate enclosing ellipsoid.",
+    "formula": "\\(F_{\\mathrm{morph.v.dens.aee}}=\\frac{3V}{4\\pi abc}\\)",
+    "family": "morphology",
+    "chinese": "计算 ROI 体积占近似包围椭球体积的比例，描述椭球对病灶的体积包络程度。",
+    "variables": [
+      "\\(V\\)：ROI 封闭三角网格围成的体积。",
+      "\\(a,b,c\\)：由 ROI 体素中心坐标 PCA 得到的近似包围椭球的三个半轴长度，分别为相应协方差特征值平方根的2倍。"
+    ],
+    "chinese_name": "体积密度（近似包围椭球）",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#volume-density-approximate-enclosing-ellipsoid",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#volume-density-approximate-enclosing-ellipsoid",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#morphological-features"
+    ],
+    "description_zh": "测量 ROI 体积与其近似包围椭球体积的比值。"
+  },
+  "ibsi_RDD2": {
+    "name": "Area density (approximate enclosing ellipsoid)",
+    "code": "RDD2",
+    "description": "Measures ROI surface area relative to the approximate enclosing-ellipsoid surface area.",
+    "formula": "\\(F_{\\mathrm{morph.a.dens.aee}}=\\frac{A}{A_{\\mathrm{aee}}},\\quad A_{\\mathrm{aee}}=4\\pi ab\\sum_{\\nu=0}^{\\infty}\\frac{(\\alpha\\beta)^\\nu}{1-4\\nu^2}P_\\nu\\!\\left(\\frac{\\alpha^2+\\beta^2}{2\\alpha\\beta}\\right)\\)",
+    "family": "morphology",
+    "chinese": "计算 ROI 表面积与近似包围椭球表面积的比例。",
+    "variables": [
+      "\\(A\\)：ROI 三角网格表面积。",
+      "\\(A_{\\mathrm{aee}}\\)：近似包围椭球表面积的级数近似。",
+      "\\(a,b,c\\)：近似包围椭球的三个半轴，按 a ≥ b ≥ c 排序。",
+      "\\(\\alpha=\\sqrt{1-b^2/a^2},\\ \\beta=\\sqrt{1-c^2/a^2}\\)：椭球离心率参数。",
+      "\\(P_\\nu,\\nu\\)：ν 阶 Legendre 多项式及级数索引；官方默认截断至 ν = 20。"
+    ],
+    "chinese_name": "面积密度（近似包围椭球）",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#area-density-approximate-enclosing-ellipsoid",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#area-density-approximate-enclosing-ellipsoid",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#morphological-features"
+    ],
+    "description_zh": "测量 ROI 表面积与近似包围椭球表面积的比值。"
+  },
+  "ibsi_SWZ1": {
+    "name": "Volume density (minimum volume enclosing ellipsoid)",
+    "code": "SWZ1",
+    "description": "Measures ROI volume relative to its minimum-volume enclosing ellipsoid; IBSI provides no reference value.",
+    "formula": "\\(F_{\\mathrm{morph.v.dens.mvee}}=\\frac{V}{V_{\\mathrm{mvee}}}\\)",
+    "family": "morphology",
+    "chinese": "计算 ROI 体积占最小体积包围椭球体积的比例；IBSI 手册未提供参考值。",
+    "variables": [
+      "\\(V\\)：ROI 封闭三角网格围成的体积。",
+      "\\(V_{\\mathrm{mvee}}\\)：最小体积包围椭球的体积。"
+    ],
+    "chinese_name": "体积密度（最小体积包围椭球）",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#volume-density-minimum-volume-enclosing-ellipsoid",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#volume-density-minimum-volume-enclosing-ellipsoid",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#morphological-features"
+    ],
+    "description_zh": "测量 ROI 体积与其最小体积包围椭球体积的比值；IBSI 未提供参考值。"
+  },
+  "ibsi_BRI8": {
+    "name": "Area density (minimum volume enclosing ellipsoid)",
+    "code": "BRI8",
+    "description": "Measures ROI surface area relative to the minimum-volume enclosing-ellipsoid surface area; IBSI provides no reference value.",
+    "formula": "\\(F_{\\mathrm{morph.a.dens.mvee}}=\\frac{A}{A_{\\mathrm{mvee}}}\\)",
+    "family": "morphology",
+    "chinese": "计算 ROI 表面积与最小体积包围椭球表面积的比例；IBSI 手册未提供参考值。",
+    "variables": [
+      "\\(A\\)：ROI 三角网格表面积。",
+      "\\(A_{\\mathrm{mvee}}\\)：最小体积包围椭球的表面积。"
+    ],
+    "chinese_name": "面积密度（最小体积包围椭球）",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#area-density-minimum-volume-enclosing-ellipsoid",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#area-density-minimum-volume-enclosing-ellipsoid",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#morphological-features"
+    ],
+    "description_zh": "测量 ROI 表面积与最小体积包围椭球表面积的比值；IBSI 未提供参考值。"
+  },
+  "ibsi_R3ER": {
+    "name": "Volume density (convex hull)",
+    "code": "R3ER",
+    "description": "Measures ROI volume relative to its convex-hull volume, also known as solidity.",
+    "formula": "\\(F_{\\mathrm{morph.v.dens.conv.hull}}=\\frac{V}{V_{\\mathrm{convex}}}\\)",
+    "family": "morphology",
+    "chinese": "计算 ROI 体积占其凸包体积的比例，常称为 Solidity，可反映凹陷程度。",
+    "variables": [
+      "\\(V\\)：ROI 封闭三角网格围成的体积。",
+      "\\(V_{\\mathrm{convex}}\\)：ROI 网格顶点凸包的体积。"
+    ],
+    "chinese_name": "体积密度（凸包）",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#volume-density-convex-hull",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#volume-density-convex-hull",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#morphological-features"
+    ],
+    "description_zh": "测量 ROI 体积与其凸包体积的比值，也称为实心度。"
+  },
+  "ibsi_7T7F": {
+    "name": "Area density (convex hull)",
+    "code": "7T7F",
+    "description": "Measures ROI surface area relative to the surface area of its convex hull.",
+    "formula": "\\(F_{\\mathrm{morph.a.dens.conv.hull}}=\\frac{A}{A_{\\mathrm{convex}}}\\)",
+    "family": "morphology",
+    "chinese": "计算 ROI 表面积与凸包表面积的比例，反映实际边界相对于凸包边界的复杂程度。",
+    "variables": [
+      "\\(A\\)：ROI 三角网格表面积。",
+      "\\(A_{\\mathrm{convex}}\\)：ROI 网格顶点凸包的表面积。"
+    ],
+    "chinese_name": "面积密度（凸包）",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#area-density-convex-hull",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#area-density-convex-hull",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#morphological-features"
+    ],
+    "description_zh": "测量 ROI 表面积与其凸包表面积的比值。"
+  },
+  "ibsi_99N0": {
+    "name": "Integrated intensity",
+    "code": "99N0",
+    "description": "Measures the product of mean ROI intensity and ROI volume.",
+    "formula": "\\(F_{\\mathrm{morph.integ.int}}=V\\cdot\\frac{1}{N_{v,gl}}\\sum_{k=1}^{N_{v,gl}}X_{gl,k}\\)",
+    "family": "morphology",
+    "chinese": "计算 ROI 平均强度与 ROI 体积的乘积，描述体积尺度上的总强度负荷。",
+    "variables": [
+      "\\(V\\)：ROI 封闭三角网格围成的体积。",
+      "\\(N_{v,gl}\\)：ROI 强度掩膜体素数。",
+      "\\(X_{gl,k}\\)：强度掩膜第 k 个体素的原始强度。"
+    ],
+    "chinese_name": "积分强度",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#integrated-intensity",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#integrated-intensity",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#morphological-features"
+    ],
+    "description_zh": "测量 ROI 平均强度与 ROI 体积的乘积。"
+  },
+  "ibsi_N365": {
+    "name": "Moran's I index",
+    "code": "N365",
+    "description": "Quantifies global spatial autocorrelation of ROI intensities.",
+    "formula": "\\(F_{\\mathrm{morph.moran.i}}=\\frac{N_{v,gl}}{\\sum_{k_1}\\sum_{k_2}w_{k_1k_2}}\\frac{\\sum_{k_1}\\sum_{k_2}w_{k_1k_2}(X_{gl,k_1}-\\mu)(X_{gl,k_2}-\\mu)}{\\sum_k(X_{gl,k}-\\mu)^2},\\quad k_1\\ne k_2\\)",
+    "family": "morphology",
+    "chinese": "衡量 ROI 内强度值的全局空间自相关，判断相邻位置是否具有相似强度。",
+    "variables": [
+      "\\(N_{v,gl}\\)：ROI 强度掩膜中的体素数。",
+      "\\(X_{gl,k},\\mu\\)：第 k 个体素的原始强度及强度掩膜的平均强度。",
+      "\\(w_{k_1k_2}\\)：两个不同体素中心的欧氏距离倒数；k₁、k₂ 为不同体素索引，排除自配对。"
+    ],
+    "chinese_name": "Moran I 指数",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#morans-i-index",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#morans-i-index",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#morphological-features"
+    ],
+    "description_zh": "量化 ROI 强度的全局空间自相关。"
+  },
+  "ibsi_NPT7": {
+    "name": "Geary's C measure",
+    "code": "NPT7",
+    "description": "Measures spatial autocorrelation through pairwise intensity differences and is more sensitive to local variation than Moran's I.",
+    "formula": "\\(F_{\\mathrm{morph.geary.c}}=\\frac{N_{v,gl}-1}{2\\sum_{k_1}\\sum_{k_2}w_{k_1k_2}}\\frac{\\sum_{k_1}\\sum_{k_2}w_{k_1k_2}(X_{gl,k_1}-X_{gl,k_2})^2}{\\sum_k(X_{gl,k}-\\mu)^2},\\quad k_1\\ne k_2\\)",
+    "family": "morphology",
+    "chinese": "衡量 ROI 内相邻体素强度差异的空间自相关，对局部强度变化更敏感。",
+    "variables": [
+      "\\(N_{v,gl}\\)：ROI 强度掩膜中的体素数。",
+      "\\(X_{gl,k},\\mu\\)：第 k 个体素的原始强度及强度掩膜的平均强度。",
+      "\\(w_{k_1k_2}\\)：两个不同体素中心的欧氏距离倒数；k₁、k₂ 为不同体素索引，排除自配对。"
+    ],
+    "chinese_name": "Geary C 度量",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#gearys-c-measure",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#gearys-c-measure",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#morphological-features"
+    ],
+    "description_zh": "通过成对强度差测量空间自相关，相比 Moran I 对局部变化更敏感。"
+  },
+  "ibsi_VJGA": {
+    "name": "Local intensity peak",
+    "code": "VJGA",
+    "description": "Calculates the mean intensity in a 1 cm³ sphere centred on the maximum-intensity ROI voxel.",
+    "formula": "\\(F_{\\mathrm{loc.peak.local}}=\\max_{k\\in\\operatorname{argmax}(\\mathbf X_{gl})}\\frac{1}{|\\mathcal S(k)|}\\sum_{v\\in\\mathcal S(k)}X_{gl,v},\\quad \\mathcal S(k)=\\{v:\\|\\mathbf X_{c,v}-\\mathbf X_{c,k}\\|_2\\le r\\}\\)",
+    "family": "local_intensity",
+    "chinese": "以 ROI 内最大强度体素为中心，计算其 1 cm³ 球形邻域的平均强度。",
+    "variables": [
+      "\\(\\mathcal S(k)\\)：以中心体素 k 为球心、体积为 1 cm³ 的球形邻域体素集合，可包含 ROI 外体素。",
+      "\\(|\\mathcal S(k)|,X_{gl,v}\\)：球形邻域实际纳入的体素数及邻域体素 v 的原始强度。",
+      "\\(\\mathbf X_{gl}\\)：ROI 强度掩膜强度集合；候选 k 为达到其最大强度的所有体素。",
+      "\\(\\mathbf X_{c,v},\\mathbf X_{c,k},r\\)：邻域体素与中心体素的中心坐标；球半径 r = (3/(4π))^(1/3) cm，约 0.62 cm。"
+    ],
+    "chinese_name": "局部强度峰值",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#local-intensity-peak",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#local-intensity-peak",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#local-intensity-features"
+    ],
+    "description_zh": "以 ROI 内最大强度体素为中心，计算体积为1 cm³的球体内的平均强度。"
+  },
+  "ibsi_0F91": {
+    "name": "Global intensity peak",
+    "code": "0F91",
+    "description": "Calculates the mean intensity in a 1 cm³ sphere around every ROI voxel and retains the maximum.",
+    "formula": "\\(F_{\\mathrm{loc.peak.global}}=\\max_{k\\in ROI}\\frac{1}{|\\mathcal S(k)|}\\sum_{v\\in\\mathcal S(k)}X_{gl,v}\\)",
+    "family": "local_intensity",
+    "chinese": "遍历 ROI 内每个体素作为中心，计算其 1 cm³ 球形邻域平均强度，并取最大值。",
+    "variables": [
+      "\\(\\mathcal S(k)\\)：以中心体素 k 为球心、体积为 1 cm³ 的球形邻域体素集合，可包含 ROI 外体素。",
+      "\\(|\\mathcal S(k)|,X_{gl,v}\\)：球形邻域实际纳入的体素数及邻域体素 v 的原始强度。",
+      "\\(k\\in ROI\\)：候选中心 k 遍历 ROI 强度掩膜的全部体素，而非仅最大强度体素。"
+    ],
+    "chinese_name": "全局强度峰值",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#global-intensity-peak",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#global-intensity-peak",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#local-intensity-features"
+    ],
+    "description_zh": "计算以 ROI 中每个体素为中心、体积为1 cm³的球体内的平均强度，并保留最大值。"
+  },
+  "ibsi_Q4LE": {
+    "name": "Mean intensity",
+    "code": "Q4LE",
+    "description": "Computes the arithmetic mean of original ROI intensities.",
+    "formula": "\\(F_{\\mathrm{stat.mean}}=\\mu=\\frac{1}{N_v}\\sum_{k=1}^{N_v}X_{gl,k}\\)",
+    "family": "intensity_statistics",
+    "chinese": "计算 ROI 原始强度的算术平均值。",
+    "variables": [
+      "\\(\\mathbf X_{gl},X_{gl,k}\\)：ROI 强度掩膜的原始强度集合及第 k 个体素的值。",
+      "\\(N_v\\)：ROI 强度掩膜的体素数。",
+      "\\(\\mu\\)：ROI 原始强度均值。"
+    ],
+    "chinese_name": "平均强度",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#mean-intensity",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#mean-intensity",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#intensity-based-statistical-features"
+    ],
+    "description_zh": "计算 ROI 原始强度的算术平均值。"
+  },
+  "ibsi_ECT3": {
+    "name": "Intensity variance",
+    "code": "ECT3",
+    "description": "Measures the dispersion of original ROI intensities around their mean.",
+    "formula": "\\(F_{\\mathrm{stat.var}}=\\frac{1}{N_v}\\sum_{k=1}^{N_v}(X_{gl,k}-\\mu)^2\\)",
+    "family": "intensity_statistics",
+    "chinese": "衡量 ROI 原始强度围绕均值的离散程度。",
+    "variables": [
+      "\\(\\mathbf X_{gl},X_{gl,k}\\)：ROI 强度掩膜的原始强度集合及第 k 个体素的值。",
+      "\\(N_v\\)：ROI 强度掩膜的体素数。",
+      "\\(\\mu\\)：ROI 原始强度均值。"
+    ],
+    "chinese_name": "强度方差",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#intensity-variance",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#intensity-variance",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#intensity-based-statistical-features"
+    ],
+    "description_zh": "测量 ROI 原始强度围绕其均值的离散程度。"
+  },
+  "ibsi_KE2A": {
+    "name": "Intensity skewness",
+    "code": "KE2A",
+    "description": "Measures the asymmetry of the original-intensity distribution.",
+    "formula": "\\(F_{\\mathrm{stat.skew}}=\\frac{\\frac{1}{N_v}\\sum_k(X_{gl,k}-\\mu)^3}{\\left[\\frac{1}{N_v}\\sum_k(X_{gl,k}-\\mu)^2\\right]^{3/2}}\\)",
+    "family": "intensity_statistics",
+    "chinese": "描述原始强度分布相对于均值的不对称程度。",
+    "variables": [
+      "\\(\\mathbf X_{gl},X_{gl,k}\\)：ROI 强度掩膜的原始强度集合及第 k 个体素的值。",
+      "\\(N_v\\)：ROI 强度掩膜的体素数。",
+      "\\(\\mu\\)：ROI 原始强度均值。"
+    ],
+    "chinese_name": "强度偏度",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#intensity-skewness",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#intensity-skewness",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#intensity-based-statistical-features"
+    ],
+    "description_zh": "测量原始强度分布的不对称性。"
+  },
+  "ibsi_IPH6": {
+    "name": "(Excess) intensity kurtosis",
+    "code": "IPH6",
+    "description": "Measures distribution peakedness and tail weight using excess kurtosis.",
+    "formula": "\\(F_{\\mathrm{stat.kurt}}=\\frac{\\frac{1}{N_v}\\sum_k(X_{gl,k}-\\mu)^4}{\\left[\\frac{1}{N_v}\\sum_k(X_{gl,k}-\\mu)^2\\right]^2}-3\\)",
+    "family": "intensity_statistics",
+    "chinese": "描述原始强度分布的峰态和尾部厚度，采用超额峰度定义。",
+    "variables": [
+      "\\(\\mathbf X_{gl},X_{gl,k}\\)：ROI 强度掩膜的原始强度集合及第 k 个体素的值。",
+      "\\(N_v\\)：ROI 强度掩膜的体素数。",
+      "\\(\\mu\\)：ROI 原始强度均值。"
+    ],
+    "chinese_name": "强度超额峰度",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#excess-intensity-kurtosis",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#excess-intensity-kurtosis",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#intensity-based-statistical-features"
+    ],
+    "description_zh": "利用超额峰度测量分布的峰态和尾部权重。"
+  },
+  "ibsi_Y12H": {
+    "name": "Median intensity",
+    "code": "Y12H",
+    "description": "Computes the sample median of original ROI intensities.",
+    "formula": "\\(F_{\\mathrm{stat.median}}=\\operatorname{median}(\\mathbf X_{gl})\\)",
+    "family": "intensity_statistics",
+    "chinese": "计算 ROI 原始强度的样本中位数。",
+    "variables": [
+      "\\(\\mathbf X_{gl}\\)：ROI 强度掩膜的原始强度集合。"
+    ],
+    "chinese_name": "强度中位数",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#median-intensity",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#median-intensity",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#intensity-based-statistical-features"
+    ],
+    "description_zh": "计算 ROI 原始强度的样本中位数。"
+  },
+  "ibsi_1GSF": {
+    "name": "Minimum intensity",
+    "code": "1GSF",
+    "description": "Returns the minimum original intensity present in the ROI.",
+    "formula": "\\(F_{\\mathrm{stat.min}}=\\min(\\mathbf X_{gl})\\)",
+    "family": "intensity_statistics",
+    "chinese": "提取 ROI 中出现的最低原始强度。",
+    "variables": [
+      "\\(\\mathbf X_{gl}\\)：ROI 强度掩膜的原始强度集合。"
+    ],
+    "chinese_name": "最小强度",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#minimum-intensity",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#minimum-intensity",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#intensity-based-statistical-features"
+    ],
+    "description_zh": "返回 ROI 中出现的最小原始强度。"
+  },
+  "ibsi_QG58": {
+    "name": "10th intensity percentile",
+    "code": "QG58",
+    "description": "Returns the 10th percentile of original ROI intensities.",
+    "formula": "\\(F_{\\mathrm{stat.P10}}=P_{10}(\\mathbf X_{gl})\\)",
+    "family": "intensity_statistics",
+    "chinese": "提取 ROI 原始强度分布的第 10 百分位数。",
+    "variables": [
+      "\\(\\mathbf X_{gl}\\)：ROI 强度掩膜的原始强度集合。",
+      "\\(P_{10}\\)：ROI 原始强度分布的第 10 百分位数。"
+    ],
+    "chinese_name": "强度第10百分位数",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#th-intensity-percentile",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#th-intensity-percentile",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#intensity-based-statistical-features"
+    ],
+    "description_zh": "返回 ROI 原始强度的第10百分位数。"
+  },
+  "ibsi_8DWT": {
+    "name": "90th intensity percentile",
+    "code": "8DWT",
+    "description": "Returns the 90th percentile of original ROI intensities.",
+    "formula": "\\(F_{\\mathrm{stat.P90}}=P_{90}(\\mathbf X_{gl})\\)",
+    "family": "intensity_statistics",
+    "chinese": "提取 ROI 原始强度分布的第 90 百分位数。",
+    "variables": [
+      "\\(\\mathbf X_{gl}\\)：ROI 强度掩膜的原始强度集合。",
+      "\\(P_{90}\\)：ROI 原始强度分布的第 90 百分位数。"
+    ],
+    "chinese_name": "强度第90百分位数",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#feat-stat-p90",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#feat-stat-p90",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#intensity-based-statistical-features"
+    ],
+    "description_zh": "返回 ROI 原始强度的第90百分位数。"
+  },
+  "ibsi_84IY": {
+    "name": "Maximum intensity",
+    "code": "84IY",
+    "description": "Returns the maximum original intensity present in the ROI.",
+    "formula": "\\(F_{\\mathrm{stat.max}}=\\max(\\mathbf X_{gl})\\)",
+    "family": "intensity_statistics",
+    "chinese": "提取 ROI 中出现的最高原始强度。",
+    "variables": [
+      "\\(\\mathbf X_{gl}\\)：ROI 强度掩膜的原始强度集合。"
+    ],
+    "chinese_name": "最大强度",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#maximum-intensity",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#maximum-intensity",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#intensity-based-statistical-features"
+    ],
+    "description_zh": "返回 ROI 中出现的最大原始强度。"
+  },
+  "ibsi_SALO": {
+    "name": "Intensity interquartile range",
+    "code": "SALO",
+    "description": "Measures the spread of the central 50% of intensities.",
+    "formula": "\\(F_{\\mathrm{stat.iqr}}=P_{75}-P_{25}\\)",
+    "family": "intensity_statistics",
+    "chinese": "计算第 75 与第 25 百分位数之差，描述中间 50% 强度的跨度。",
+    "variables": [
+      "\\(P_{75},P_{25}\\)：ROI 原始强度分布的第 75、25 百分位数。"
+    ],
+    "chinese_name": "强度四分位距",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#intensity-interquartile-range",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#intensity-interquartile-range",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#intensity-based-statistical-features"
+    ],
+    "description_zh": "测量中间50%强度值的分布跨度。"
+  },
+  "ibsi_2OJQ": {
+    "name": "Intensity range",
+    "code": "2OJQ",
+    "description": "Measures the difference between maximum and minimum original intensity.",
+    "formula": "\\(F_{\\mathrm{stat.range}}=\\max(\\mathbf X_{gl})-\\min(\\mathbf X_{gl})\\)",
+    "family": "intensity_statistics",
+    "chinese": "计算 ROI 最大与最小原始强度之差。",
+    "variables": [
+      "\\(\\mathbf X_{gl}\\)：ROI 强度掩膜的原始强度集合。"
+    ],
+    "chinese_name": "强度极差",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#intensity-range",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#intensity-range",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#intensity-based-statistical-features"
+    ],
+    "description_zh": "测量最大与最小原始强度之间的差值。"
+  },
+  "ibsi_4FUA": {
+    "name": "Intensity-based mean absolute deviation",
+    "code": "4FUA",
+    "description": "Computes the mean absolute deviation from the mean intensity.",
+    "formula": "\\(F_{\\mathrm{stat.mad}}=\\frac{1}{N_v}\\sum_{k=1}^{N_v}|X_{gl,k}-\\mu|\\)",
+    "family": "intensity_statistics",
+    "chinese": "计算各体素强度与均值绝对偏差的平均值。",
+    "variables": [
+      "\\(\\mathbf X_{gl},X_{gl,k}\\)：ROI 强度掩膜的原始强度集合及第 k 个体素的值。",
+      "\\(N_v\\)：ROI 强度掩膜的体素数。",
+      "\\(\\mu\\)：ROI 原始强度均值。"
+    ],
+    "chinese_name": "强度平均绝对偏差",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#intensity-based-mean-absolute-deviation",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#intensity-based-mean-absolute-deviation",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#intensity-based-statistical-features"
+    ],
+    "description_zh": "计算相对于平均强度的平均绝对偏差。"
+  },
+  "ibsi_1128": {
+    "name": "Intensity-based robust mean absolute deviation",
+    "code": "1128",
+    "description": "Computes mean absolute deviation within the 10th–90th percentile range to reduce outlier influence.",
+    "formula": "\\(\\mathbf X_{gl,10-90}=\\{x\\in\\mathbf X_{gl}:P_{10}\\le x\\le P_{90}\\},\\quad F_{\\mathrm{stat.rmad}}=\\frac{1}{N_{v,10-90}}\\sum_k|X_{gl,10-90,k}-\\overline X_{gl,10-90}|\\)",
+    "family": "intensity_statistics",
+    "chinese": "仅在第 10 至第 90 百分位范围内计算平均绝对偏差，降低极端值影响。",
+    "variables": [
+      "\\(\\mathbf X_{gl,10-90}\\)：原始强度落在第10至第90百分位闭区间内的体素值集合。",
+      "\\(P_{10},P_{90}\\)：相应 ROI 分布的第10及第90百分位数。",
+      "\\(N_{v,10-90}\\)：截取集合的体素数；k 索引其中体素。",
+      "\\(\\overline X_{gl,10-90}\\)：截取集合的算术均值。"
+    ],
+    "chinese_name": "强度稳健平均绝对偏差",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#intensity-based-robust-mean-absolute-deviation",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#intensity-based-robust-mean-absolute-deviation",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#intensity-based-statistical-features"
+    ],
+    "description_zh": "在第10至第90百分位范围内计算平均绝对偏差，以减小离群值的影响。"
+  },
+  "ibsi_N72L": {
+    "name": "Intensity-based median absolute deviation",
+    "code": "N72L",
+    "description": "Computes the mean absolute distance of intensities from the sample median.",
+    "formula": "\\(F_{\\mathrm{stat.medad}}=\\frac{1}{N_v}\\sum_{k=1}^{N_v}|X_{gl,k}-M|\\)",
+    "family": "intensity_statistics",
+    "chinese": "计算各体素强度与中位数之差的绝对值的平均值。",
+    "variables": [
+      "\\(\\mathbf X_{gl},X_{gl,k}\\)：ROI 强度掩膜的原始强度集合及第 k 个体素的值。",
+      "\\(N_v\\)：ROI 强度掩膜的体素数。",
+      "\\(M\\)：ROI 原始强度中位数。"
+    ],
+    "chinese_name": "强度中位数绝对偏差",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#intensity-based-median-absolute-deviation",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#intensity-based-median-absolute-deviation",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#intensity-based-statistical-features"
+    ],
+    "description_zh": "计算强度值相对于样本中位数的平均绝对距离。"
+  },
+  "ibsi_7TET": {
+    "name": "Intensity-based coefficient of variation",
+    "code": "7TET",
+    "description": "Measures relative dispersion as standard deviation divided by mean.",
+    "formula": "\\(F_{\\mathrm{stat.cov}}=\\frac{\\sigma}{\\mu}\\)",
+    "family": "intensity_statistics",
+    "chinese": "计算标准差与均值之比，描述相对离散程度。",
+    "variables": [
+      "\\(\\mu\\)：ROI 原始强度均值。",
+      "\\(\\sigma\\)：ROI 原始强度标准差。"
+    ],
+    "chinese_name": "强度变异系数",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#intensity-based-coefficient-of-variation",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#intensity-based-coefficient-of-variation",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#intensity-based-statistical-features"
+    ],
+    "description_zh": "以标准差除以均值来测量相对离散程度。"
+  },
+  "ibsi_9S40": {
+    "name": "Intensity-based quartile coefficient of dispersion",
+    "code": "9S40",
+    "description": "Measures robust relative dispersion using the quartiles.",
+    "formula": "\\(F_{\\mathrm{stat.qcod}}=\\frac{P_{75}-P_{25}}{P_{75}+P_{25}}\\)",
+    "family": "intensity_statistics",
+    "chinese": "以四分位距除以两四分位数之和，衡量稳健的相对离散程度。",
+    "variables": [
+      "\\(P_{75},P_{25}\\)：ROI 原始强度分布的第 75、25 百分位数。"
+    ],
+    "chinese_name": "强度四分位离散系数",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#intensity-based-quartile-coefficient-of-dispersion",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#intensity-based-quartile-coefficient-of-dispersion",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#intensity-based-statistical-features"
+    ],
+    "description_zh": "利用四分位数测量稳健的相对离散程度。"
+  },
+  "ibsi_N8CA": {
+    "name": "Intensity-based energy",
+    "code": "N8CA",
+    "description": "Computes the sum of squared original intensities and depends on both intensity magnitude and voxel count.",
+    "formula": "\\(F_{\\mathrm{stat.energy}}=\\sum_{k=1}^{N_v}X_{gl,k}^2\\)",
+    "family": "intensity_statistics",
+    "chinese": "计算 ROI 原始强度平方和，反映强度幅值与 ROI 体素数的共同影响。",
+    "variables": [
+      "\\(\\mathbf X_{gl},X_{gl,k}\\)：ROI 强度掩膜的原始强度集合及第 k 个体素的值。",
+      "\\(N_v\\)：ROI 强度掩膜的体素数。"
+    ],
+    "chinese_name": "强度能量",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#intensity-based-energy",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#intensity-based-energy",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#intensity-based-statistical-features"
+    ],
+    "description_zh": "计算原始强度的平方和，其值同时受强度大小和体素数影响。"
+  },
+  "ibsi_5ZWQ": {
+    "name": "Root mean square intensity",
+    "code": "5ZWQ",
+    "description": "Computes the square root of the mean squared original intensity.",
+    "formula": "\\(F_{\\mathrm{stat.rms}}=\\sqrt{\\frac{1}{N_v}\\sum_{k=1}^{N_v}X_{gl,k}^2}\\)",
+    "family": "intensity_statistics",
+    "chinese": "计算原始强度平方均值的平方根。",
+    "variables": [
+      "\\(\\mathbf X_{gl},X_{gl,k}\\)：ROI 强度掩膜的原始强度集合及第 k 个体素的值。",
+      "\\(N_v\\)：ROI 强度掩膜的体素数。"
+    ],
+    "chinese_name": "强度均方根",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#root-mean-square-intensity",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#root-mean-square-intensity",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#intensity-based-statistical-features"
+    ],
+    "description_zh": "计算原始强度平方均值的平方根。"
+  },
+  "ibsi_X6K6": {
+    "name": "Mean discretised intensity",
+    "code": "X6K6",
+    "description": "Computes the mean discretised grey level.",
+    "formula": "\\(F_{\\mathrm{ih.mean}}=\\sum_{i=1}^{N_g}i\\,p_i\\)",
+    "family": "intensity_histogram",
+    "chinese": "计算离散化灰度级的平均值。",
+    "variables": [
+      "\\(i,p_i\\)：离散灰度档及其出现概率 pᵢ = nᵢ/Nᵥ，其中 nᵢ 为该档体素频数。",
+      "\\(N_g\\)：离散直方图灰度档数。"
+    ],
+    "chinese_name": "离散强度均值",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#mean-discretised-intensity",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#mean-discretised-intensity",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#intensity-histogram-features"
+    ],
+    "description_zh": "计算离散化灰度级的均值。"
+  },
+  "ibsi_CH89": {
+    "name": "Discretised intensity variance",
+    "code": "CH89",
+    "description": "Measures the variance of discretised grey levels.",
+    "formula": "\\(F_{\\mathrm{ih.var}}=\\sum_{i=1}^{N_g}(i-\\mu)^2p_i\\)",
+    "family": "intensity_histogram",
+    "chinese": "衡量离散化灰度级围绕其均值的离散程度。",
+    "variables": [
+      "\\(i,p_i\\)：离散灰度档及其出现概率 pᵢ = nᵢ/Nᵥ，其中 nᵢ 为该档体素频数。",
+      "\\(N_g\\)：离散直方图灰度档数。",
+      "\\(\\mu\\)：ROI 离散化灰度均值。"
+    ],
+    "chinese_name": "离散强度方差",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#discretised-intensity-variance",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#discretised-intensity-variance",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#intensity-histogram-features"
+    ],
+    "description_zh": "测量离散化灰度级的方差。"
+  },
+  "ibsi_88K1": {
+    "name": "Discretised intensity skewness",
+    "code": "88K1",
+    "description": "Measures the skewness of the discretised-intensity histogram.",
+    "formula": "\\(F_{\\mathrm{ih.skew}}=\\frac{\\sum_i(i-\\mu)^3p_i}{\\left[\\sum_i(i-\\mu)^2p_i\\right]^{3/2}}\\)",
+    "family": "intensity_histogram",
+    "chinese": "描述离散化灰度直方图分布的不对称程度。",
+    "variables": [
+      "\\(i,p_i\\)：离散灰度档及其出现概率 pᵢ = nᵢ/Nᵥ，其中 nᵢ 为该档体素频数。",
+      "\\(\\mu\\)：ROI 离散化灰度均值。"
+    ],
+    "chinese_name": "离散强度偏度",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#discretised-intensity-skewness",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#discretised-intensity-skewness",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#intensity-histogram-features"
+    ],
+    "description_zh": "测量离散化强度直方图的偏度。"
+  },
+  "ibsi_C3I7": {
+    "name": "(Excess) discretised intensity kurtosis",
+    "code": "C3I7",
+    "description": "Measures the excess kurtosis of the discretised-intensity histogram.",
+    "formula": "\\(F_{\\mathrm{ih.kurt}}=\\frac{\\sum_i(i-\\mu)^4p_i}{\\left[\\sum_i(i-\\mu)^2p_i\\right]^2}-3\\)",
+    "family": "intensity_histogram",
+    "chinese": "描述离散化灰度直方图的峰态和尾部厚度。",
+    "variables": [
+      "\\(i,p_i\\)：离散灰度档及其出现概率 pᵢ = nᵢ/Nᵥ，其中 nᵢ 为该档体素频数。",
+      "\\(\\mu\\)：ROI 离散化灰度均值。"
+    ],
+    "chinese_name": "离散强度超额峰度",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#excess-discretised-intensity-kurtosis",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#excess-discretised-intensity-kurtosis",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#intensity-histogram-features"
+    ],
+    "description_zh": "测量离散化强度直方图的超额峰度。"
+  },
+  "ibsi_WIFQ": {
+    "name": "Median discretised intensity",
+    "code": "WIFQ",
+    "description": "Computes the sample median of discretised grey levels.",
+    "formula": "\\(F_{\\mathrm{ih.median}}=\\operatorname{median}(\\mathbf X_d)\\)",
+    "family": "intensity_histogram",
+    "chinese": "计算离散化灰度级的样本中位数。",
+    "variables": [
+      "\\(\\mathbf X_{d}\\)：ROI 强度掩膜的离散化灰度集合。"
+    ],
+    "chinese_name": "离散强度中位数",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#median-discretised-intensity",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#median-discretised-intensity",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#intensity-histogram-features"
+    ],
+    "description_zh": "计算离散化灰度级的样本中位数。"
+  },
+  "ibsi_1PR8": {
+    "name": "Minimum discretised intensity",
+    "code": "1PR8",
+    "description": "Returns the minimum discretised grey level present in the ROI.",
+    "formula": "\\(F_{\\mathrm{ih.min}}=\\min(\\mathbf X_d)\\)",
+    "family": "intensity_histogram",
+    "chinese": "提取 ROI 中出现的最低离散化灰度级。",
+    "variables": [
+      "\\(\\mathbf X_{d}\\)：ROI 强度掩膜的离散化灰度集合。"
+    ],
+    "chinese_name": "最小离散强度",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#minimum-discretised-intensity",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#minimum-discretised-intensity",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#intensity-histogram-features"
+    ],
+    "description_zh": "返回 ROI 中出现的最小离散化灰度级。"
+  },
+  "ibsi_GPMT": {
+    "name": "10th discretised intensity percentile",
+    "code": "GPMT",
+    "description": "Returns the 10th percentile of discretised grey levels.",
+    "formula": "\\(F_{\\mathrm{ih.P10}}=P_{10}(\\mathbf X_d)\\)",
+    "family": "intensity_histogram",
+    "chinese": "提取离散化灰度分布的第 10 百分位数。",
+    "variables": [
+      "\\(\\mathbf X_{d}\\)：ROI 强度掩膜的离散化灰度集合。",
+      "\\(P_{10}\\)：ROI 离散化灰度分布的第 10 百分位数。"
+    ],
+    "chinese_name": "离散强度第10百分位数",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#th-discretised-intensity-percentile",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#th-discretised-intensity-percentile",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#intensity-histogram-features"
+    ],
+    "description_zh": "返回离散化灰度级的第10百分位数。"
+  },
+  "ibsi_OZ0C": {
+    "name": "90th discretised intensity percentile",
+    "code": "OZ0C",
+    "description": "Returns the 90th percentile of discretised grey levels.",
+    "formula": "\\(F_{\\mathrm{ih.P90}}=P_{90}(\\mathbf X_d)\\)",
+    "family": "intensity_histogram",
+    "chinese": "提取离散化灰度分布的第 90 百分位数。",
+    "variables": [
+      "\\(\\mathbf X_{d}\\)：ROI 强度掩膜的离散化灰度集合。",
+      "\\(P_{90}\\)：ROI 离散化灰度分布的第 90 百分位数。"
+    ],
+    "chinese_name": "离散强度第90百分位数",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#feat-int-hist-p90",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#feat-int-hist-p90",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#intensity-histogram-features"
+    ],
+    "description_zh": "返回离散化灰度级的第90百分位数。"
+  },
+  "ibsi_3NCY": {
+    "name": "Maximum discretised intensity",
+    "code": "3NCY",
+    "description": "Returns the maximum discretised grey level present in the ROI.",
+    "formula": "\\(F_{\\mathrm{ih.max}}=\\max(\\mathbf X_d)\\)",
+    "family": "intensity_histogram",
+    "chinese": "提取 ROI 中出现的最高离散化灰度级。",
+    "variables": [
+      "\\(\\mathbf X_{d}\\)：ROI 强度掩膜的离散化灰度集合。"
+    ],
+    "chinese_name": "最大离散强度",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#maximum-discretised-intensity",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#maximum-discretised-intensity",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#intensity-histogram-features"
+    ],
+    "description_zh": "返回 ROI 中出现的最大离散化灰度级。"
+  },
+  "ibsi_AMMC": {
+    "name": "Intensity histogram mode",
+    "code": "AMMC",
+    "description": "Returns the most frequent discretised grey level, with IBSI tie-breaking based on proximity to the mean.",
+    "formula": "\\(F_{\\mathrm{ih.mode}}=\\operatorname*{arg\\,max}_{i}n_i\\quad\\text{(tie: closest to }\\mu\\text{; then lower bin)}\\)",
+    "family": "intensity_histogram",
+    "chinese": "提取频数最高的离散化灰度级；并列时按 IBSI 规则选择最接近均值的灰度级。",
+    "variables": [
+      "\\(i,n_i\\)：灰度档及体素频数；并列最大频数时取最接近均值 μ 的档，仍并列则取较低档。",
+      "\\(\\mu\\)：ROI 离散化灰度均值。"
+    ],
+    "chinese_name": "强度直方图众数",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#intensity-histogram-mode",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#intensity-histogram-mode",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#intensity-histogram-features"
+    ],
+    "description_zh": "返回出现频率最高的离散化灰度级，并列时按照 IBSI 规则根据与均值的接近程度选择。"
+  },
+  "ibsi_WR0O": {
+    "name": "Discretised intensity interquartile range",
+    "code": "WR0O",
+    "description": "Measures the interquartile range of discretised grey levels.",
+    "formula": "\\(F_{\\mathrm{ih.iqr}}=P_{75}-P_{25}\\)",
+    "family": "intensity_histogram",
+    "chinese": "计算离散化灰度第 75 与第 25 百分位数之差。",
+    "variables": [
+      "\\(P_{75},P_{25}\\)：ROI 离散化灰度分布的第 75、25 百分位数。"
+    ],
+    "chinese_name": "离散强度四分位距",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#discretised-intensity-interquartile-range",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#discretised-intensity-interquartile-range",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#intensity-histogram-features"
+    ],
+    "description_zh": "测量离散化灰度级的四分位距。"
+  },
+  "ibsi_5Z3W": {
+    "name": "Discretised intensity range",
+    "code": "5Z3W",
+    "description": "Measures the range of discretised grey levels.",
+    "formula": "\\(F_{\\mathrm{ih.range}}=\\max(\\mathbf X_d)-\\min(\\mathbf X_d)\\)",
+    "family": "intensity_histogram",
+    "chinese": "计算离散化灰度最大值与最小值之差。",
+    "variables": [
+      "\\(\\mathbf X_{d}\\)：ROI 强度掩膜的离散化灰度集合。"
+    ],
+    "chinese_name": "离散强度极差",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#discretised-intensity-range",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#discretised-intensity-range",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#intensity-histogram-features"
+    ],
+    "description_zh": "测量离散化灰度级的极差。"
+  },
+  "ibsi_D2ZX": {
+    "name": "Intensity histogram mean absolute deviation",
+    "code": "D2ZX",
+    "description": "Computes mean absolute deviation from the mean discretised intensity.",
+    "formula": "\\(F_{\\mathrm{ih.mad}}=\\frac{1}{N_v}\\sum_{k=1}^{N_v}|X_{d,k}-\\mu|\\)",
+    "family": "intensity_histogram",
+    "chinese": "计算离散化灰度与其均值之间绝对偏差的平均值。",
+    "variables": [
+      "\\(\\mathbf X_{d},X_{d,k}\\)：ROI 强度掩膜的离散化灰度集合及第 k 个体素的值。",
+      "\\(N_v\\)：ROI 强度掩膜的体素数。",
+      "\\(\\mu\\)：ROI 离散化灰度均值。"
+    ],
+    "chinese_name": "强度直方图平均绝对偏差",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#intensity-histogram-mean-absolute-deviation",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#intensity-histogram-mean-absolute-deviation",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#intensity-histogram-features"
+    ],
+    "description_zh": "计算相对于平均离散化强度的平均绝对偏差。"
+  },
+  "ibsi_WRZB": {
+    "name": "Intensity histogram robust mean absolute deviation",
+    "code": "WRZB",
+    "description": "Computes mean absolute deviation within the 10th–90th percentile range.",
+    "formula": "\\(\\mathbf X_{d,10-90}=\\{x\\in\\mathbf X_d:P_{10}\\le x\\le P_{90}\\},\\quad F_{\\mathrm{ih.rmad}}=\\frac{1}{N_{v,10-90}}\\sum_k|X_{d,10-90,k}-\\overline X_{d,10-90}|\\)",
+    "family": "intensity_histogram",
+    "chinese": "在第 10 至第 90 百分位范围内计算平均绝对偏差。",
+    "variables": [
+      "\\(\\mathbf X_{d,10-90}\\)：离散化灰度落在第10至第90百分位闭区间内的体素值集合。",
+      "\\(P_{10},P_{90}\\)：相应 ROI 分布的第10及第90百分位数。",
+      "\\(N_{v,10-90}\\)：截取集合的体素数；k 索引其中体素。",
+      "\\(\\overline X_{d,10-90}\\)：截取集合的算术均值。"
+    ],
+    "chinese_name": "强度直方图稳健平均绝对偏差",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#intensity-histogram-robust-mean-absolute-deviation",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#intensity-histogram-robust-mean-absolute-deviation",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#intensity-histogram-features"
+    ],
+    "description_zh": "在第10至第90百分位范围内计算平均绝对偏差。"
+  },
+  "ibsi_4RNL": {
+    "name": "Intensity histogram median absolute deviation",
+    "code": "4RNL",
+    "description": "Computes the mean absolute distance from the median discretised intensity.",
+    "formula": "\\(F_{\\mathrm{ih.medad}}=\\frac{1}{N_v}\\sum_k|X_{d,k}-M|\\)",
+    "family": "intensity_histogram",
+    "chinese": "计算离散化灰度与中位数绝对偏差的平均值。",
+    "variables": [
+      "\\(\\mathbf X_{d},X_{d,k}\\)：ROI 强度掩膜的离散化灰度集合及第 k 个体素的值。",
+      "\\(N_v\\)：ROI 强度掩膜的体素数。",
+      "\\(M\\)：ROI 离散化灰度中位数。"
+    ],
+    "chinese_name": "强度直方图中位数绝对偏差",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#intensity-histogram-median-absolute-deviation",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#intensity-histogram-median-absolute-deviation",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#intensity-histogram-features"
+    ],
+    "description_zh": "计算相对于离散化强度中位数的平均绝对距离。"
+  },
+  "ibsi_CWYJ": {
+    "name": "Intensity histogram coefficient of variation",
+    "code": "CWYJ",
+    "description": "Measures the coefficient of variation of discretised grey levels.",
+    "formula": "\\(F_{\\mathrm{ih.cov}}=\\frac{\\sigma}{\\mu}\\)",
+    "family": "intensity_histogram",
+    "chinese": "计算离散化灰度标准差与均值之比。",
+    "variables": [
+      "\\(\\mu\\)：ROI 离散化灰度均值。",
+      "\\(\\sigma\\)：ROI 离散化灰度标准差。"
+    ],
+    "chinese_name": "强度直方图变异系数",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#intensity-histogram-coefficient-of-variation",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#intensity-histogram-coefficient-of-variation",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#intensity-histogram-features"
+    ],
+    "description_zh": "测量离散化灰度级的变异系数。"
+  },
+  "ibsi_SLWD": {
+    "name": "Intensity histogram quartile coefficient of dispersion",
+    "code": "SLWD",
+    "description": "Measures robust relative dispersion using the interquartile range and quartiles.",
+    "formula": "\\(F_{\\mathrm{ih.qcod}}=\\frac{P_{75}-P_{25}}{P_{75}+P_{25}}\\)",
+    "family": "intensity_histogram",
+    "chinese": "通过四分位距与四分位数之和的比值衡量稳健相对离散程度。",
+    "variables": [
+      "\\(P_{75},P_{25}\\)：ROI 离散化灰度分布的第 75、25 百分位数。"
+    ],
+    "chinese_name": "强度直方图四分位离散系数",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#intensity-histogram-quartile-coefficient-of-dispersion",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#intensity-histogram-quartile-coefficient-of-dispersion",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#intensity-histogram-features"
+    ],
+    "description_zh": "利用四分位距和四分位数测量稳健的相对离散程度。"
+  },
+  "ibsi_TLU2": {
+    "name": "Discretised intensity entropy",
+    "code": "TLU2",
+    "description": "Measures uncertainty or heterogeneity in the discretised-intensity distribution.",
+    "formula": "\\(F_{\\mathrm{ih.entropy}}=-\\sum_{i=1}^{N_g}p_i\\log_2p_i\\)",
+    "family": "intensity_histogram",
+    "chinese": "衡量离散化灰度分布的不确定性或复杂程度。",
+    "variables": [
+      "\\(i,p_i\\)：离散灰度档及其出现概率 pᵢ = nᵢ/Nᵥ，其中 nᵢ 为该档体素频数。",
+      "\\(N_g\\)：离散直方图灰度档数。"
+    ],
+    "chinese_name": "离散强度熵",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#discretised-intensity-entropy",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#discretised-intensity-entropy",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#intensity-histogram-features"
+    ],
+    "description_zh": "测量离散化强度分布的不确定性或异质性。"
+  },
+  "ibsi_BJ5W": {
+    "name": "Discretised intensity uniformity",
+    "code": "BJ5W",
+    "description": "Measures concentration of the discretised-intensity histogram through squared probabilities.",
+    "formula": "\\(F_{\\mathrm{ih.uniformity}}=\\sum_{i=1}^{N_g}p_i^2\\)",
+    "family": "intensity_histogram",
+    "chinese": "计算各灰度级概率平方和，分布越集中通常取值越高。",
+    "variables": [
+      "\\(i,p_i\\)：离散灰度档及其出现概率 pᵢ = nᵢ/Nᵥ，其中 nᵢ 为该档体素频数。",
+      "\\(N_g\\)：离散直方图灰度档数。"
+    ],
+    "chinese_name": "离散强度均匀性",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#discretised-intensity-uniformity",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#discretised-intensity-uniformity",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#intensity-histogram-features"
+    ],
+    "description_zh": "通过概率平方测量离散化强度直方图的集中程度。"
+  },
+  "ibsi_12CE": {
+    "name": "Maximum histogram gradient",
+    "code": "12CE",
+    "description": "Returns the maximum first-order discrete gradient of the intensity histogram.",
+    "formula": "\\(F_{\\mathrm{ih.max.grad}}=\\max_i H'_i\\)",
+    "family": "intensity_histogram",
+    "chinese": "提取直方图一阶离散梯度的最大值，反映直方图上升最快的幅度。",
+    "variables": [
+      "\\(H'_i\\)：第 i 档直方图梯度：内部档取相邻频数中心差分的一半，首末档取单边差分；零频档不省略。",
+      "\\(i,n_i,N_g\\)：离散灰度档索引、该档体素频数及直方图灰度档数。"
+    ],
+    "chinese_name": "最大直方图梯度",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#maximum-histogram-gradient",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#maximum-histogram-gradient",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#intensity-histogram-features"
+    ],
+    "description_zh": "返回强度直方图一阶离散梯度的最大值。"
+  },
+  "ibsi_8E6O": {
+    "name": "Maximum histogram gradient intensity",
+    "code": "8E6O",
+    "description": "Returns the discretised grey level at which the histogram gradient is maximal.",
+    "formula": "\\(F_{\\mathrm{ih.max.grad.gl}}=i_{\\max},\\quad i_{\\max}\\in\\operatorname*{arg\\,max}_i H'_i\\)",
+    "family": "intensity_histogram",
+    "chinese": "提取直方图梯度达到最大值时对应的离散化灰度级。",
+    "variables": [
+      "\\(H'_i\\)：第 i 档直方图梯度：内部档取相邻频数中心差分的一半，首末档取单边差分；零频档不省略。",
+      "\\(i,n_i,N_g\\)：离散灰度档索引、该档体素频数及直方图灰度档数。",
+      "\\(i_{\\max}\\)：使直方图梯度达到最大值的离散灰度档。"
+    ],
+    "chinese_name": "最大直方图梯度对应强度",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#maximum-histogram-gradient-intensity",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#maximum-histogram-gradient-intensity",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#intensity-histogram-features"
+    ],
+    "description_zh": "返回直方图梯度达到最大值时对应的离散化灰度级。"
+  },
+  "ibsi_VQB3": {
+    "name": "Minimum histogram gradient",
+    "code": "VQB3",
+    "description": "Returns the minimum first-order discrete gradient of the intensity histogram.",
+    "formula": "\\(F_{\\mathrm{ih.min.grad}}=\\min_i H'_i\\)",
+    "family": "intensity_histogram",
+    "chinese": "提取直方图一阶离散梯度的最小值，反映直方图下降最快的幅度。",
+    "variables": [
+      "\\(H'_i\\)：第 i 档直方图梯度：内部档取相邻频数中心差分的一半，首末档取单边差分；零频档不省略。",
+      "\\(i,n_i,N_g\\)：离散灰度档索引、该档体素频数及直方图灰度档数。"
+    ],
+    "chinese_name": "最小直方图梯度",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#minimum-histogram-gradient",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#minimum-histogram-gradient",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#intensity-histogram-features"
+    ],
+    "description_zh": "返回强度直方图一阶离散梯度的最小值。"
+  },
+  "ibsi_RHQZ": {
+    "name": "Minimum histogram gradient intensity",
+    "code": "RHQZ",
+    "description": "Returns the discretised grey level at which the histogram gradient is minimal.",
+    "formula": "\\(F_{\\mathrm{ih.min.grad.gl}}=i_{\\min},\\quad i_{\\min}\\in\\operatorname*{arg\\,min}_i H'_i\\)",
+    "family": "intensity_histogram",
+    "chinese": "提取直方图梯度达到最小值时对应的离散化灰度级。",
+    "variables": [
+      "\\(H'_i\\)：第 i 档直方图梯度：内部档取相邻频数中心差分的一半，首末档取单边差分；零频档不省略。",
+      "\\(i,n_i,N_g\\)：离散灰度档索引、该档体素频数及直方图灰度档数。",
+      "\\(i_{\\min}\\)：使直方图梯度达到最小值的离散灰度档。"
+    ],
+    "chinese_name": "最小直方图梯度对应强度",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#minimum-histogram-gradient-intensity",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#minimum-histogram-gradient-intensity",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#intensity-histogram-features"
+    ],
+    "description_zh": "返回直方图梯度达到最小值时对应的离散化灰度级。"
+  },
+  "ibsi_BC2M": {
+    "name": "Volume at intensity fraction",
+    "code": "BC2M",
+    "description": "Returns the largest volume fraction whose intensity fraction is at least the specified threshold; IBSI defines V10 and V90.",
+    "formula": "\\(\\nu_i=1-\\frac{1}{N_v}\\sum_{k=1}^{N_v}[X_{d,gl,k}<i],\\quad \\gamma_i=\\frac{i-\\min(\\mathbf G)}{\\max(\\mathbf G)-\\min(\\mathbf G)},\\quad V_x=\\max_{\\gamma_i\\ge x/100}\\nu_i,\\quad x\\in\\{10,90\\}\\)",
+    "family": "intensity_volume_histogram",
+    "chinese": "计算强度达到指定比例阈值时，仍达到该阈值的最大体积分数；IBSI 定义 V10 和 V90 两个值。",
+    "variables": [
+      "\\(\\nu_i\\)：强度不低于离散强度 i 的体积分数。",
+      "\\(\\gamma_i\\)：按离散强度范围最小、最大值归一化后的强度分数。",
+      "\\(\\mathbf G,X_{d,gl,k},N_v\\)：IVH 离散强度范围、第 k 个体素的 IVH 离散强度及强度掩膜体素数；方括号为条件成立取1、否则取0的 Iverson 括号。",
+      "\\(V_x,x\\)：归一化强度分数阈值 x% 下的体积分数；x 取10或90。"
+    ],
+    "chinese_name": "指定强度分数下的体积分数",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#volume-at-intensity-fraction",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#volume-at-intensity-fraction",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#intensity-volume-histogram-features"
+    ],
+    "description_zh": "返回强度分数不低于指定阈值时的最大体积分数；IBSI 定义了 V10 和 V90。"
+  },
+  "ibsi_GBPN": {
+    "name": "Intensity at volume fraction",
+    "code": "GBPN",
+    "description": "Returns the minimum discretised intensity present in at most the specified volume fraction; IBSI defines I10 and I90.",
+    "formula": "\\(I_x=\\min\\{i:\\nu_i\\le x/100\\},\\quad x\\in\\{10,90\\}\\)",
+    "family": "intensity_volume_histogram",
+    "chinese": "计算指定体积分数阈值下的最低离散化强度；IBSI 定义 I10 和 I90 两个值。",
+    "variables": [
+      "\\(I_x\\)：体积分数至多为 x% 时满足条件的最小离散强度。",
+      "\\(i,\\nu_i,x\\)：IVH 离散强度、不低于 i 的体积分数及百分比参数 x（10或90）。"
+    ],
+    "chinese_name": "指定体积分数下的强度",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#intensity-at-volume-fraction",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#intensity-at-volume-fraction",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#intensity-volume-histogram-features"
+    ],
+    "description_zh": "返回在至多指定体积分数中出现的最小离散化强度；IBSI 定义了 I10 和 I90。"
+  },
+  "ibsi_DDTU": {
+    "name": "Volume fraction difference between intensity fractions",
+    "code": "DDTU",
+    "description": "Measures the difference between volume fractions at 10% and 90% intensity fractions.",
+    "formula": "\\(F_{\\mathrm{ivh.V10-V90}}=V_{10}-V_{90}\\)",
+    "family": "intensity_volume_histogram",
+    "chinese": "计算 10% 与 90% 强度分位对应的体积分数差异，反映 IVH 曲线在强度轴上的体积变化。",
+    "variables": [
+      "\\(V_{10},V_{90}\\)：分别为归一化强度分数10%和90%对应的体积分数。"
+    ],
+    "chinese_name": "强度分数间的体积分数差",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#volume-fraction-difference-between-intensity-fractions",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#volume-fraction-difference-between-intensity-fractions",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#intensity-volume-histogram-features"
+    ],
+    "description_zh": "测量10%与90%强度分数所对应的体积分数之差。"
+  },
+  "ibsi_CNV2": {
+    "name": "Intensity fraction difference between volume fractions",
+    "code": "CNV2",
+    "description": "Measures the intensity difference between the 10% and 90% volume fractions.",
+    "formula": "\\(F_{\\mathrm{ivh.I10-I90}}=I_{10}-I_{90}\\)",
+    "family": "intensity_volume_histogram",
+    "chinese": "计算 10% 与 90% 体积分数对应的强度差异，反映 IVH 曲线在体积轴上的强度变化。",
+    "variables": [
+      "\\(I_{10},I_{90}\\)：分别为体积分数至多10%和90%所对应的最小离散强度。"
+    ],
+    "chinese_name": "体积分数间的强度差",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#intensity-fraction-difference-between-volume-fractions",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#intensity-fraction-difference-between-volume-fractions",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#intensity-volume-histogram-features"
+    ],
+    "description_zh": "测量10%与90%体积分数所对应的强度之差。"
+  },
+  "ibsi_9CMM": {
+    "name": "Area under the IVH curve",
+    "code": "9CMM",
+    "description": "Approximates the area under the cumulative intensity-volume histogram; IBSI provides no reference value.",
+    "formula": "\\(F_{\\mathrm{ivh.auc}}\\approx\\sum_{i=1}^{N_G-1}\\frac{\\nu_i+\\nu_{i+1}}{2}(\\gamma_{i+1}-\\gamma_i)\\)",
+    "family": "intensity_volume_histogram",
+    "chinese": "计算累积强度-体积直方图曲线下面积；IBSI 手册指出该特征没有参考值。",
+    "variables": [
+      "\\(\\nu_i,\\nu_{i+1}\\)：相邻离散强度点的不低于该强度的体积分数。",
+      "\\(\\gamma_i,\\gamma_{i+1}\\)：相应强度点的归一化强度分数。",
+      "\\(N_G\\)：IVH 离散强度范围中的采样点数；i 索引梯形积分区间。"
+    ],
+    "chinese_name": "强度体积直方图曲线下面积",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#area-under-the-ivh-curve",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#area-under-the-ivh-curve",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#intensity-volume-histogram-features"
+    ],
+    "description_zh": "近似计算累积强度体积直方图的曲线下面积；IBSI 未提供参考值。"
+  },
+  "ibsi_GYBY": {
+    "name": "Joint maximum",
+    "code": "GYBY",
+    "description": "Returns the largest joint probability in the GLCM.",
+    "formula": "\\(F_{\\mathrm{cm.joint.max}}=\\max_{i,j}p_{ij}\\)",
+    "family": "glcm",
+    "chinese": "提取共生概率矩阵中的最大元素，反映最常见灰度共现组合的概率。",
+    "variables": [
+      "\\(i,j,p_{ij}\\)：相邻体素的离散灰度及归一化 GLCM 中该灰度对的联合概率。"
+    ],
+    "chinese_name": "联合最大值",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#joint-maximum",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#joint-maximum",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#grey-level-co-occurrence-based-features"
+    ],
+    "description_zh": "返回 GLCM 中最大的联合概率。"
+  },
+  "ibsi_60VM": {
+    "name": "Joint average",
+    "code": "60VM",
+    "description": "Computes the probability-weighted mean of the first grey-level index.",
+    "formula": "\\(F_{\\mathrm{cm.joint.avg}}=\\sum_{i=1}^{N_g}\\sum_{j=1}^{N_g}i\\,p_{ij}\\)",
+    "family": "glcm",
+    "chinese": "计算共生矩阵第一灰度维度的概率加权平均值。",
+    "variables": [
+      "\\(i,j,p_{ij}\\)：相邻体素的离散灰度及归一化 GLCM 中该灰度对的联合概率。",
+      "\\(N_g\\)：GLCM 灰度级轴的范围大小。"
+    ],
+    "chinese_name": "联合均值",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#joint-average",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#joint-average",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#grey-level-co-occurrence-based-features"
+    ],
+    "description_zh": "计算第一个灰度级索引的概率加权均值。"
+  },
+  "ibsi_UR99": {
+    "name": "Joint variance",
+    "code": "UR99",
+    "description": "Measures dispersion of the first grey-level index around its joint mean.",
+    "formula": "\\(F_{\\mathrm{cm.joint.var}}=\\sum_{i=1}^{N_g}\\sum_{j=1}^{N_g}(i-\\mu)^2p_{ij}\\)",
+    "family": "glcm",
+    "chinese": "衡量共生矩阵第一灰度维度围绕联合均值的离散程度。",
+    "variables": [
+      "\\(i,j,p_{ij}\\)：相邻体素的离散灰度及归一化 GLCM 中该灰度对的联合概率。",
+      "\\(N_g\\)：GLCM 灰度级轴的范围大小。",
+      "\\(\\mu\\)：联合均值，即 Σᵢⱼ i·pᵢⱼ。"
+    ],
+    "chinese_name": "联合方差",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#joint-variance",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#joint-variance",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#grey-level-co-occurrence-based-features"
+    ],
+    "description_zh": "测量第一个灰度级索引围绕其联合均值的离散程度。"
+  },
+  "ibsi_TU9B": {
+    "name": "Joint entropy",
+    "code": "TU9B",
+    "description": "Measures uncertainty in the joint grey-level co-occurrence distribution.",
+    "formula": "\\(F_{\\mathrm{cm.joint.entr}}=-\\sum_{i=1}^{N_g}\\sum_{j=1}^{N_g}p_{ij}\\log_2p_{ij}\\)",
+    "family": "glcm",
+    "chinese": "衡量灰度对共现概率分布的不确定性。",
+    "variables": [
+      "\\(i,j,p_{ij}\\)：相邻体素的离散灰度及归一化 GLCM 中该灰度对的联合概率。",
+      "\\(N_g\\)：GLCM 灰度级轴的范围大小。"
+    ],
+    "chinese_name": "联合熵",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#joint-entropy",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#joint-entropy",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#grey-level-co-occurrence-based-features"
+    ],
+    "description_zh": "测量灰度共现联合分布的不确定性。"
+  },
+  "ibsi_TF7R": {
+    "name": "Difference average",
+    "code": "TF7R",
+    "description": "Computes the expected absolute grey-level difference between neighbouring voxels.",
+    "formula": "\\(F_{\\mathrm{cm.diff.avg}}=\\sum_{k=0}^{N_g-1}k\\,p_{i-j,k}\\)",
+    "family": "glcm",
+    "chinese": "计算两个相邻体素灰度级绝对差的期望值。",
+    "variables": [
+      "\\(k,p_{i-j,k}\\)：灰度绝对差及其概率：对所有 |i−j| = k 的共现联合概率求和。",
+      "\\(N_g\\)：GLCM 灰度级轴的范围大小。"
+    ],
+    "chinese_name": "差值均值",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#difference-average",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#difference-average",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#grey-level-co-occurrence-based-features"
+    ],
+    "description_zh": "计算相邻体素间灰度级绝对差的期望值。"
+  },
+  "ibsi_D3YU": {
+    "name": "Difference variance",
+    "code": "D3YU",
+    "description": "Measures the variance of the absolute grey-level difference distribution.",
+    "formula": "\\(F_{\\mathrm{cm.diff.var}}=\\sum_{k=0}^{N_g-1}(k-\\mu)^2p_{i-j,k}\\)",
+    "family": "glcm",
+    "chinese": "衡量灰度级绝对差分布的离散程度。",
+    "variables": [
+      "\\(k,p_{i-j,k}\\)：灰度绝对差及其概率：对所有 |i−j| = k 的共现联合概率求和。",
+      "\\(N_g\\)：GLCM 灰度级轴的范围大小。",
+      "\\(\\mu\\)：差值概率分布的均值，即差值均值特征。"
+    ],
+    "chinese_name": "差值方差",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#difference-variance",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#difference-variance",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#grey-level-co-occurrence-based-features"
+    ],
+    "description_zh": "测量灰度级绝对差分布的方差。"
+  },
+  "ibsi_NTRS": {
+    "name": "Difference entropy",
+    "code": "NTRS",
+    "description": "Measures entropy of the absolute grey-level difference distribution.",
+    "formula": "\\(F_{\\mathrm{cm.diff.entr}}=-\\sum_{k=0}^{N_g-1}p_{i-j,k}\\log_2p_{i-j,k}\\)",
+    "family": "glcm",
+    "chinese": "衡量灰度级绝对差分布的不确定性。",
+    "variables": [
+      "\\(k,p_{i-j,k}\\)：灰度绝对差及其概率：对所有 |i−j| = k 的共现联合概率求和。",
+      "\\(N_g\\)：GLCM 灰度级轴的范围大小。"
+    ],
+    "chinese_name": "差值熵",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#difference-entropy",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#difference-entropy",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#grey-level-co-occurrence-based-features"
+    ],
+    "description_zh": "测量灰度级绝对差分布的熵。"
+  },
+  "ibsi_ZGXS": {
+    "name": "Sum average",
+    "code": "ZGXS",
+    "description": "Computes the expected sum of neighbouring grey-level indices.",
+    "formula": "\\(F_{\\mathrm{cm.sum.avg}}=\\sum_{k=2}^{2N_g}k\\,p_{i+j,k}\\)",
+    "family": "glcm",
+    "chinese": "计算相邻体素灰度级之和的期望值。",
+    "variables": [
+      "\\(k,p_{i+j,k}\\)：灰度和值及其概率：对所有 i+j = k 的共现联合概率求和。",
+      "\\(N_g\\)：GLCM 灰度级轴的范围大小。"
+    ],
+    "chinese_name": "和值均值",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#sum-average",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#sum-average",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#grey-level-co-occurrence-based-features"
+    ],
+    "description_zh": "计算相邻灰度级索引之和的期望值。"
+  },
+  "ibsi_OEEB": {
+    "name": "Sum variance",
+    "code": "OEEB",
+    "description": "Measures the variance of the grey-level sum distribution.",
+    "formula": "\\(F_{\\mathrm{cm.sum.var}}=\\sum_{k=2}^{2N_g}(k-\\mu)^2p_{i+j,k}\\)",
+    "family": "glcm",
+    "chinese": "衡量相邻体素灰度级之和分布的离散程度。",
+    "variables": [
+      "\\(k,p_{i+j,k}\\)：灰度和值及其概率：对所有 i+j = k 的共现联合概率求和。",
+      "\\(N_g\\)：GLCM 灰度级轴的范围大小。",
+      "\\(\\mu\\)：和值概率分布的均值，即和值均值特征。"
+    ],
+    "chinese_name": "和值方差",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#sum-variance",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#sum-variance",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#grey-level-co-occurrence-based-features"
+    ],
+    "description_zh": "测量灰度级和值分布的方差。"
+  },
+  "ibsi_P6QZ": {
+    "name": "Sum entropy",
+    "code": "P6QZ",
+    "description": "Measures entropy of the grey-level sum distribution.",
+    "formula": "\\(F_{\\mathrm{cm.sum.entr}}=-\\sum_{k=2}^{2N_g}p_{i+j,k}\\log_2p_{i+j,k}\\)",
+    "family": "glcm",
+    "chinese": "衡量相邻体素灰度级之和分布的不确定性。",
+    "variables": [
+      "\\(k,p_{i+j,k}\\)：灰度和值及其概率：对所有 i+j = k 的共现联合概率求和。",
+      "\\(N_g\\)：GLCM 灰度级轴的范围大小。"
+    ],
+    "chinese_name": "和值熵",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#sum-entropy",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#sum-entropy",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#grey-level-co-occurrence-based-features"
+    ],
+    "description_zh": "测量灰度级和值分布的熵。"
+  },
+  "ibsi_8ZQL": {
+    "name": "Angular second moment",
+    "code": "8ZQL",
+    "description": "Measures concentration of the co-occurrence distribution through its angular second moment.",
+    "formula": "\\(F_{\\mathrm{cm.energy}}=\\sum_{i=1}^{N_g}\\sum_{j=1}^{N_g}p_{ij}^2\\)",
+    "family": "glcm",
+    "chinese": "计算共生概率平方和，反映共现分布的集中程度。",
+    "variables": [
+      "\\(i,j,p_{ij}\\)：相邻体素的离散灰度及归一化 GLCM 中该灰度对的联合概率。",
+      "\\(N_g\\)：GLCM 灰度级轴的范围大小。"
+    ],
+    "chinese_name": "角二阶矩",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#angular-second-moment",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#angular-second-moment",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#grey-level-co-occurrence-based-features"
+    ],
+    "description_zh": "通过角二阶矩测量共现分布的集中程度。"
+  },
+  "ibsi_ACUI": {
+    "name": "Contrast",
+    "code": "ACUI",
+    "description": "Emphasises neighbouring pairs with large grey-level differences.",
+    "formula": "\\(F_{\\mathrm{cm.contrast}}=\\sum_{i=1}^{N_g}\\sum_{j=1}^{N_g}(i-j)^2p_{ij}\\)",
+    "family": "glcm",
+    "chinese": "强调灰度差较大的邻接对，衡量局部灰度对比。",
+    "variables": [
+      "\\(i,j,p_{ij}\\)：相邻体素的离散灰度及归一化 GLCM 中该灰度对的联合概率。",
+      "\\(N_g\\)：GLCM 灰度级轴的范围大小。"
+    ],
+    "chinese_name": "对比度",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#contrast",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#contrast",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#grey-level-co-occurrence-based-features"
+    ],
+    "description_zh": "强调灰度级差异较大的相邻体素对。"
+  },
+  "ibsi_8S9J": {
+    "name": "Dissimilarity",
+    "code": "8S9J",
+    "description": "Measures neighbouring grey-level dissimilarity using absolute differences.",
+    "formula": "\\(F_{\\mathrm{cm.dissimilarity}}=\\sum_{i=1}^{N_g}\\sum_{j=1}^{N_g}|i-j|p_{ij}\\)",
+    "family": "glcm",
+    "chinese": "以灰度差绝对值加权，衡量相邻灰度的不相似程度。",
+    "variables": [
+      "\\(i,j,p_{ij}\\)：相邻体素的离散灰度及归一化 GLCM 中该灰度对的联合概率。",
+      "\\(N_g\\)：GLCM 灰度级轴的范围大小。"
+    ],
+    "chinese_name": "相异度",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#dissimilarity",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#dissimilarity",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#grey-level-co-occurrence-based-features"
+    ],
+    "description_zh": "利用绝对差测量相邻灰度级的不相似性。"
+  },
+  "ibsi_IB1Z": {
+    "name": "Inverse difference",
+    "code": "IB1Z",
+    "description": "Weights similar neighbouring grey levels more strongly and measures local homogeneity.",
+    "formula": "\\(F_{\\mathrm{cm.inv.diff}}=\\sum_{i=1}^{N_g}\\sum_{j=1}^{N_g}\\frac{p_{ij}}{1+|i-j|}\\)",
+    "family": "glcm",
+    "chinese": "对灰度差较小的共现对赋予较高权重，反映局部同质性。",
+    "variables": [
+      "\\(i,j,p_{ij}\\)：相邻体素的离散灰度及归一化 GLCM 中该灰度对的联合概率。",
+      "\\(N_g\\)：GLCM 灰度级轴的范围大小。"
+    ],
+    "chinese_name": "逆差",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#inverse-difference",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#inverse-difference",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#grey-level-co-occurrence-based-features"
+    ],
+    "description_zh": "为相似的相邻灰度级赋予更高权重，并测量局部同质性。"
+  },
+  "ibsi_NDRX": {
+    "name": "Normalised inverse difference",
+    "code": "NDRX",
+    "description": "Normalises the grey-level difference in the inverse-difference measure by the number of grey levels.",
+    "formula": "\\(F_{\\mathrm{cm.inv.diff.norm}}=\\sum_{i=1}^{N_g}\\sum_{j=1}^{N_g}\\frac{p_{ij}}{1+|i-j|/N_g}\\)",
+    "family": "glcm",
+    "chinese": "对逆差分特征中的灰度差按灰度级数归一化。",
+    "variables": [
+      "\\(i,j,p_{ij}\\)：相邻体素的离散灰度及归一化 GLCM 中该灰度对的联合概率。",
+      "\\(N_g\\)：GLCM 灰度级轴的范围大小。"
+    ],
+    "chinese_name": "归一化逆差",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#normalised-inverse-difference",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#normalised-inverse-difference",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#grey-level-co-occurrence-based-features"
+    ],
+    "description_zh": "利用灰度级数量对逆差指标中的灰度级差进行归一化。"
+  },
+  "ibsi_WF0Z": {
+    "name": "Inverse difference moment",
+    "code": "WF0Z",
+    "description": "Uses squared grey-level differences to emphasise local similarity.",
+    "formula": "\\(F_{\\mathrm{cm.inv.diff.mom}}=\\sum_{i=1}^{N_g}\\sum_{j=1}^{N_g}\\frac{p_{ij}}{1+(i-j)^2}\\)",
+    "family": "glcm",
+    "chinese": "以灰度差平方惩罚较大的灰度差，强调局部相似性。",
+    "variables": [
+      "\\(i,j,p_{ij}\\)：相邻体素的离散灰度及归一化 GLCM 中该灰度对的联合概率。",
+      "\\(N_g\\)：GLCM 灰度级轴的范围大小。"
+    ],
+    "chinese_name": "逆差矩",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#inverse-difference-moment",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#inverse-difference-moment",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#grey-level-co-occurrence-based-features"
+    ],
+    "description_zh": "利用灰度级差的平方强调局部相似性。"
+  },
+  "ibsi_1QCO": {
+    "name": "Normalised inverse difference moment",
+    "code": "1QCO",
+    "description": "Normalises the squared grey-level difference in inverse-difference moment.",
+    "formula": "\\(F_{\\mathrm{cm.inv.diff.mom.norm}}=\\sum_{i=1}^{N_g}\\sum_{j=1}^{N_g}\\frac{p_{ij}}{1+(i-j)^2/N_g^2}\\)",
+    "family": "glcm",
+    "chinese": "对逆差分矩特征中的灰度差平方按灰度级数归一化。",
+    "variables": [
+      "\\(i,j,p_{ij}\\)：相邻体素的离散灰度及归一化 GLCM 中该灰度对的联合概率。",
+      "\\(N_g\\)：GLCM 灰度级轴的范围大小。"
+    ],
+    "chinese_name": "归一化逆差矩",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#normalised-inverse-difference-moment",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#normalised-inverse-difference-moment",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#grey-level-co-occurrence-based-features"
+    ],
+    "description_zh": "对逆差矩中的灰度级差平方进行归一化。"
+  },
+  "ibsi_E8JP": {
+    "name": "Inverse variance",
+    "code": "E8JP",
+    "description": "Emphasises co-occurrences with small non-zero grey-level differences.",
+    "formula": "\\(F_{\\mathrm{cm.inv.var}}=\\sum_{\\substack{i,j=1\\\\i\\ne j}}^{N_g}\\frac{p_{ij}}{(i-j)^2}\\)",
+    "family": "glcm",
+    "chinese": "主要强调灰度级相近但不相同的共现对。",
+    "variables": [
+      "\\(i,j,p_{ij}\\)：相邻体素的离散灰度及归一化 GLCM 中该灰度对的联合概率。",
+      "\\(N_g\\)：GLCM 灰度级轴的范围大小。"
+    ],
+    "chinese_name": "逆方差",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#inverse-variance",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#inverse-variance",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#grey-level-co-occurrence-based-features"
+    ],
+    "description_zh": "强调灰度级差较小但不为零的共现组合。"
+  },
+  "ibsi_NI2N": {
+    "name": "Correlation",
+    "code": "NI2N",
+    "description": "Measures linear correlation between the two grey-level dimensions of the GLCM.",
+    "formula": "\\(F_{\\mathrm{cm.corr}}=\\frac{\\sum_{i,j}(i-\\mu_{i.})(j-\\mu_{.j})p_{ij}}{\\sigma_{i.}\\sigma_{.j}}\\)",
+    "family": "glcm",
+    "chinese": "衡量共生矩阵两个灰度维度之间的线性相关性。",
+    "variables": [
+      "\\(i,j,p_{ij}\\)：相邻体素的离散灰度及归一化 GLCM 中该灰度对的联合概率。",
+      "\\(\\mu_{i.},\\mu_{.j}\\)：GLCM 行、列边缘灰度分布的均值。",
+      "\\(\\sigma_{i.},\\sigma_{.j}\\)：行、列边缘灰度分布的标准差。"
+    ],
+    "chinese_name": "相关性",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#correlation",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#correlation",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#grey-level-co-occurrence-based-features"
+    ],
+    "description_zh": "测量 GLCM 两个灰度级维度之间的线性相关性。"
+  },
+  "ibsi_QWB0": {
+    "name": "Autocorrelation",
+    "code": "QWB0",
+    "description": "Computes the expected product of neighbouring grey-level indices.",
+    "formula": "\\(F_{\\mathrm{cm.auto.corr}}=\\sum_{i=1}^{N_g}\\sum_{j=1}^{N_g}ij\\,p_{ij}\\)",
+    "family": "glcm",
+    "chinese": "计算两个相邻位置灰度级乘积的期望值。",
+    "variables": [
+      "\\(i,j,p_{ij}\\)：相邻体素的离散灰度及归一化 GLCM 中该灰度对的联合概率。",
+      "\\(N_g\\)：GLCM 灰度级轴的范围大小。"
+    ],
+    "chinese_name": "自相关",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#autocorrelation",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#autocorrelation",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#grey-level-co-occurrence-based-features"
+    ],
+    "description_zh": "计算相邻灰度级索引乘积的期望值。"
+  },
+  "ibsi_DG8W": {
+    "name": "Cluster tendency",
+    "code": "DG8W",
+    "description": "Measures the tendency of co-occurring grey levels to form clustered structures.",
+    "formula": "\\(F_{\\mathrm{cm.clust.tend}}=\\sum_{i,j}(i+j-\\mu_{i.}-\\mu_{.j})^2p_{ij}\\)",
+    "family": "glcm",
+    "chinese": "衡量共现概率围绕灰度均值和形成聚集结构的程度。",
+    "variables": [
+      "\\(i,j,p_{ij}\\)：相邻体素的离散灰度及归一化 GLCM 中该灰度对的联合概率。",
+      "\\(\\mu_{i.},\\mu_{.j}\\)：GLCM 行、列边缘灰度分布的均值。"
+    ],
+    "chinese_name": "聚类倾向",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#cluster-tendency",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#cluster-tendency",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#grey-level-co-occurrence-based-features"
+    ],
+    "description_zh": "测量共现灰度级形成聚集结构的倾向。"
+  },
+  "ibsi_7NFM": {
+    "name": "Cluster shade",
+    "code": "7NFM",
+    "description": "Measures asymmetry of clustered co-occurrences using a third-order moment.",
+    "formula": "\\(F_{\\mathrm{cm.clust.shade}}=\\sum_{i,j}(i+j-\\mu_{i.}-\\mu_{.j})^3p_{ij}\\)",
+    "family": "glcm",
+    "chinese": "以三次中心矩衡量共现聚集结构的偏斜程度。",
+    "variables": [
+      "\\(i,j,p_{ij}\\)：相邻体素的离散灰度及归一化 GLCM 中该灰度对的联合概率。",
+      "\\(\\mu_{i.},\\mu_{.j}\\)：GLCM 行、列边缘灰度分布的均值。"
+    ],
+    "chinese_name": "聚类阴影",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#cluster-shade",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#cluster-shade",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#grey-level-co-occurrence-based-features"
+    ],
+    "description_zh": "利用三阶矩测量聚集共现的不对称性。"
+  },
+  "ibsi_AE86": {
+    "name": "Cluster prominence",
+    "code": "AE86",
+    "description": "Measures prominence of clustered co-occurrences using a fourth-order moment.",
+    "formula": "\\(F_{\\mathrm{cm.clust.prom}}=\\sum_{i,j}(i+j-\\mu_{i.}-\\mu_{.j})^4p_{ij}\\)",
+    "family": "glcm",
+    "chinese": "以四次中心矩衡量共现聚集结构的突出程度。",
+    "variables": [
+      "\\(i,j,p_{ij}\\)：相邻体素的离散灰度及归一化 GLCM 中该灰度对的联合概率。",
+      "\\(\\mu_{i.},\\mu_{.j}\\)：GLCM 行、列边缘灰度分布的均值。"
+    ],
+    "chinese_name": "聚类突出度",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#cluster-prominence",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#cluster-prominence",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#grey-level-co-occurrence-based-features"
+    ],
+    "description_zh": "利用四阶矩测量聚集共现的突出程度。"
+  },
+  "ibsi_R8DG": {
+    "name": "Information correlation 1",
+    "code": "R8DG",
+    "description": "Measures information correlation using joint and marginal entropies.",
+    "formula": "\\(F_{\\mathrm{cm.info.corr.1}}=\\frac{HXY-HXY_1}{HX},\\quad HXY_1=-\\sum_{i,j}p_{ij}\\log_2(p_{i.}p_{.j})\\)",
+    "family": "glcm",
+    "chinese": "利用联合熵与边缘熵衡量两个灰度维度之间的信息相关性。",
+    "variables": [
+      "\\(i,j,p_{ij}\\)：相邻体素的离散灰度及归一化 GLCM 中该灰度对的联合概率。",
+      "\\(p_{i.},p_{.j}\\)：GLCM 行、列边缘概率，分别对列、行求和得到。",
+      "\\(HXY\\)：联合熵 −Σᵢⱼ pᵢⱼ log₂ pᵢⱼ。",
+      "\\(HX\\)：行边缘熵 −Σᵢ pᵢ· log₂ pᵢ·；对称矩阵的行、列边缘熵相同。",
+      "\\(HXY_1\\)：−Σᵢⱼ pᵢⱼ log₂(pᵢ·p·ⱼ)。"
+    ],
+    "chinese_name": "信息相关性1",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#information-correlation-1",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#information-correlation-1",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#grey-level-co-occurrence-based-features"
+    ],
+    "description_zh": "利用联合熵和边缘熵测量信息相关性。"
+  },
+  "ibsi_JN9H": {
+    "name": "Information correlation 2",
+    "code": "JN9H",
+    "description": "Measures information correlation from the difference between joint entropy and the entropy under independent marginals.",
+    "formula": "\\(F_{\\mathrm{cm.info.corr.2}}=\\sqrt{1-\\exp[-2(HXY_2-HXY)]},\\quad HXY_2=-\\sum_{i,j}p_{i.}p_{.j}\\log_2(p_{i.}p_{.j})\\)",
+    "family": "glcm",
+    "chinese": "利用联合熵与独立边缘分布熵之间的差异衡量信息相关性。",
+    "variables": [
+      "\\(i,j,p_{ij}\\)：相邻体素的离散灰度及归一化 GLCM 中该灰度对的联合概率。",
+      "\\(p_{i.},p_{.j}\\)：GLCM 行、列边缘概率，分别对列、行求和得到。",
+      "\\(HXY\\)：联合熵 −Σᵢⱼ pᵢⱼ log₂ pᵢⱼ。",
+      "\\(HXY_2\\)：−Σᵢⱼ pᵢ·p·ⱼ log₂(pᵢ·p·ⱼ)。"
+    ],
+    "chinese_name": "信息相关性2",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#information-correlation-2",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#information-correlation-2",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#grey-level-co-occurrence-based-features"
+    ],
+    "description_zh": "根据联合熵与边缘独立条件下的熵之间的差异测量信息相关性。"
+  },
+  "ibsi_22OV": {
+    "name": "Short runs emphasis",
+    "code": "22OV",
+    "description": "Emphasises short runs and reflects the prevalence of short homogeneous structures.",
+    "formula": "\\(F_{\\mathrm{rlm.sre}}=\\frac{1}{N_s}\\sum_{j=1}^{N_r}\\frac{r_{.j}}{j^2}\\)",
+    "family": "glrlm",
+    "chinese": "强调较短游程，反映纹理中短距离连续同灰度结构的占比。",
+    "variables": [
+      "\\(r_{.j}\\)：游程长度（连续同灰度体素数）为 j 的游程总数，对全部灰度求和。",
+      "\\(j,N_r\\)：游程长度（连续同灰度体素数）索引及其最大值。",
+      "\\(N_s\\)：矩阵所有计数之和，即游程总数。"
+    ],
+    "chinese_name": "短游程强调",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#short-runs-emphasis",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#short-runs-emphasis",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#grey-level-run-length-based-features"
+    ],
+    "description_zh": "强调短游程，反映短小同质结构的普遍程度。"
+  },
+  "ibsi_W4KF": {
+    "name": "Long runs emphasis",
+    "code": "W4KF",
+    "description": "Emphasises long runs and reflects the prevalence of extended homogeneous structures.",
+    "formula": "\\(F_{\\mathrm{rlm.lre}}=\\frac{1}{N_s}\\sum_{j=1}^{N_r}j^2r_{.j}\\)",
+    "family": "glrlm",
+    "chinese": "强调较长游程，反映纹理中长距离连续同灰度结构的占比。",
+    "variables": [
+      "\\(r_{.j}\\)：游程长度（连续同灰度体素数）为 j 的游程总数，对全部灰度求和。",
+      "\\(j,N_r\\)：游程长度（连续同灰度体素数）索引及其最大值。",
+      "\\(N_s\\)：矩阵所有计数之和，即游程总数。"
+    ],
+    "chinese_name": "长游程强调",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#long-runs-emphasis",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#long-runs-emphasis",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#grey-level-run-length-based-features"
+    ],
+    "description_zh": "强调长游程，反映延伸同质结构的普遍程度。"
+  },
+  "ibsi_V3SW": {
+    "name": "Low grey level run emphasis",
+    "code": "V3SW",
+    "description": "Emphasises runs with low grey levels.",
+    "formula": "\\(F_{\\mathrm{rlm.lgre}}=\\frac{1}{N_s}\\sum_{i=1}^{N_g}\\frac{r_{i.}}{i^2}\\)",
+    "family": "glrlm",
+    "chinese": "强调低灰度级游程，衡量低灰度结构的相对占比。",
+    "variables": [
+      "\\(r_{i.}\\)：灰度为 i 的游程总数，对矩阵第二轴求和。",
+      "\\(i,N_g\\)：灰度级索引及矩阵灰度级轴的范围大小。",
+      "\\(N_s\\)：矩阵所有计数之和，即游程总数。"
+    ],
+    "chinese_name": "低灰度游程强调",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#low-grey-level-run-emphasis",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#low-grey-level-run-emphasis",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#grey-level-run-length-based-features"
+    ],
+    "description_zh": "强调低灰度级游程。"
+  },
+  "ibsi_G3QZ": {
+    "name": "High grey level run emphasis",
+    "code": "G3QZ",
+    "description": "Emphasises runs with high grey levels.",
+    "formula": "\\(F_{\\mathrm{rlm.hgre}}=\\frac{1}{N_s}\\sum_{i=1}^{N_g}i^2r_{i.}\\)",
+    "family": "glrlm",
+    "chinese": "强调高灰度级游程，衡量高灰度结构的相对占比。",
+    "variables": [
+      "\\(r_{i.}\\)：灰度为 i 的游程总数，对矩阵第二轴求和。",
+      "\\(i,N_g\\)：灰度级索引及矩阵灰度级轴的范围大小。",
+      "\\(N_s\\)：矩阵所有计数之和，即游程总数。"
+    ],
+    "chinese_name": "高灰度游程强调",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#high-grey-level-run-emphasis",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#high-grey-level-run-emphasis",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#grey-level-run-length-based-features"
+    ],
+    "description_zh": "强调高灰度级游程。"
+  },
+  "ibsi_HTZT": {
+    "name": "Short run low grey level emphasis",
+    "code": "HTZT",
+    "description": "Emphasises runs that are both short and low in grey level.",
+    "formula": "\\(F_{\\mathrm{rlm.srlge}}=\\frac{1}{N_s}\\sum_{i=1}^{N_g}\\sum_{j=1}^{N_r}\\frac{r_{ij}}{i^2j^2}\\)",
+    "family": "glrlm",
+    "chinese": "同时强调短游程和低灰度级游程。",
+    "variables": [
+      "\\(r_{ij}\\)：灰度为 i、游程长度（连续同灰度体素数）为 j 的游程数。",
+      "\\(i,N_g\\)：灰度级索引及矩阵灰度级轴的范围大小。",
+      "\\(j,N_r\\)：游程长度（连续同灰度体素数）索引及其最大值。",
+      "\\(N_s\\)：矩阵所有计数之和，即游程总数。"
+    ],
+    "chinese_name": "短游程低灰度强调",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#short-run-low-grey-level-emphasis",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#short-run-low-grey-level-emphasis",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#grey-level-run-length-based-features"
+    ],
+    "description_zh": "强调长度短且灰度级低的游程。"
+  },
+  "ibsi_GD3A": {
+    "name": "Short run high grey level emphasis",
+    "code": "GD3A",
+    "description": "Emphasises runs that are short and high in grey level.",
+    "formula": "\\(F_{\\mathrm{rlm.srhge}}=\\frac{1}{N_s}\\sum_{i=1}^{N_g}\\sum_{j=1}^{N_r}\\frac{i^2r_{ij}}{j^2}\\)",
+    "family": "glrlm",
+    "chinese": "同时强调短游程和高灰度级游程。",
+    "variables": [
+      "\\(r_{ij}\\)：灰度为 i、游程长度（连续同灰度体素数）为 j 的游程数。",
+      "\\(i,N_g\\)：灰度级索引及矩阵灰度级轴的范围大小。",
+      "\\(j,N_r\\)：游程长度（连续同灰度体素数）索引及其最大值。",
+      "\\(N_s\\)：矩阵所有计数之和，即游程总数。"
+    ],
+    "chinese_name": "短游程高灰度强调",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#short-run-high-grey-level-emphasis",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#short-run-high-grey-level-emphasis",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#grey-level-run-length-based-features"
+    ],
+    "description_zh": "强调长度短且灰度级高的游程。"
+  },
+  "ibsi_IVPO": {
+    "name": "Long run low grey level emphasis",
+    "code": "IVPO",
+    "description": "Emphasises runs that are long and low in grey level.",
+    "formula": "\\(F_{\\mathrm{rlm.lrlge}}=\\frac{1}{N_s}\\sum_{i=1}^{N_g}\\sum_{j=1}^{N_r}\\frac{j^2r_{ij}}{i^2}\\)",
+    "family": "glrlm",
+    "chinese": "同时强调长游程和低灰度级游程。",
+    "variables": [
+      "\\(r_{ij}\\)：灰度为 i、游程长度（连续同灰度体素数）为 j 的游程数。",
+      "\\(i,N_g\\)：灰度级索引及矩阵灰度级轴的范围大小。",
+      "\\(j,N_r\\)：游程长度（连续同灰度体素数）索引及其最大值。",
+      "\\(N_s\\)：矩阵所有计数之和，即游程总数。"
+    ],
+    "chinese_name": "长游程低灰度强调",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#long-run-low-grey-level-emphasis",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#long-run-low-grey-level-emphasis",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#grey-level-run-length-based-features"
+    ],
+    "description_zh": "强调长度长且灰度级低的游程。"
+  },
+  "ibsi_3KUM": {
+    "name": "Long run high grey level emphasis",
+    "code": "3KUM",
+    "description": "Emphasises runs that are long and high in grey level.",
+    "formula": "\\(F_{\\mathrm{rlm.lrhge}}=\\frac{1}{N_s}\\sum_{i=1}^{N_g}\\sum_{j=1}^{N_r}i^2j^2r_{ij}\\)",
+    "family": "glrlm",
+    "chinese": "同时强调长游程和高灰度级游程。",
+    "variables": [
+      "\\(r_{ij}\\)：灰度为 i、游程长度（连续同灰度体素数）为 j 的游程数。",
+      "\\(i,N_g\\)：灰度级索引及矩阵灰度级轴的范围大小。",
+      "\\(j,N_r\\)：游程长度（连续同灰度体素数）索引及其最大值。",
+      "\\(N_s\\)：矩阵所有计数之和，即游程总数。"
+    ],
+    "chinese_name": "长游程高灰度强调",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#long-run-high-grey-level-emphasis",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#long-run-high-grey-level-emphasis",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#grey-level-run-length-based-features"
+    ],
+    "description_zh": "强调长度长且灰度级高的游程。"
+  },
+  "ibsi_R5YN": {
+    "name": "Grey level non-uniformity",
+    "code": "R5YN",
+    "description": "Measures non-uniformity of run counts across grey levels.",
+    "formula": "\\(F_{\\mathrm{rlm.glnu}}=\\frac{1}{N_s}\\sum_{i=1}^{N_g}r_{i.}^2\\)",
+    "family": "glrlm",
+    "chinese": "衡量不同灰度级游程数量分布的不均匀程度。",
+    "variables": [
+      "\\(r_{i.}\\)：灰度为 i 的游程总数，对矩阵第二轴求和。",
+      "\\(i,N_g\\)：灰度级索引及矩阵灰度级轴的范围大小。",
+      "\\(N_s\\)：矩阵所有计数之和，即游程总数。"
+    ],
+    "chinese_name": "灰度非均匀性",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#grey-level-non-uniformity",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#grey-level-non-uniformity",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#grey-level-run-length-based-features"
+    ],
+    "description_zh": "测量不同灰度级之间游程计数的非均匀性。"
+  },
+  "ibsi_OVBL": {
+    "name": "Normalised grey level non-uniformity",
+    "code": "OVBL",
+    "description": "Normalises grey-level run-count non-uniformity by the squared total run count.",
+    "formula": "\\(F_{\\mathrm{rlm.glnu.norm}}=\\frac{1}{N_s^2}\\sum_{i=1}^{N_g}r_{i.}^2\\)",
+    "family": "glrlm",
+    "chinese": "对灰度级游程非均匀性进行归一化，降低总游程数影响。",
+    "variables": [
+      "\\(r_{i.}\\)：灰度为 i 的游程总数，对矩阵第二轴求和。",
+      "\\(i,N_g\\)：灰度级索引及矩阵灰度级轴的范围大小。",
+      "\\(N_s\\)：矩阵所有计数之和，即游程总数。"
+    ],
+    "chinese_name": "归一化灰度非均匀性",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#normalised-grey-level-non-uniformity",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#normalised-grey-level-non-uniformity",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#grey-level-run-length-based-features"
+    ],
+    "description_zh": "利用游程总数的平方对灰度级游程计数非均匀性进行归一化。"
+  },
+  "ibsi_W92Y": {
+    "name": "Run length non-uniformity",
+    "code": "W92Y",
+    "description": "Measures non-uniformity of run counts across run lengths.",
+    "formula": "\\(F_{\\mathrm{rlm.rlnu}}=\\frac{1}{N_s}\\sum_{j=1}^{N_r}r_{.j}^2\\)",
+    "family": "glrlm",
+    "chinese": "衡量不同游程长度的游程数量分布是否均匀。",
+    "variables": [
+      "\\(r_{.j}\\)：游程长度（连续同灰度体素数）为 j 的游程总数，对全部灰度求和。",
+      "\\(j,N_r\\)：游程长度（连续同灰度体素数）索引及其最大值。",
+      "\\(N_s\\)：矩阵所有计数之和，即游程总数。"
+    ],
+    "chinese_name": "游程长度非均匀性",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#run-length-non-uniformity",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#run-length-non-uniformity",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#grey-level-run-length-based-features"
+    ],
+    "description_zh": "测量不同游程长度之间游程计数的非均匀性。"
+  },
+  "ibsi_IC23": {
+    "name": "Normalised run length non-uniformity",
+    "code": "IC23",
+    "description": "Normalises run-length non-uniformity by the squared total run count.",
+    "formula": "\\(F_{\\mathrm{rlm.rlnu.norm}}=\\frac{1}{N_s^2}\\sum_{j=1}^{N_r}r_{.j}^2\\)",
+    "family": "glrlm",
+    "chinese": "对游程长度非均匀性进行归一化。",
+    "variables": [
+      "\\(r_{.j}\\)：游程长度（连续同灰度体素数）为 j 的游程总数，对全部灰度求和。",
+      "\\(j,N_r\\)：游程长度（连续同灰度体素数）索引及其最大值。",
+      "\\(N_s\\)：矩阵所有计数之和，即游程总数。"
+    ],
+    "chinese_name": "归一化游程长度非均匀性",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#normalised-run-length-non-uniformity",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#normalised-run-length-non-uniformity",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#grey-level-run-length-based-features"
+    ],
+    "description_zh": "利用游程总数的平方对游程长度非均匀性进行归一化。"
+  },
+  "ibsi_9ZK5": {
+    "name": "Run percentage",
+    "code": "9ZK5",
+    "description": "Measures the number of runs relative to the number of ROI voxels.",
+    "formula": "\\(F_{\\mathrm{rlm.r.perc}}=\\frac{N_s}{N_v}\\)",
+    "family": "glrlm",
+    "chinese": "计算游程总数与 ROI 体素数之比，反映游程划分密度。",
+    "variables": [
+      "\\(N_s\\)：矩阵所有计数之和，即游程总数。",
+      "\\(N_v\\)：ROI 强度掩膜的体素数。"
+    ],
+    "chinese_name": "游程百分比",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#run-percentage",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#run-percentage",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#grey-level-run-length-based-features"
+    ],
+    "description_zh": "测量游程数与 ROI 体素数的比值。"
+  },
+  "ibsi_8CE5": {
+    "name": "Grey level variance",
+    "code": "8CE5",
+    "description": "Measures variance of grey levels represented in the run-length matrix.",
+    "formula": "\\(F_{\\mathrm{rlm.gl.var}}=\\sum_{i=1}^{N_g}\\sum_{j=1}^{N_r}(i-\\mu)^2p_{ij}\\)",
+    "family": "glrlm",
+    "chinese": "衡量游程矩阵中灰度级分布的方差。",
+    "variables": [
+      "\\(p_{ij}\\)：rᵢⱼ/Nₛ：灰度 i 与游程长度（连续同灰度体素数） j 的联合概率，rᵢⱼ 为对应游程数。",
+      "\\(i,N_g\\)：灰度级索引及矩阵灰度级轴的范围大小。",
+      "\\(j,N_r\\)：游程长度（连续同灰度体素数）索引及其最大值。",
+      "\\(N_s\\)：矩阵所有计数之和，即游程总数。",
+      "\\(\\mu\\)：灰度均值 Σᵢⱼ i·pᵢⱼ。"
+    ],
+    "chinese_name": "灰度方差",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#grey-level-variance",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#grey-level-variance",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#grey-level-run-length-based-features"
+    ],
+    "description_zh": "测量游程长度矩阵所表示的灰度级方差。"
+  },
+  "ibsi_SXLW": {
+    "name": "Run length variance",
+    "code": "SXLW",
+    "description": "Measures variance of run lengths in the run-length matrix.",
+    "formula": "\\(F_{\\mathrm{rlm.rl.var}}=\\sum_{i=1}^{N_g}\\sum_{j=1}^{N_r}(j-\\mu)^2p_{ij}\\)",
+    "family": "glrlm",
+    "chinese": "衡量游程长度分布的方差。",
+    "variables": [
+      "\\(p_{ij}\\)：rᵢⱼ/Nₛ：灰度 i 与游程长度（连续同灰度体素数） j 的联合概率，rᵢⱼ 为对应游程数。",
+      "\\(i,N_g\\)：灰度级索引及矩阵灰度级轴的范围大小。",
+      "\\(j,N_r\\)：游程长度（连续同灰度体素数）索引及其最大值。",
+      "\\(N_s\\)：矩阵所有计数之和，即游程总数。",
+      "\\(\\mu\\)：游程长度（连续同灰度体素数）均值 Σᵢⱼ j·pᵢⱼ。"
+    ],
+    "chinese_name": "游程长度方差",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#run-length-variance",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#run-length-variance",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#grey-level-run-length-based-features"
+    ],
+    "description_zh": "测量游程长度矩阵中的游程长度方差。"
+  },
+  "ibsi_HJ9O": {
+    "name": "Run entropy",
+    "code": "HJ9O",
+    "description": "Measures entropy of the joint grey-level and run-length distribution.",
+    "formula": "\\(F_{\\mathrm{rlm.rl.entr}}=-\\sum_{i=1}^{N_g}\\sum_{j=1}^{N_r}p_{ij}\\log_2p_{ij}\\)",
+    "family": "glrlm",
+    "chinese": "衡量灰度级与游程长度联合分布的不确定性。",
+    "variables": [
+      "\\(p_{ij}\\)：rᵢⱼ/Nₛ：灰度 i 与游程长度（连续同灰度体素数） j 的联合概率，rᵢⱼ 为对应游程数。",
+      "\\(i,N_g\\)：灰度级索引及矩阵灰度级轴的范围大小。",
+      "\\(j,N_r\\)：游程长度（连续同灰度体素数）索引及其最大值。",
+      "\\(N_s\\)：矩阵所有计数之和，即游程总数。"
+    ],
+    "chinese_name": "游程熵",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#run-entropy",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#run-entropy",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#grey-level-run-length-based-features"
+    ],
+    "description_zh": "测量灰度级与游程长度联合分布的熵。"
+  },
+  "ibsi_5QRC": {
+    "name": "Small zone emphasis",
+    "code": "5QRC",
+    "description": "Emphasises small zones and reflects the prevalence of small homogeneous regions.",
+    "formula": "\\(F_{\\mathrm{szm.sze}}=\\frac{1}{N_s}\\sum_{j=1}^{N_z}\\frac{s_{.j}}{j^2}\\)",
+    "family": "glszm",
+    "chinese": "强调小尺寸灰度区域，反映 ROI 中细小同质区域的占比。",
+    "variables": [
+      "\\(s_{.j}\\)：区域大小（连通同灰度体素数）为 j 的区域总数，对全部灰度求和。",
+      "\\(j,N_z\\)：区域大小（连通同灰度体素数）索引及其最大值。",
+      "\\(N_s\\)：矩阵所有计数之和，即区域总数。"
+    ],
+    "chinese_name": "小区域强调",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#small-zone-emphasis",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#small-zone-emphasis",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#grey-level-size-zone-based-features"
+    ],
+    "description_zh": "强调小区域，反映小型同质区域的普遍程度。"
+  },
+  "ibsi_48P8": {
+    "name": "Large zone emphasis",
+    "code": "48P8",
+    "description": "Emphasises large zones and reflects the prevalence of large homogeneous regions.",
+    "formula": "\\(F_{\\mathrm{szm.lze}}=\\frac{1}{N_s}\\sum_{j=1}^{N_z}j^2s_{.j}\\)",
+    "family": "glszm",
+    "chinese": "强调大尺寸灰度区域，反映较大同质区域的占比。",
+    "variables": [
+      "\\(s_{.j}\\)：区域大小（连通同灰度体素数）为 j 的区域总数，对全部灰度求和。",
+      "\\(j,N_z\\)：区域大小（连通同灰度体素数）索引及其最大值。",
+      "\\(N_s\\)：矩阵所有计数之和，即区域总数。"
+    ],
+    "chinese_name": "大区域强调",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#large-zone-emphasis",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#large-zone-emphasis",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#grey-level-size-zone-based-features"
+    ],
+    "description_zh": "强调大区域，反映大型同质区域的普遍程度。"
+  },
+  "ibsi_XMSY": {
+    "name": "Low grey level zone emphasis",
+    "code": "XMSY",
+    "description": "Emphasises zones with low grey levels.",
+    "formula": "\\(F_{\\mathrm{szm.lgze}}=\\frac{1}{N_s}\\sum_{i=1}^{N_g}\\frac{s_{i.}}{i^2}\\)",
+    "family": "glszm",
+    "chinese": "强调低灰度级区域，衡量低灰度同质区域的占比。",
+    "variables": [
+      "\\(s_{i.}\\)：灰度为 i 的区域总数，对矩阵第二轴求和。",
+      "\\(i,N_g\\)：灰度级索引及矩阵灰度级轴的范围大小。",
+      "\\(N_s\\)：矩阵所有计数之和，即区域总数。"
+    ],
+    "chinese_name": "低灰度区域强调",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#low-grey-level-zone-emphasis",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#low-grey-level-zone-emphasis",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#grey-level-size-zone-based-features"
+    ],
+    "description_zh": "强调低灰度级区域。"
+  },
+  "ibsi_5GN9": {
+    "name": "High grey level zone emphasis",
+    "code": "5GN9",
+    "description": "Emphasises zones with high grey levels.",
+    "formula": "\\(F_{\\mathrm{szm.hgze}}=\\frac{1}{N_s}\\sum_{i=1}^{N_g}i^2s_{i.}\\)",
+    "family": "glszm",
+    "chinese": "强调高灰度级区域，衡量高灰度同质区域的占比。",
+    "variables": [
+      "\\(s_{i.}\\)：灰度为 i 的区域总数，对矩阵第二轴求和。",
+      "\\(i,N_g\\)：灰度级索引及矩阵灰度级轴的范围大小。",
+      "\\(N_s\\)：矩阵所有计数之和，即区域总数。"
+    ],
+    "chinese_name": "高灰度区域强调",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#high-grey-level-zone-emphasis",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#high-grey-level-zone-emphasis",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#grey-level-size-zone-based-features"
+    ],
+    "description_zh": "强调高灰度级区域。"
+  },
+  "ibsi_5RAI": {
+    "name": "Small zone low grey level emphasis",
+    "code": "5RAI",
+    "description": "Emphasises zones that are both small and low in grey level.",
+    "formula": "\\(F_{\\mathrm{szm.szlge}}=\\frac{1}{N_s}\\sum_{i=1}^{N_g}\\sum_{j=1}^{N_z}\\frac{s_{ij}}{i^2j^2}\\)",
+    "family": "glszm",
+    "chinese": "同时强调小尺寸和低灰度级区域。",
+    "variables": [
+      "\\(s_{ij}\\)：灰度为 i、区域大小（连通同灰度体素数）为 j 的区域数。",
+      "\\(i,N_g\\)：灰度级索引及矩阵灰度级轴的范围大小。",
+      "\\(j,N_z\\)：区域大小（连通同灰度体素数）索引及其最大值。",
+      "\\(N_s\\)：矩阵所有计数之和，即区域总数。"
+    ],
+    "chinese_name": "小区域低灰度强调",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#small-zone-low-grey-level-emphasis",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#small-zone-low-grey-level-emphasis",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#grey-level-size-zone-based-features"
+    ],
+    "description_zh": "强调尺寸小且灰度级低的区域。"
+  },
+  "ibsi_HW1V": {
+    "name": "Small zone high grey level emphasis",
+    "code": "HW1V",
+    "description": "Emphasises zones that are small and high in grey level.",
+    "formula": "\\(F_{\\mathrm{szm.szhge}}=\\frac{1}{N_s}\\sum_{i=1}^{N_g}\\sum_{j=1}^{N_z}\\frac{i^2s_{ij}}{j^2}\\)",
+    "family": "glszm",
+    "chinese": "同时强调小尺寸和高灰度级区域。",
+    "variables": [
+      "\\(s_{ij}\\)：灰度为 i、区域大小（连通同灰度体素数）为 j 的区域数。",
+      "\\(i,N_g\\)：灰度级索引及矩阵灰度级轴的范围大小。",
+      "\\(j,N_z\\)：区域大小（连通同灰度体素数）索引及其最大值。",
+      "\\(N_s\\)：矩阵所有计数之和，即区域总数。"
+    ],
+    "chinese_name": "小区域高灰度强调",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#small-zone-high-grey-level-emphasis",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#small-zone-high-grey-level-emphasis",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#grey-level-size-zone-based-features"
+    ],
+    "description_zh": "强调尺寸小且灰度级高的区域。"
+  },
+  "ibsi_YH51": {
+    "name": "Large zone low grey level emphasis",
+    "code": "YH51",
+    "description": "Emphasises zones that are large and low in grey level.",
+    "formula": "\\(F_{\\mathrm{szm.lzlge}}=\\frac{1}{N_s}\\sum_{i=1}^{N_g}\\sum_{j=1}^{N_z}\\frac{j^2s_{ij}}{i^2}\\)",
+    "family": "glszm",
+    "chinese": "同时强调大尺寸和低灰度级区域。",
+    "variables": [
+      "\\(s_{ij}\\)：灰度为 i、区域大小（连通同灰度体素数）为 j 的区域数。",
+      "\\(i,N_g\\)：灰度级索引及矩阵灰度级轴的范围大小。",
+      "\\(j,N_z\\)：区域大小（连通同灰度体素数）索引及其最大值。",
+      "\\(N_s\\)：矩阵所有计数之和，即区域总数。"
+    ],
+    "chinese_name": "大区域低灰度强调",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#large-zone-low-grey-level-emphasis",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#large-zone-low-grey-level-emphasis",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#grey-level-size-zone-based-features"
+    ],
+    "description_zh": "强调尺寸大且灰度级低的区域。"
+  },
+  "ibsi_J17V": {
+    "name": "Large zone high grey level emphasis",
+    "code": "J17V",
+    "description": "Emphasises zones that are large and high in grey level.",
+    "formula": "\\(F_{\\mathrm{szm.lzhge}}=\\frac{1}{N_s}\\sum_{i=1}^{N_g}\\sum_{j=1}^{N_z}i^2j^2s_{ij}\\)",
+    "family": "glszm",
+    "chinese": "同时强调大尺寸和高灰度级区域。",
+    "variables": [
+      "\\(s_{ij}\\)：灰度为 i、区域大小（连通同灰度体素数）为 j 的区域数。",
+      "\\(i,N_g\\)：灰度级索引及矩阵灰度级轴的范围大小。",
+      "\\(j,N_z\\)：区域大小（连通同灰度体素数）索引及其最大值。",
+      "\\(N_s\\)：矩阵所有计数之和，即区域总数。"
+    ],
+    "chinese_name": "大区域高灰度强调",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#large-zone-high-grey-level-emphasis",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#large-zone-high-grey-level-emphasis",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#grey-level-size-zone-based-features"
+    ],
+    "description_zh": "强调尺寸大且灰度级高的区域。"
+  },
+  "ibsi_JNSA": {
+    "name": "Grey level non-uniformity",
+    "code": "JNSA",
+    "description": "Measures non-uniformity of zone counts across grey levels.",
+    "formula": "\\(F_{\\mathrm{szm.glnu}}=\\frac{1}{N_s}\\sum_{i=1}^{N_g}s_{i.}^2\\)",
+    "family": "glszm",
+    "chinese": "衡量不同灰度级区域数量分布的不均匀程度。",
+    "variables": [
+      "\\(s_{i.}\\)：灰度为 i 的区域总数，对矩阵第二轴求和。",
+      "\\(i,N_g\\)：灰度级索引及矩阵灰度级轴的范围大小。",
+      "\\(N_s\\)：矩阵所有计数之和，即区域总数。"
+    ],
+    "chinese_name": "灰度非均匀性",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#feat-szm-grey-level-non-uniformity",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#feat-szm-grey-level-non-uniformity",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#grey-level-size-zone-based-features"
+    ],
+    "description_zh": "测量不同灰度级之间区域计数的非均匀性。"
+  },
+  "ibsi_Y1RO": {
+    "name": "Normalised grey level non-uniformity",
+    "code": "Y1RO",
+    "description": "Normalises grey-level zone-count non-uniformity.",
+    "formula": "\\(F_{\\mathrm{szm.glnu.norm}}=\\frac{1}{N_s^2}\\sum_{i=1}^{N_g}s_{i.}^2\\)",
+    "family": "glszm",
+    "chinese": "对灰度级区域数量非均匀性进行归一化。",
+    "variables": [
+      "\\(s_{i.}\\)：灰度为 i 的区域总数，对矩阵第二轴求和。",
+      "\\(i,N_g\\)：灰度级索引及矩阵灰度级轴的范围大小。",
+      "\\(N_s\\)：矩阵所有计数之和，即区域总数。"
+    ],
+    "chinese_name": "归一化灰度非均匀性",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#feat-szm-grey-level-non-uniformity-normalised",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#feat-szm-grey-level-non-uniformity-normalised",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#grey-level-size-zone-based-features"
+    ],
+    "description_zh": "对灰度级区域计数非均匀性进行归一化。"
+  },
+  "ibsi_4JP3": {
+    "name": "Zone size non-uniformity",
+    "code": "4JP3",
+    "description": "Measures non-uniformity of zone counts across zone sizes.",
+    "formula": "\\(F_{\\mathrm{szm.zsnu}}=\\frac{1}{N_s}\\sum_{j=1}^{N_z}s_{.j}^2\\)",
+    "family": "glszm",
+    "chinese": "衡量不同区域尺寸的区域数量分布是否均匀。",
+    "variables": [
+      "\\(s_{.j}\\)：区域大小（连通同灰度体素数）为 j 的区域总数，对全部灰度求和。",
+      "\\(j,N_z\\)：区域大小（连通同灰度体素数）索引及其最大值。",
+      "\\(N_s\\)：矩阵所有计数之和，即区域总数。"
+    ],
+    "chinese_name": "区域大小非均匀性",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#zone-size-non-uniformity",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#zone-size-non-uniformity",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#grey-level-size-zone-based-features"
+    ],
+    "description_zh": "测量不同区域大小之间区域计数的非均匀性。"
+  },
+  "ibsi_VB3A": {
+    "name": "Normalised zone size non-uniformity",
+    "code": "VB3A",
+    "description": "Normalises zone-size non-uniformity.",
+    "formula": "\\(F_{\\mathrm{szm.zsnu.norm}}=\\frac{1}{N_s^2}\\sum_{j=1}^{N_z}s_{.j}^2\\)",
+    "family": "glszm",
+    "chinese": "对区域尺寸非均匀性进行归一化。",
+    "variables": [
+      "\\(s_{.j}\\)：区域大小（连通同灰度体素数）为 j 的区域总数，对全部灰度求和。",
+      "\\(j,N_z\\)：区域大小（连通同灰度体素数）索引及其最大值。",
+      "\\(N_s\\)：矩阵所有计数之和，即区域总数。"
+    ],
+    "chinese_name": "归一化区域大小非均匀性",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#normalised-zone-size-non-uniformity",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#normalised-zone-size-non-uniformity",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#grey-level-size-zone-based-features"
+    ],
+    "description_zh": "对区域大小非均匀性进行归一化。"
+  },
+  "ibsi_P30P": {
+    "name": "Zone percentage",
+    "code": "P30P",
+    "description": "Measures the number of zones relative to the number of ROI voxels.",
+    "formula": "\\(F_{\\mathrm{szm.z.perc}}=\\frac{N_s}{N_v}\\)",
+    "family": "glszm",
+    "chinese": "计算区域总数与 ROI 体素数之比，反映区域划分密度。",
+    "variables": [
+      "\\(N_s\\)：矩阵所有计数之和，即区域总数。",
+      "\\(N_v\\)：ROI 强度掩膜的体素数。"
+    ],
+    "chinese_name": "区域百分比",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#zone-percentage",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#zone-percentage",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#grey-level-size-zone-based-features"
+    ],
+    "description_zh": "测量区域数与 ROI 体素数的比值。"
+  },
+  "ibsi_BYLV": {
+    "name": "Grey level variance",
+    "code": "BYLV",
+    "description": "Measures variance of grey levels represented in the size-zone matrix.",
+    "formula": "\\(F_{\\mathrm{szm.gl.var}}=\\sum_{i=1}^{N_g}\\sum_{j=1}^{N_z}(i-\\mu)^2p_{ij}\\)",
+    "family": "glszm",
+    "chinese": "衡量区域矩阵中灰度级分布的方差。",
+    "variables": [
+      "\\(p_{ij}\\)：sᵢⱼ/Nₛ：灰度 i 与区域大小（连通同灰度体素数） j 的联合概率，sᵢⱼ 为对应区域数。",
+      "\\(i,N_g\\)：灰度级索引及矩阵灰度级轴的范围大小。",
+      "\\(j,N_z\\)：区域大小（连通同灰度体素数）索引及其最大值。",
+      "\\(N_s\\)：矩阵所有计数之和，即区域总数。",
+      "\\(\\mu\\)：灰度均值 Σᵢⱼ i·pᵢⱼ。"
+    ],
+    "chinese_name": "灰度方差",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#feat-szm-grey-level-variance",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#feat-szm-grey-level-variance",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#grey-level-size-zone-based-features"
+    ],
+    "description_zh": "测量区域大小矩阵所表示的灰度级方差。"
+  },
+  "ibsi_3NSA": {
+    "name": "Zone size variance",
+    "code": "3NSA",
+    "description": "Measures variance of zone sizes in the size-zone matrix.",
+    "formula": "\\(F_{\\mathrm{szm.zs.var}}=\\sum_{i=1}^{N_g}\\sum_{j=1}^{N_z}(j-\\mu)^2p_{ij}\\)",
+    "family": "glszm",
+    "chinese": "衡量灰度区域尺寸分布的方差。",
+    "variables": [
+      "\\(p_{ij}\\)：sᵢⱼ/Nₛ：灰度 i 与区域大小（连通同灰度体素数） j 的联合概率，sᵢⱼ 为对应区域数。",
+      "\\(i,N_g\\)：灰度级索引及矩阵灰度级轴的范围大小。",
+      "\\(j,N_z\\)：区域大小（连通同灰度体素数）索引及其最大值。",
+      "\\(N_s\\)：矩阵所有计数之和，即区域总数。",
+      "\\(\\mu\\)：区域大小（连通同灰度体素数）均值 Σᵢⱼ j·pᵢⱼ。"
+    ],
+    "chinese_name": "区域大小方差",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#zone-size-variance",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#zone-size-variance",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#grey-level-size-zone-based-features"
+    ],
+    "description_zh": "测量区域大小矩阵中的区域大小方差。"
+  },
+  "ibsi_GU8N": {
+    "name": "Zone size entropy",
+    "code": "GU8N",
+    "description": "Measures entropy of the joint grey-level and zone-size distribution.",
+    "formula": "\\(F_{\\mathrm{szm.zs.entr}}=-\\sum_{i=1}^{N_g}\\sum_{j=1}^{N_z}p_{ij}\\log_2p_{ij}\\)",
+    "family": "glszm",
+    "chinese": "衡量灰度级与区域尺寸联合分布的不确定性。",
+    "variables": [
+      "\\(p_{ij}\\)：sᵢⱼ/Nₛ：灰度 i 与区域大小（连通同灰度体素数） j 的联合概率，sᵢⱼ 为对应区域数。",
+      "\\(i,N_g\\)：灰度级索引及矩阵灰度级轴的范围大小。",
+      "\\(j,N_z\\)：区域大小（连通同灰度体素数）索引及其最大值。",
+      "\\(N_s\\)：矩阵所有计数之和，即区域总数。"
+    ],
+    "chinese_name": "区域大小熵",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#zone-size-entropy",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#zone-size-entropy",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#grey-level-size-zone-based-features"
+    ],
+    "description_zh": "测量灰度级与区域大小联合分布的熵。"
+  },
+  "ibsi_0GBI": {
+    "name": "Small distance emphasis",
+    "code": "0GBI",
+    "description": "Emphasises zones close to the ROI boundary.",
+    "formula": "\\(F_{\\mathrm{dzm.sde}}=\\frac{1}{N_s}\\sum_{j=1}^{N_d}\\frac{d_{.j}}{j^2}\\)",
+    "family": "gldzm",
+    "chinese": "强调距 ROI 边界较近的区域，描述区域在边缘附近的分布。",
+    "variables": [
+      "\\(d_{.j}\\)：区域到 ROI 边界的最小离散距离（边界为1）为 j 的区域总数，对全部灰度求和。",
+      "\\(j,N_d\\)：区域到 ROI 边界的最小离散距离（边界为1）索引及其最大值。",
+      "\\(N_s\\)：矩阵所有计数之和，即区域总数。"
+    ],
+    "chinese_name": "小距离强调",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#small-distance-emphasis",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#small-distance-emphasis",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#grey-level-distance-zone-based-features"
+    ],
+    "description_zh": "强调靠近 ROI 边界的区域。"
+  },
+  "ibsi_MB4I": {
+    "name": "Large distance emphasis",
+    "code": "MB4I",
+    "description": "Emphasises zones located farther from the ROI boundary.",
+    "formula": "\\(F_{\\mathrm{dzm.lde}}=\\frac{1}{N_s}\\sum_{j=1}^{N_d}j^2d_{.j}\\)",
+    "family": "gldzm",
+    "chinese": "强调距 ROI 边界较远的区域，描述区域在 ROI 内部的分布。",
+    "variables": [
+      "\\(d_{.j}\\)：区域到 ROI 边界的最小离散距离（边界为1）为 j 的区域总数，对全部灰度求和。",
+      "\\(j,N_d\\)：区域到 ROI 边界的最小离散距离（边界为1）索引及其最大值。",
+      "\\(N_s\\)：矩阵所有计数之和，即区域总数。"
+    ],
+    "chinese_name": "大距离强调",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#large-distance-emphasis",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#large-distance-emphasis",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#grey-level-distance-zone-based-features"
+    ],
+    "description_zh": "强调距 ROI 边界较远的区域。"
+  },
+  "ibsi_S1RA": {
+    "name": "Low grey level zone emphasis",
+    "code": "S1RA",
+    "description": "Emphasises distance zones with low grey levels.",
+    "formula": "\\(F_{\\mathrm{dzm.lgze}}=\\frac{1}{N_s}\\sum_{i=1}^{N_g}\\frac{d_{i.}}{i^2}\\)",
+    "family": "gldzm",
+    "chinese": "强调低灰度级的距离区域。",
+    "variables": [
+      "\\(d_{i.}\\)：灰度为 i 的区域总数，对矩阵第二轴求和。",
+      "\\(i,N_g\\)：灰度级索引及矩阵灰度级轴的范围大小。",
+      "\\(N_s\\)：矩阵所有计数之和，即区域总数。"
+    ],
+    "chinese_name": "低灰度区域强调",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#feat-dzm-low-grey-level-zone-emphasis",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#feat-dzm-low-grey-level-zone-emphasis",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#grey-level-distance-zone-based-features"
+    ],
+    "description_zh": "强调低灰度级距离区域。"
+  },
+  "ibsi_K26C": {
+    "name": "High grey level zone emphasis",
+    "code": "K26C",
+    "description": "Emphasises distance zones with high grey levels.",
+    "formula": "\\(F_{\\mathrm{dzm.hgze}}=\\frac{1}{N_s}\\sum_{i=1}^{N_g}i^2d_{i.}\\)",
+    "family": "gldzm",
+    "chinese": "强调高灰度级的距离区域。",
+    "variables": [
+      "\\(d_{i.}\\)：灰度为 i 的区域总数，对矩阵第二轴求和。",
+      "\\(i,N_g\\)：灰度级索引及矩阵灰度级轴的范围大小。",
+      "\\(N_s\\)：矩阵所有计数之和，即区域总数。"
+    ],
+    "chinese_name": "高灰度区域强调",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#feat-dzm-high-grey-level-zone-emphasis",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#feat-dzm-high-grey-level-zone-emphasis",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#grey-level-distance-zone-based-features"
+    ],
+    "description_zh": "强调高灰度级距离区域。"
+  },
+  "ibsi_RUVG": {
+    "name": "Small distance low grey level emphasis",
+    "code": "RUVG",
+    "description": "Emphasises zones that are close to the boundary and low in grey level.",
+    "formula": "\\(F_{\\mathrm{dzm.sdlge}}=\\frac{1}{N_s}\\sum_{i=1}^{N_g}\\sum_{j=1}^{N_d}\\frac{d_{ij}}{i^2j^2}\\)",
+    "family": "gldzm",
+    "chinese": "同时强调靠近边界和低灰度级的区域。",
+    "variables": [
+      "\\(d_{ij}\\)：灰度为 i、区域到 ROI 边界的最小离散距离（边界为1）为 j 的区域数。",
+      "\\(i,N_g\\)：灰度级索引及矩阵灰度级轴的范围大小。",
+      "\\(j,N_d\\)：区域到 ROI 边界的最小离散距离（边界为1）索引及其最大值。",
+      "\\(N_s\\)：矩阵所有计数之和，即区域总数。"
+    ],
+    "chinese_name": "小距离低灰度强调",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#small-distance-low-grey-level-emphasis",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#small-distance-low-grey-level-emphasis",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#grey-level-distance-zone-based-features"
+    ],
+    "description_zh": "强调靠近边界且灰度级低的区域。"
+  },
+  "ibsi_DKNJ": {
+    "name": "Small distance high grey level emphasis",
+    "code": "DKNJ",
+    "description": "Emphasises zones that are close to the boundary and high in grey level.",
+    "formula": "\\(F_{\\mathrm{dzm.sdhge}}=\\frac{1}{N_s}\\sum_{i=1}^{N_g}\\sum_{j=1}^{N_d}\\frac{i^2d_{ij}}{j^2}\\)",
+    "family": "gldzm",
+    "chinese": "同时强调靠近边界和高灰度级的区域。",
+    "variables": [
+      "\\(d_{ij}\\)：灰度为 i、区域到 ROI 边界的最小离散距离（边界为1）为 j 的区域数。",
+      "\\(i,N_g\\)：灰度级索引及矩阵灰度级轴的范围大小。",
+      "\\(j,N_d\\)：区域到 ROI 边界的最小离散距离（边界为1）索引及其最大值。",
+      "\\(N_s\\)：矩阵所有计数之和，即区域总数。"
+    ],
+    "chinese_name": "小距离高灰度强调",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#small-distance-high-grey-level-emphasis",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#small-distance-high-grey-level-emphasis",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#grey-level-distance-zone-based-features"
+    ],
+    "description_zh": "强调靠近边界且灰度级高的区域。"
+  },
+  "ibsi_A7WM": {
+    "name": "Large distance low grey level emphasis",
+    "code": "A7WM",
+    "description": "Emphasises zones that are far from the boundary and low in grey level.",
+    "formula": "\\(F_{\\mathrm{dzm.ldlge}}=\\frac{1}{N_s}\\sum_{i=1}^{N_g}\\sum_{j=1}^{N_d}\\frac{j^2d_{ij}}{i^2}\\)",
+    "family": "gldzm",
+    "chinese": "同时强调远离边界和低灰度级的区域。",
+    "variables": [
+      "\\(d_{ij}\\)：灰度为 i、区域到 ROI 边界的最小离散距离（边界为1）为 j 的区域数。",
+      "\\(i,N_g\\)：灰度级索引及矩阵灰度级轴的范围大小。",
+      "\\(j,N_d\\)：区域到 ROI 边界的最小离散距离（边界为1）索引及其最大值。",
+      "\\(N_s\\)：矩阵所有计数之和，即区域总数。"
+    ],
+    "chinese_name": "大距离低灰度强调",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#large-distance-low-grey-level-emphasis",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#large-distance-low-grey-level-emphasis",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#grey-level-distance-zone-based-features"
+    ],
+    "description_zh": "强调远离边界且灰度级低的区域。"
+  },
+  "ibsi_KLTH": {
+    "name": "Large distance high grey level emphasis",
+    "code": "KLTH",
+    "description": "Emphasises zones that are far from the boundary and high in grey level.",
+    "formula": "\\(F_{\\mathrm{dzm.ldhge}}=\\frac{1}{N_s}\\sum_{i=1}^{N_g}\\sum_{j=1}^{N_d}i^2j^2d_{ij}\\)",
+    "family": "gldzm",
+    "chinese": "同时强调远离边界和高灰度级的区域。",
+    "variables": [
+      "\\(d_{ij}\\)：灰度为 i、区域到 ROI 边界的最小离散距离（边界为1）为 j 的区域数。",
+      "\\(i,N_g\\)：灰度级索引及矩阵灰度级轴的范围大小。",
+      "\\(j,N_d\\)：区域到 ROI 边界的最小离散距离（边界为1）索引及其最大值。",
+      "\\(N_s\\)：矩阵所有计数之和，即区域总数。"
+    ],
+    "chinese_name": "大距离高灰度强调",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#large-distance-high-grey-level-emphasis",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#large-distance-high-grey-level-emphasis",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#grey-level-distance-zone-based-features"
+    ],
+    "description_zh": "强调远离边界且灰度级高的区域。"
+  },
+  "ibsi_VFT7": {
+    "name": "Grey level non-uniformity",
+    "code": "VFT7",
+    "description": "Measures non-uniformity of distance-zone counts across grey levels.",
+    "formula": "\\(F_{\\mathrm{dzm.glnu}}=\\frac{1}{N_s}\\sum_{i=1}^{N_g}d_{i.}^2\\)",
+    "family": "gldzm",
+    "chinese": "衡量不同灰度级距离区域数量分布的不均匀程度。",
+    "variables": [
+      "\\(d_{i.}\\)：灰度为 i 的区域总数，对矩阵第二轴求和。",
+      "\\(i,N_g\\)：灰度级索引及矩阵灰度级轴的范围大小。",
+      "\\(N_s\\)：矩阵所有计数之和，即区域总数。"
+    ],
+    "chinese_name": "灰度非均匀性",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#feat-dzm-grey-level-non-uniformity",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#feat-dzm-grey-level-non-uniformity",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#grey-level-distance-zone-based-features"
+    ],
+    "description_zh": "测量不同灰度级之间距离区域计数的非均匀性。"
+  },
+  "ibsi_7HP3": {
+    "name": "Normalised grey level non-uniformity",
+    "code": "7HP3",
+    "description": "Normalises grey-level non-uniformity in the distance-zone matrix.",
+    "formula": "\\(F_{\\mathrm{dzm.glnu.norm}}=\\frac{1}{N_s^2}\\sum_{i=1}^{N_g}d_{i.}^2\\)",
+    "family": "gldzm",
+    "chinese": "对灰度级距离区域数量非均匀性进行归一化。",
+    "variables": [
+      "\\(d_{i.}\\)：灰度为 i 的区域总数，对矩阵第二轴求和。",
+      "\\(i,N_g\\)：灰度级索引及矩阵灰度级轴的范围大小。",
+      "\\(N_s\\)：矩阵所有计数之和，即区域总数。"
+    ],
+    "chinese_name": "归一化灰度非均匀性",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#feat-dzm-grey-level-non-uniformity-normalised",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#feat-dzm-grey-level-non-uniformity-normalised",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#grey-level-distance-zone-based-features"
+    ],
+    "description_zh": "对距离区域矩阵中的灰度级非均匀性进行归一化。"
+  },
+  "ibsi_V294": {
+    "name": "Zone distance non-uniformity",
+    "code": "V294",
+    "description": "Measures non-uniformity of zone counts across boundary-distance levels.",
+    "formula": "\\(F_{\\mathrm{dzm.zdnu}}=\\frac{1}{N_s}\\sum_{j=1}^{N_d}d_{.j}^2\\)",
+    "family": "gldzm",
+    "chinese": "衡量不同边界距离层的区域数量分布是否均匀。",
+    "variables": [
+      "\\(d_{.j}\\)：区域到 ROI 边界的最小离散距离（边界为1）为 j 的区域总数，对全部灰度求和。",
+      "\\(j,N_d\\)：区域到 ROI 边界的最小离散距离（边界为1）索引及其最大值。",
+      "\\(N_s\\)：矩阵所有计数之和，即区域总数。"
+    ],
+    "chinese_name": "区域距离非均匀性",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#zone-distance-non-uniformity",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#zone-distance-non-uniformity",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#grey-level-distance-zone-based-features"
+    ],
+    "description_zh": "测量不同边界距离层级之间区域计数的非均匀性。"
+  },
+  "ibsi_IATH": {
+    "name": "Normalised zone distance non-uniformity",
+    "code": "IATH",
+    "description": "Normalises zone-distance non-uniformity.",
+    "formula": "\\(F_{\\mathrm{dzm.zdnu.norm}}=\\frac{1}{N_s^2}\\sum_{j=1}^{N_d}d_{.j}^2\\)",
+    "family": "gldzm",
+    "chinese": "对区域距离非均匀性进行归一化。",
+    "variables": [
+      "\\(d_{.j}\\)：区域到 ROI 边界的最小离散距离（边界为1）为 j 的区域总数，对全部灰度求和。",
+      "\\(j,N_d\\)：区域到 ROI 边界的最小离散距离（边界为1）索引及其最大值。",
+      "\\(N_s\\)：矩阵所有计数之和，即区域总数。"
+    ],
+    "chinese_name": "归一化区域距离非均匀性",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#normalised-zone-distance-non-uniformity",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#normalised-zone-distance-non-uniformity",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#grey-level-distance-zone-based-features"
+    ],
+    "description_zh": "对区域距离非均匀性进行归一化。"
+  },
+  "ibsi_VIWW": {
+    "name": "Zone percentage",
+    "code": "VIWW",
+    "description": "Measures the number of distance zones relative to ROI voxel count.",
+    "formula": "\\(F_{\\mathrm{dzm.z.perc}}=\\frac{N_s}{N_v}\\)",
+    "family": "gldzm",
+    "chinese": "计算距离区域总数与 ROI 体素数之比。",
+    "variables": [
+      "\\(N_s\\)：矩阵所有计数之和，即区域总数。",
+      "\\(N_v\\)：ROI 强度掩膜的体素数。"
+    ],
+    "chinese_name": "区域百分比",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#feat-dzm-zone-percentage",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#feat-dzm-zone-percentage",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#grey-level-distance-zone-based-features"
+    ],
+    "description_zh": "测量距离区域数与 ROI 体素数的比值。"
+  },
+  "ibsi_QK93": {
+    "name": "Grey level variance",
+    "code": "QK93",
+    "description": "Measures variance of grey levels represented in the distance-zone matrix.",
+    "formula": "\\(F_{\\mathrm{dzm.gl.var}}=\\sum_{i=1}^{N_g}\\sum_{j=1}^{N_d}(i-\\mu)^2p_{ij}\\)",
+    "family": "gldzm",
+    "chinese": "衡量距离区域矩阵中灰度级分布的方差。",
+    "variables": [
+      "\\(p_{ij}\\)：dᵢⱼ/Nₛ：灰度 i 与区域到 ROI 边界的最小离散距离（边界为1） j 的联合概率，dᵢⱼ 为对应区域数。",
+      "\\(i,N_g\\)：灰度级索引及矩阵灰度级轴的范围大小。",
+      "\\(j,N_d\\)：区域到 ROI 边界的最小离散距离（边界为1）索引及其最大值。",
+      "\\(N_s\\)：矩阵所有计数之和，即区域总数。",
+      "\\(\\mu\\)：灰度均值 Σᵢⱼ i·pᵢⱼ。"
+    ],
+    "chinese_name": "灰度方差",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#feat-dzm-grey-level-variance",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#feat-dzm-grey-level-variance",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#grey-level-distance-zone-based-features"
+    ],
+    "description_zh": "测量距离区域矩阵所表示的灰度级方差。"
+  },
+  "ibsi_7WT1": {
+    "name": "Zone distance variance",
+    "code": "7WT1",
+    "description": "Measures variance of zone distances to the ROI boundary.",
+    "formula": "\\(F_{\\mathrm{dzm.zd.var}}=\\sum_{i=1}^{N_g}\\sum_{j=1}^{N_d}(j-\\mu)^2p_{ij}\\)",
+    "family": "gldzm",
+    "chinese": "衡量区域到 ROI 边界距离分布的方差。",
+    "variables": [
+      "\\(p_{ij}\\)：dᵢⱼ/Nₛ：灰度 i 与区域到 ROI 边界的最小离散距离（边界为1） j 的联合概率，dᵢⱼ 为对应区域数。",
+      "\\(i,N_g\\)：灰度级索引及矩阵灰度级轴的范围大小。",
+      "\\(j,N_d\\)：区域到 ROI 边界的最小离散距离（边界为1）索引及其最大值。",
+      "\\(N_s\\)：矩阵所有计数之和，即区域总数。",
+      "\\(\\mu\\)：区域到 ROI 边界的最小离散距离（边界为1）均值 Σᵢⱼ j·pᵢⱼ。"
+    ],
+    "chinese_name": "区域距离方差",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#zone-distance-variance",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#zone-distance-variance",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#grey-level-distance-zone-based-features"
+    ],
+    "description_zh": "测量区域到 ROI 边界距离的方差。"
+  },
+  "ibsi_GBDU": {
+    "name": "Zone distance entropy",
+    "code": "GBDU",
+    "description": "Measures entropy of the joint grey-level and boundary-distance distribution.",
+    "formula": "\\(F_{\\mathrm{dzm.zd.entr}}=-\\sum_{i=1}^{N_g}\\sum_{j=1}^{N_d}p_{ij}\\log_2p_{ij}\\)",
+    "family": "gldzm",
+    "chinese": "衡量灰度级与边界距离联合分布的不确定性。",
+    "variables": [
+      "\\(p_{ij}\\)：dᵢⱼ/Nₛ：灰度 i 与区域到 ROI 边界的最小离散距离（边界为1） j 的联合概率，dᵢⱼ 为对应区域数。",
+      "\\(i,N_g\\)：灰度级索引及矩阵灰度级轴的范围大小。",
+      "\\(j,N_d\\)：区域到 ROI 边界的最小离散距离（边界为1）索引及其最大值。",
+      "\\(N_s\\)：矩阵所有计数之和，即区域总数。"
+    ],
+    "chinese_name": "区域距离熵",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#zone-distance-entropy",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#zone-distance-entropy",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#grey-level-distance-zone-based-features"
+    ],
+    "description_zh": "测量灰度级与边界距离联合分布的熵。"
+  },
+  "ibsi_QCDE": {
+    "name": "Coarseness",
+    "code": "QCDE",
+    "description": "Measures texture coarseness; smaller local grey-level differences generally produce higher values.",
+    "formula": "\\(F_{\\mathrm{ngt.coarseness}}=\\frac{1}{\\sum_{i=1}^{N_g}p_i s_i}\\)",
+    "family": "ngtdm",
+    "chinese": "衡量邻域内灰度变化的粗糙程度；局部变化越小，Coarseness 通常越高。",
+    "variables": [
+      "\\(i\\)：离散灰度级索引。",
+      "\\(s_i\\)：灰度为 i 且有有效邻域的体素，其灰度与 ROI 内邻域平均灰度的绝对差总和；中心不参与邻域均值。",
+      "\\(p_i\\)：\\(n_i/N_{v,c}\\)：nᵢ 为灰度 i 且有 ROI 内邻居的体素数；\\(N_{v,c}\\) 为全部有有效邻域的体素数。",
+      "\\(N_g\\)：ROI 离散灰度级轴的范围大小。"
+    ],
+    "chinese_name": "粗糙度",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#coarseness",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#coarseness",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#neighbourhood-grey-tone-difference-based-features"
+    ],
+    "description_zh": "测量纹理粗糙度；局部灰度级差越小，通常数值越高。"
+  },
+  "ibsi_65HE": {
+    "name": "Contrast",
+    "code": "65HE",
+    "description": "Combines grey-level dynamic range and spatial frequency of local intensity changes.",
+    "formula": "\\(F_{\\mathrm{ngt.contrast}}=\\left[\\frac{1}{N_{g,p}(N_{g,p}-1)}\\sum_{i_1=1}^{N_g}\\sum_{i_2=1}^{N_g}p_{i_1}p_{i_2}(i_1-i_2)^2\\right]\\left[\\frac{1}{N_{v,c}}\\sum_{i=1}^{N_g}s_i\\right]\\)",
+    "family": "ngtdm",
+    "chinese": "综合灰度动态范围和局部灰度变化频率，衡量纹理对比度。",
+    "variables": [
+      "\\(i,i_1,i_2\\)：离散灰度级索引。",
+      "\\(s_i\\)：灰度为 i 且有有效邻域的体素，其灰度与 ROI 内邻域平均灰度的绝对差总和；中心不参与邻域均值。",
+      "\\(p_i\\)：\\(n_i/N_{v,c}\\)：nᵢ 为灰度 i 且有 ROI 内邻居的体素数；\\(N_{v,c}\\) 为全部有有效邻域的体素数。",
+      "\\(N_g\\)：ROI 离散灰度级轴的范围大小。",
+      "\\(N_{g,p}\\)：出现概率大于0的灰度级数。",
+      "\\(N_{v,c}\\)：至少具有一个 ROI 内邻居的体素总数。"
+    ],
+    "chinese_name": "对比度",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#feat-ngtdm-contrast",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#feat-ngtdm-contrast",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#neighbourhood-grey-tone-difference-based-features"
+    ],
+    "description_zh": "综合灰度级动态范围与局部强度变化的空间频率。"
+  },
+  "ibsi_NQ30": {
+    "name": "Busyness",
+    "code": "NQ30",
+    "description": "Measures how rapidly grey levels change between neighbouring voxels.",
+    "formula": "\\(F_{\\mathrm{ngt.busyness}}=\\frac{\\sum_{i=1}^{N_g}p_i s_i}{\\sum_{\\substack{i_1=1\\\\p_{i_1}>0}}^{N_g}\\sum_{\\substack{i_2=1\\\\p_{i_2}>0}}^{N_g}|i_1p_{i_1}-i_2p_{i_2}|}\\)",
+    "family": "ngtdm",
+    "chinese": "衡量相邻体素灰度变化的忙碌程度，数值越高通常表示灰度变化越频繁。",
+    "variables": [
+      "\\(i,i_1,i_2\\)：离散灰度级索引。",
+      "\\(s_i\\)：灰度为 i 且有有效邻域的体素，其灰度与 ROI 内邻域平均灰度的绝对差总和；中心不参与邻域均值。",
+      "\\(p_i\\)：\\(n_i/N_{v,c}\\)：nᵢ 为灰度 i 且有 ROI 内邻居的体素数；\\(N_{v,c}\\) 为全部有有效邻域的体素数。",
+      "\\(N_g\\)：ROI 离散灰度级轴的范围大小。"
+    ],
+    "chinese_name": "繁忙度",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#busyness",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#busyness",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#neighbourhood-grey-tone-difference-based-features"
+    ],
+    "description_zh": "测量相邻体素之间灰度级变化的快慢。"
+  },
+  "ibsi_HDEZ": {
+    "name": "Complexity",
+    "code": "HDEZ",
+    "description": "Measures texture complexity by combining grey-level differences with their probabilities and neighbourhood differences.",
+    "formula": "\\(F_{\\mathrm{ngt.complexity}}=\\frac{1}{N_{v,c}}\\sum_{\\substack{i_1,i_2=1\\\\p_{i_1},p_{i_2}>0}}^{N_g}|i_1-i_2|\\frac{p_{i_1}s_{i_1}+p_{i_2}s_{i_2}}{p_{i_1}+p_{i_2}}\\)",
+    "family": "ngtdm",
+    "chinese": "衡量局部灰度差异的复杂程度，综合灰度差和对应概率/邻域差异。",
+    "variables": [
+      "\\(i,i_1,i_2\\)：离散灰度级索引。",
+      "\\(s_i\\)：灰度为 i 且有有效邻域的体素，其灰度与 ROI 内邻域平均灰度的绝对差总和；中心不参与邻域均值。",
+      "\\(p_i\\)：\\(n_i/N_{v,c}\\)：nᵢ 为灰度 i 且有 ROI 内邻居的体素数；\\(N_{v,c}\\) 为全部有有效邻域的体素数。",
+      "\\(N_g\\)：ROI 离散灰度级轴的范围大小。",
+      "\\(N_{v,c}\\)：至少具有一个 ROI 内邻居的体素总数。"
+    ],
+    "chinese_name": "复杂度",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#complexity",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#complexity",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#neighbourhood-grey-tone-difference-based-features"
+    ],
+    "description_zh": "结合灰度级差、对应概率以及邻域差异来测量纹理复杂度。"
+  },
+  "ibsi_1X9X": {
+    "name": "Strength",
+    "code": "1X9X",
+    "description": "Measures the prominence of broad, strong homogeneous structures in the texture.",
+    "formula": "\\(F_{\\mathrm{ngt.strength}}=\\frac{\\sum_{\\substack{i_1,i_2=1\\\\p_{i_1},p_{i_2}>0}}^{N_g}(p_{i_1}+p_{i_2})(i_1-i_2)^2}{\\sum_{i=1}^{N_g}s_i}\\)",
+    "family": "ngtdm",
+    "chinese": "衡量纹理中大范围、较强的同灰度结构；较大的值通常对应更强的粗尺度结构。",
+    "variables": [
+      "\\(i,i_1,i_2\\)：离散灰度级索引。",
+      "\\(s_i\\)：灰度为 i 且有有效邻域的体素，其灰度与 ROI 内邻域平均灰度的绝对差总和；中心不参与邻域均值。",
+      "\\(p_i\\)：\\(n_i/N_{v,c}\\)：nᵢ 为灰度 i 且有 ROI 内邻居的体素数；\\(N_{v,c}\\) 为全部有有效邻域的体素数。",
+      "\\(N_g\\)：ROI 离散灰度级轴的范围大小。"
+    ],
+    "chinese_name": "强度",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#strength",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#strength",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#neighbourhood-grey-tone-difference-based-features"
+    ],
+    "description_zh": "测量纹理中大范围、强同质结构的突出程度。"
+  },
+  "ibsi_SODN": {
+    "name": "Low dependence emphasis",
+    "code": "SODN",
+    "description": "Emphasises neighbourhoods with low dependence counts.",
+    "formula": "\\(F_{\\mathrm{ngl.lde}}=\\frac{1}{N_s}\\sum_{j=1}^{N_n}\\frac{s_{.j}}{j^2}\\)",
+    "family": "ngldm",
+    "chinese": "强调依赖体素数较少的邻域，反映低依赖程度结构的占比。",
+    "variables": [
+      "\\(s_{.j}\\)：依赖计数（包含中心体素，最小为1）为 j 的邻域总数，对全部灰度求和。",
+      "\\(j,N_n\\)：依赖计数（包含中心体素，最小为1）索引及其最大值。",
+      "\\(N_s\\)：矩阵所有计数之和，即邻域总数。",
+      "依赖计数只统计 ROI 内满足灰度差阈值及邻域半径的体素，并包含中心体素。"
+    ],
+    "chinese_name": "低依赖强调",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#low-dependence-emphasis",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#low-dependence-emphasis",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#neighbouring-grey-level-dependence-based-features"
+    ],
+    "description_zh": "强调依赖计数低的邻域。"
+  },
+  "ibsi_IMOQ": {
+    "name": "High dependence emphasis",
+    "code": "IMOQ",
+    "description": "Emphasises neighbourhoods with high dependence counts.",
+    "formula": "\\(F_{\\mathrm{ngl.hde}}=\\frac{1}{N_s}\\sum_{j=1}^{N_n}j^2s_{.j}\\)",
+    "family": "ngldm",
+    "chinese": "强调依赖体素数较多的邻域，反映高依赖程度结构的占比。",
+    "variables": [
+      "\\(s_{.j}\\)：依赖计数（包含中心体素，最小为1）为 j 的邻域总数，对全部灰度求和。",
+      "\\(j,N_n\\)：依赖计数（包含中心体素，最小为1）索引及其最大值。",
+      "\\(N_s\\)：矩阵所有计数之和，即邻域总数。",
+      "依赖计数只统计 ROI 内满足灰度差阈值及邻域半径的体素，并包含中心体素。"
+    ],
+    "chinese_name": "高依赖强调",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#high-dependence-emphasis",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#high-dependence-emphasis",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#neighbouring-grey-level-dependence-based-features"
+    ],
+    "description_zh": "强调依赖计数高的邻域。"
+  },
+  "ibsi_TL9H": {
+    "name": "Low grey level count emphasis",
+    "code": "TL9H",
+    "description": "Emphasises dependence neighbourhoods with low centre-voxel grey levels.",
+    "formula": "\\(F_{\\mathrm{ngl.lgce}}=\\frac{1}{N_s}\\sum_{i=1}^{N_g}\\frac{s_{i.}}{i^2}\\)",
+    "family": "ngldm",
+    "chinese": "强调低灰度级中心体素对应的依赖邻域。",
+    "variables": [
+      "\\(s_{i.}\\)：灰度为 i 的邻域总数，对矩阵第二轴求和。",
+      "\\(i,N_g\\)：灰度级索引及矩阵灰度级轴的范围大小。",
+      "\\(N_s\\)：矩阵所有计数之和，即邻域总数。"
+    ],
+    "chinese_name": "低灰度计数强调",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#low-grey-level-count-emphasis",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#low-grey-level-count-emphasis",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#neighbouring-grey-level-dependence-based-features"
+    ],
+    "description_zh": "强调中心体素灰度级低的依赖邻域。"
+  },
+  "ibsi_OAE7": {
+    "name": "High grey level count emphasis",
+    "code": "OAE7",
+    "description": "Emphasises dependence neighbourhoods with high centre-voxel grey levels.",
+    "formula": "\\(F_{\\mathrm{ngl.hgce}}=\\frac{1}{N_s}\\sum_{i=1}^{N_g}i^2s_{i.}\\)",
+    "family": "ngldm",
+    "chinese": "强调高灰度级中心体素对应的依赖邻域。",
+    "variables": [
+      "\\(s_{i.}\\)：灰度为 i 的邻域总数，对矩阵第二轴求和。",
+      "\\(i,N_g\\)：灰度级索引及矩阵灰度级轴的范围大小。",
+      "\\(N_s\\)：矩阵所有计数之和，即邻域总数。"
+    ],
+    "chinese_name": "高灰度计数强调",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#high-grey-level-count-emphasis",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#high-grey-level-count-emphasis",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#neighbouring-grey-level-dependence-based-features"
+    ],
+    "description_zh": "强调中心体素灰度级高的依赖邻域。"
+  },
+  "ibsi_EQ3F": {
+    "name": "Low dependence low grey level emphasis",
+    "code": "EQ3F",
+    "description": "Emphasises neighbourhoods with both low dependence counts and low grey levels.",
+    "formula": "\\(F_{\\mathrm{ngl.ldlge}}=\\frac{1}{N_s}\\sum_{i=1}^{N_g}\\sum_{j=1}^{N_n}\\frac{s_{ij}}{i^2j^2}\\)",
+    "family": "ngldm",
+    "chinese": "同时强调低依赖计数和低灰度级。",
+    "variables": [
+      "\\(s_{ij}\\)：灰度为 i、依赖计数（包含中心体素，最小为1）为 j 的邻域数。",
+      "\\(i,N_g\\)：灰度级索引及矩阵灰度级轴的范围大小。",
+      "\\(j,N_n\\)：依赖计数（包含中心体素，最小为1）索引及其最大值。",
+      "\\(N_s\\)：矩阵所有计数之和，即邻域总数。",
+      "依赖计数只统计 ROI 内满足灰度差阈值及邻域半径的体素，并包含中心体素。"
+    ],
+    "chinese_name": "低依赖低灰度强调",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#low-dependence-low-grey-level-emphasis",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#low-dependence-low-grey-level-emphasis",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#neighbouring-grey-level-dependence-based-features"
+    ],
+    "description_zh": "强调依赖计数低且灰度级低的邻域。"
+  },
+  "ibsi_JA6D": {
+    "name": "Low dependence high grey level emphasis",
+    "code": "JA6D",
+    "description": "Emphasises neighbourhoods with low dependence counts and high grey levels.",
+    "formula": "\\(F_{\\mathrm{ngl.ldhge}}=\\frac{1}{N_s}\\sum_{i=1}^{N_g}\\sum_{j=1}^{N_n}\\frac{i^2s_{ij}}{j^2}\\)",
+    "family": "ngldm",
+    "chinese": "同时强调低依赖计数和高灰度级。",
+    "variables": [
+      "\\(s_{ij}\\)：灰度为 i、依赖计数（包含中心体素，最小为1）为 j 的邻域数。",
+      "\\(i,N_g\\)：灰度级索引及矩阵灰度级轴的范围大小。",
+      "\\(j,N_n\\)：依赖计数（包含中心体素，最小为1）索引及其最大值。",
+      "\\(N_s\\)：矩阵所有计数之和，即邻域总数。",
+      "依赖计数只统计 ROI 内满足灰度差阈值及邻域半径的体素，并包含中心体素。"
+    ],
+    "chinese_name": "低依赖高灰度强调",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#low-dependence-high-grey-level-emphasis",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#low-dependence-high-grey-level-emphasis",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#neighbouring-grey-level-dependence-based-features"
+    ],
+    "description_zh": "强调依赖计数低且灰度级高的邻域。"
+  },
+  "ibsi_NBZI": {
+    "name": "High dependence low grey level emphasis",
+    "code": "NBZI",
+    "description": "Emphasises neighbourhoods with high dependence counts and low grey levels.",
+    "formula": "\\(F_{\\mathrm{ngl.hdlge}}=\\frac{1}{N_s}\\sum_{i=1}^{N_g}\\sum_{j=1}^{N_n}\\frac{j^2s_{ij}}{i^2}\\)",
+    "family": "ngldm",
+    "chinese": "同时强调高依赖计数和低灰度级。",
+    "variables": [
+      "\\(s_{ij}\\)：灰度为 i、依赖计数（包含中心体素，最小为1）为 j 的邻域数。",
+      "\\(i,N_g\\)：灰度级索引及矩阵灰度级轴的范围大小。",
+      "\\(j,N_n\\)：依赖计数（包含中心体素，最小为1）索引及其最大值。",
+      "\\(N_s\\)：矩阵所有计数之和，即邻域总数。",
+      "依赖计数只统计 ROI 内满足灰度差阈值及邻域半径的体素，并包含中心体素。"
+    ],
+    "chinese_name": "高依赖低灰度强调",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#high-dependence-low-grey-level-emphasis",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#high-dependence-low-grey-level-emphasis",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#neighbouring-grey-level-dependence-based-features"
+    ],
+    "description_zh": "强调依赖计数高且灰度级低的邻域。"
+  },
+  "ibsi_9QMG": {
+    "name": "High dependence high grey level emphasis",
+    "code": "9QMG",
+    "description": "Emphasises neighbourhoods with both high dependence counts and high grey levels.",
+    "formula": "\\(F_{\\mathrm{ngl.hdhge}}=\\frac{1}{N_s}\\sum_{i=1}^{N_g}\\sum_{j=1}^{N_n}i^2j^2s_{ij}\\)",
+    "family": "ngldm",
+    "chinese": "同时强调高依赖计数和高灰度级。",
+    "variables": [
+      "\\(s_{ij}\\)：灰度为 i、依赖计数（包含中心体素，最小为1）为 j 的邻域数。",
+      "\\(i,N_g\\)：灰度级索引及矩阵灰度级轴的范围大小。",
+      "\\(j,N_n\\)：依赖计数（包含中心体素，最小为1）索引及其最大值。",
+      "\\(N_s\\)：矩阵所有计数之和，即邻域总数。",
+      "依赖计数只统计 ROI 内满足灰度差阈值及邻域半径的体素，并包含中心体素。"
+    ],
+    "chinese_name": "高依赖高灰度强调",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#high-dependence-high-grey-level-emphasis",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#high-dependence-high-grey-level-emphasis",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#neighbouring-grey-level-dependence-based-features"
+    ],
+    "description_zh": "强调依赖计数高且灰度级高的邻域。"
+  },
+  "ibsi_FP8K": {
+    "name": "Grey level non-uniformity",
+    "code": "FP8K",
+    "description": "Measures non-uniformity of dependence-neighbourhood counts across grey levels.",
+    "formula": "\\(F_{\\mathrm{ngl.glnu}}=\\frac{1}{N_s}\\sum_{i=1}^{N_g}s_{i.}^2\\)",
+    "family": "ngldm",
+    "chinese": "衡量不同灰度级依赖邻域数量分布的不均匀程度。",
+    "variables": [
+      "\\(s_{i.}\\)：灰度为 i 的邻域总数，对矩阵第二轴求和。",
+      "\\(i,N_g\\)：灰度级索引及矩阵灰度级轴的范围大小。",
+      "\\(N_s\\)：矩阵所有计数之和，即邻域总数。"
+    ],
+    "chinese_name": "灰度非均匀性",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#feat-ngldm-grey-level-non-uniformity",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#feat-ngldm-grey-level-non-uniformity",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#neighbouring-grey-level-dependence-based-features"
+    ],
+    "description_zh": "测量不同灰度级之间依赖邻域计数的非均匀性。"
+  },
+  "ibsi_5SPA": {
+    "name": "Normalised grey level non-uniformity",
+    "code": "5SPA",
+    "description": "Normalises grey-level non-uniformity in the dependence matrix.",
+    "formula": "\\(F_{\\mathrm{ngl.glnu.norm}}=\\frac{1}{N_s^2}\\sum_{i=1}^{N_g}s_{i.}^2\\)",
+    "family": "ngldm",
+    "chinese": "对灰度级依赖邻域数量非均匀性进行归一化。",
+    "variables": [
+      "\\(s_{i.}\\)：灰度为 i 的邻域总数，对矩阵第二轴求和。",
+      "\\(i,N_g\\)：灰度级索引及矩阵灰度级轴的范围大小。",
+      "\\(N_s\\)：矩阵所有计数之和，即邻域总数。"
+    ],
+    "chinese_name": "归一化灰度非均匀性",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#feat-ngldm-grey-level-non-uniformity-normalised",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#feat-ngldm-grey-level-non-uniformity-normalised",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#neighbouring-grey-level-dependence-based-features"
+    ],
+    "description_zh": "对依赖矩阵中的灰度级非均匀性进行归一化。"
+  },
+  "ibsi_Z87G": {
+    "name": "Dependence count non-uniformity",
+    "code": "Z87G",
+    "description": "Measures non-uniformity of neighbourhood counts across dependence counts.",
+    "formula": "\\(F_{\\mathrm{ngl.dcnu}}=\\frac{1}{N_s}\\sum_{j=1}^{N_n}s_{.j}^2\\)",
+    "family": "ngldm",
+    "chinese": "衡量不同依赖计数对应的邻域数量分布是否均匀。",
+    "variables": [
+      "\\(s_{.j}\\)：依赖计数（包含中心体素，最小为1）为 j 的邻域总数，对全部灰度求和。",
+      "\\(j,N_n\\)：依赖计数（包含中心体素，最小为1）索引及其最大值。",
+      "\\(N_s\\)：矩阵所有计数之和，即邻域总数。",
+      "依赖计数只统计 ROI 内满足灰度差阈值及邻域半径的体素，并包含中心体素。"
+    ],
+    "chinese_name": "依赖计数非均匀性",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#dependence-count-non-uniformity",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#dependence-count-non-uniformity",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#neighbouring-grey-level-dependence-based-features"
+    ],
+    "description_zh": "测量不同依赖计数之间邻域计数的非均匀性。"
+  },
+  "ibsi_OKJI": {
+    "name": "Normalised dependence count non-uniformity",
+    "code": "OKJI",
+    "description": "Normalises dependence-count non-uniformity.",
+    "formula": "\\(F_{\\mathrm{ngl.dcnu.norm}}=\\frac{1}{N_s^2}\\sum_{j=1}^{N_n}s_{.j}^2\\)",
+    "family": "ngldm",
+    "chinese": "对依赖计数非均匀性进行归一化。",
+    "variables": [
+      "\\(s_{.j}\\)：依赖计数（包含中心体素，最小为1）为 j 的邻域总数，对全部灰度求和。",
+      "\\(j,N_n\\)：依赖计数（包含中心体素，最小为1）索引及其最大值。",
+      "\\(N_s\\)：矩阵所有计数之和，即邻域总数。",
+      "依赖计数只统计 ROI 内满足灰度差阈值及邻域半径的体素，并包含中心体素。"
+    ],
+    "chinese_name": "归一化依赖计数非均匀性",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#normalised-dependence-count-non-uniformity",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#normalised-dependence-count-non-uniformity",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#neighbouring-grey-level-dependence-based-features"
+    ],
+    "description_zh": "对依赖计数非均匀性进行归一化。"
+  },
+  "ibsi_6XV8": {
+    "name": "Dependence count percentage",
+    "code": "6XV8",
+    "description": "Measures the number of realised dependence neighbourhoods relative to ROI voxel count; it is 1 under the IBSI definition when all centres are included.",
+    "formula": "\\(F_{\\mathrm{ngl.dc.perc}}=\\frac{N_s}{N_v}\\)",
+    "family": "ngldm",
+    "chinese": "计算邻域总数与 ROI 体素数之比；在 IBSI 当前邻域定义下通常为 1。",
+    "variables": [
+      "\\(N_s\\)：矩阵所有计数之和，即邻域总数。",
+      "\\(N_v\\)：ROI 强度掩膜的体素数。"
+    ],
+    "chinese_name": "依赖计数百分比",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#dependence-count-percentage",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#dependence-count-percentage",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#neighbouring-grey-level-dependence-based-features"
+    ],
+    "description_zh": "测量实际形成的依赖邻域数与 ROI 体素数的比值；按照 IBSI 定义，包含所有中心体素时该值为1。"
+  },
+  "ibsi_1PFV": {
+    "name": "Grey level variance",
+    "code": "1PFV",
+    "description": "Measures variance of grey levels represented in the dependence matrix.",
+    "formula": "\\(F_{\\mathrm{ngl.gl.var}}=\\sum_{i=1}^{N_g}\\sum_{j=1}^{N_n}(i-\\mu)^2p_{ij}\\)",
+    "family": "ngldm",
+    "chinese": "衡量依赖矩阵中灰度级分布的方差。",
+    "variables": [
+      "\\(p_{ij}\\)：sᵢⱼ/Nₛ：灰度 i 与依赖计数（包含中心体素，最小为1） j 的联合概率，sᵢⱼ 为对应邻域数。",
+      "\\(i,N_g\\)：灰度级索引及矩阵灰度级轴的范围大小。",
+      "\\(j,N_n\\)：依赖计数（包含中心体素，最小为1）索引及其最大值。",
+      "\\(N_s\\)：矩阵所有计数之和，即邻域总数。",
+      "\\(\\mu\\)：灰度均值 Σᵢⱼ i·pᵢⱼ。",
+      "依赖计数只统计 ROI 内满足灰度差阈值及邻域半径的体素，并包含中心体素。"
+    ],
+    "chinese_name": "灰度方差",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#feat-ngldm-grey-level-variance",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#feat-ngldm-grey-level-variance",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#neighbouring-grey-level-dependence-based-features"
+    ],
+    "description_zh": "测量依赖矩阵所表示的灰度级方差。"
+  },
+  "ibsi_DNX2": {
+    "name": "Dependence count variance",
+    "code": "DNX2",
+    "description": "Measures variance of dependence counts in the dependence matrix.",
+    "formula": "\\(F_{\\mathrm{ngl.dc.var}}=\\sum_{i=1}^{N_g}\\sum_{j=1}^{N_n}(j-\\mu)^2p_{ij}\\)",
+    "family": "ngldm",
+    "chinese": "衡量邻域依赖计数分布的方差。",
+    "variables": [
+      "\\(p_{ij}\\)：sᵢⱼ/Nₛ：灰度 i 与依赖计数（包含中心体素，最小为1） j 的联合概率，sᵢⱼ 为对应邻域数。",
+      "\\(i,N_g\\)：灰度级索引及矩阵灰度级轴的范围大小。",
+      "\\(j,N_n\\)：依赖计数（包含中心体素，最小为1）索引及其最大值。",
+      "\\(N_s\\)：矩阵所有计数之和，即邻域总数。",
+      "\\(\\mu\\)：依赖计数（包含中心体素，最小为1）均值 Σᵢⱼ j·pᵢⱼ。",
+      "依赖计数只统计 ROI 内满足灰度差阈值及邻域半径的体素，并包含中心体素。"
+    ],
+    "chinese_name": "依赖计数方差",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#dependence-count-variance",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#dependence-count-variance",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#neighbouring-grey-level-dependence-based-features"
+    ],
+    "description_zh": "测量依赖矩阵中依赖计数的方差。"
+  },
+  "ibsi_FCBV": {
+    "name": "Dependence count entropy",
+    "code": "FCBV",
+    "description": "Measures entropy of the joint grey-level and dependence-count distribution.",
+    "formula": "\\(F_{\\mathrm{ngl.dc.entr}}=-\\sum_{i=1}^{N_g}\\sum_{j=1}^{N_n}p_{ij}\\log_2p_{ij}\\)",
+    "family": "ngldm",
+    "chinese": "衡量灰度级与依赖计数联合分布的不确定性。",
+    "variables": [
+      "\\(p_{ij}\\)：sᵢⱼ/Nₛ：灰度 i 与依赖计数（包含中心体素，最小为1） j 的联合概率，sᵢⱼ 为对应邻域数。",
+      "\\(i,N_g\\)：灰度级索引及矩阵灰度级轴的范围大小。",
+      "\\(j,N_n\\)：依赖计数（包含中心体素，最小为1）索引及其最大值。",
+      "\\(N_s\\)：矩阵所有计数之和，即邻域总数。",
+      "依赖计数只统计 ROI 内满足灰度差阈值及邻域半径的体素，并包含中心体素。"
+    ],
+    "chinese_name": "依赖计数熵",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#dependence-count-entropy",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#dependence-count-entropy",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#neighbouring-grey-level-dependence-based-features"
+    ],
+    "description_zh": "测量灰度级与依赖计数联合分布的熵。"
+  },
+  "ibsi_CAS9": {
+    "name": "Dependence count energy",
+    "code": "CAS9",
+    "description": "Measures concentration of the joint dependence distribution through squared probabilities.",
+    "formula": "\\(F_{\\mathrm{ngl.dc.energy}}=\\sum_{i=1}^{N_g}\\sum_{j=1}^{N_n}p_{ij}^2\\)",
+    "family": "ngldm",
+    "chinese": "计算依赖矩阵联合概率平方和，反映分布集中程度。",
+    "variables": [
+      "\\(p_{ij}\\)：sᵢⱼ/Nₛ：灰度 i 与依赖计数（包含中心体素，最小为1） j 的联合概率，sᵢⱼ 为对应邻域数。",
+      "\\(i,N_g\\)：灰度级索引及矩阵灰度级轴的范围大小。",
+      "\\(j,N_n\\)：依赖计数（包含中心体素，最小为1）索引及其最大值。",
+      "\\(N_s\\)：矩阵所有计数之和，即邻域总数。",
+      "依赖计数只统计 ROI 内满足灰度差阈值及邻域半径的体素，并包含中心体素。"
+    ],
+    "chinese_name": "依赖计数能量",
+    "source_url": "https://ibsi.readthedocs.io/en/master/03_Image_features.html#dependence-count-energy",
+    "variable_source_urls": [
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#dependence-count-energy",
+      "https://ibsi.readthedocs.io/en/master/03_Image_features.html#neighbouring-grey-level-dependence-based-features"
+    ],
+    "description_zh": "通过概率平方测量依赖联合分布的集中程度。"
+  }
+}

@@ -103,8 +103,8 @@
 .clinical-ui .c-progress{height:5px;background:var(--c-soft);border-radius:5px;overflow:hidden;margin:12px 0}
 .clinical-ui .c-progress>span{height:100%;display:block;background:var(--c-blue)}
 .clinical-ui .c-work{max-width:1920px;padding:20px 24px 24px;margin:auto}
-.clinical-ui .c-work-grid{display:grid;grid-template-columns:minmax(0,1fr) 370px;gap:18px;align-items:start}
-.clinical-ui .c-work-grid.collapsed{grid-template-columns:minmax(0,1fr)}
+.clinical-ui .c-work-grid{--c-result-width:370px;display:grid;grid-template-columns:minmax(0,1fr) var(--c-result-width);gap:18px;align-items:start;overflow:hidden;transition:grid-template-columns .28s cubic-bezier(.22,1,.36,1),gap .28s cubic-bezier(.22,1,.36,1)}
+.clinical-ui .c-work-grid.collapsed{grid-template-columns:minmax(0,1fr) 0px;column-gap:0}
 .clinical-ui .c-view{min-width:0;border:1px solid var(--c-line);border-radius:10px;background:var(--c-panel);overflow:hidden}
 .clinical-ui .c-view-toolbar{padding:13px 14px 11px;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:10px 18px;border-bottom:1px solid var(--c-line)}
 .clinical-ui .c-studyline{display:flex;align-items:center;gap:8px;flex-wrap:wrap;min-width:0}
@@ -173,8 +173,8 @@
 .clinical-ui input[type=checkbox]{accent-color:var(--c-blue)}
 .clinical-ui .c-disclosure summary{color:var(--c-blue);font-size:13px;cursor:pointer}
 .clinical-ui .c-disclosure[open] summary{margin-bottom:16px}
-@media(min-width:1600px){.clinical-ui .c-work-grid{grid-template-columns:minmax(0,1fr) 400px}}
-@media(max-width:1180px){.clinical-ui .c-main{padding:26px 24px}.clinical-ui .c-work-grid{grid-template-columns:minmax(0,1fr) 320px}.clinical-ui .c-table td,.clinical-ui .c-table th{padding-left:14px;padding-right:14px}.clinical-ui .c-filters{gap:18px}.clinical-ui .c-search{width:230px}.clinical-ui .c-viewport{min-height:360px}}
+@media(min-width:1600px){.clinical-ui .c-work-grid{--c-result-width:400px}}
+@media(max-width:1180px){.clinical-ui .c-main{padding:26px 24px}.clinical-ui .c-work-grid{--c-result-width:320px}.clinical-ui .c-table td,.clinical-ui .c-table th{padding-left:14px;padding-right:14px}.clinical-ui .c-filters{gap:18px}.clinical-ui .c-search{width:230px}.clinical-ui .c-viewport{min-height:360px}}
 @media(max-width:900px){.clinical-ui .c-work-grid{grid-template-columns:1fr}.clinical-ui .c-viewport{max-height:none;aspect-ratio:1.2}.clinical-ui .c-filterbar{display:block}.clinical-ui .c-search{width:100%;margin-top:10px}.clinical-ui .c-toolsbottom{grid-template-columns:minmax(0,1fr) auto}.clinical-ui .c-toolsbottom .c-selection-note{grid-column:1/-1;grid-row:2}.clinical-ui .c-account{display:none}}
 @media(max-width:560px){.clinical-ui .clinical-header{padding:12px 16px;gap:12px}.clinical-ui .clinical-brand strong{font-size:14px}.clinical-ui .clinical-brand small{font-size:9px;letter-spacing:1px}.clinical-ui .clinical-account,.clinical-ui .clinical-header-divider,.clinical-ui .clinical-theme>span{display:none}.clinical-ui .clinical-header-actions{gap:6px}.clinical-ui .c-main{padding:23px 14px}.clinical-ui h1{font-size:23px}.clinical-ui .c-stats{grid-template-columns:1fr 1fr;gap:10px}.clinical-ui .c-stat{padding:15px}.clinical-ui .c-panel-head{padding:16px 14px}.clinical-ui .c-work{padding:16px 12px}.clinical-ui .c-view-toolbar{grid-template-columns:1fr;padding:10px}.clinical-ui .c-windowtools{justify-content:flex-start}.clinical-ui .c-toolbar-secondary{grid-column:1}.clinical-ui .c-viewport{min-height:270px}.clinical-ui .c-sliderline{display:grid;grid-template-columns:36px minmax(0,1fr) 36px;gap:10px}.clinical-ui .c-sliderwrap{grid-column:2;grid-row:1}.clinical-ui .c-slice-prev{grid-column:1;grid-row:1}.clinical-ui .c-slice-next{grid-column:3;grid-row:1}.clinical-ui .c-slice-input{grid-column:2;grid-row:2;justify-self:end}.clinical-ui .c-slice-total{grid-column:3;grid-row:2}.clinical-ui .c-toolsbottom{display:flex;flex-wrap:wrap;gap:12px}.clinical-ui .c-selection-note{order:3;flex-basis:100%}.clinical-ui .c-form-grid{grid-template-columns:1fr}.clinical-ui .c-login-card{padding:25px}.clinical-ui .c-presetsvalues{gap:7px;flex-wrap:wrap;max-width:100%}.clinical-ui .c-presetsvalues>span{font-size:11px}}
 @media(pointer:coarse){.clinical-ui .c-button,.clinical-ui .c-link,.clinical-ui .c-filter{min-height:44px}.clinical-ui .c-input{font-size:16px}}
@@ -322,3 +322,21 @@ html:has(.clinical-ui){scrollbar-gutter:stable}
 .clinical-ui .c-study-table tbody tr:hover{background:transparent}
 
 @media(max-width:560px){.clinical-ui .clinical-brand{gap:10px}.clinical-ui .clinical-brand>.clinical-logo{width:48px;height:32px}}
+
+.clinical-ui .c-back-link{display:inline-flex;align-items:center;gap:8px;padding:7px 0;text-decoration:none;background:transparent;border:0;border-radius:0;box-shadow:none}
+.clinical-ui .c-back-link:hover{text-decoration:none}
+.clinical-ui .c-back-link:focus-visible{outline:2px solid var(--c-blue);outline-offset:4px}
+.clinical-ui .c-results-region{display:grid;grid-template-rows:1fr;min-width:0;overflow:hidden;opacity:1;transform:translateX(0);transition:grid-template-rows .28s cubic-bezier(.22,1,.36,1),opacity .22s ease,transform .28s ease}
+.clinical-ui .c-results-region>.c-result-panel{width:var(--c-result-width);min-height:0;overflow:hidden}
+.clinical-ui .c-work-grid.collapsed .c-results-region{grid-template-rows:0fr;opacity:0;transform:translateX(18px);pointer-events:none}
+.clinical-ui .c-drawer[open]::backdrop{animation:c-drawer-backdrop-in .26s ease both}
+.clinical-ui .c-drawer.c-dialog-closing::backdrop{animation:c-drawer-backdrop-out .22s ease both}
+@keyframes c-drawer-backdrop-in{from{opacity:0}to{opacity:1}}
+@keyframes c-drawer-backdrop-out{from{opacity:1}to{opacity:0}}
+@media(max-width:900px){
+ .clinical-ui .c-work-grid,.clinical-ui .c-work-grid.collapsed{grid-template-columns:minmax(0,1fr)}
+ .clinical-ui .c-work-grid.collapsed{row-gap:0}
+ .clinical-ui .c-results-region>.c-result-panel{width:auto}
+ .clinical-ui .c-work-grid.collapsed .c-results-region{transform:translateY(-12px)}
+}
+@media(prefers-reduced-motion:reduce){.clinical-ui .c-drawer::backdrop{animation:none!important}}

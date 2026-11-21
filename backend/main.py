@@ -1,4 +1,6 @@
 import sys
+import asyncio
+from contextlib import suppress
 from pathlib import Path
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
@@ -14,14 +16,25 @@ if str(PROJECT_ROOT) not in sys.path:
 
 from app.core.config import settings
 from app.db.init_db import init_database
-from app.api.v1 import auth, admin, studies, tasks, results, reports
+from app.api.v1 import auth, admin, studies, tasks, results, reports, insights, feature_calculation
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # Startup: ensure tables & initial accounts exist
-    await init_database()
-    yield
-    # Shutdown: clean up if needed
+    if settings.INITIALIZE_DATABASE_ON_STARTUP:
+        await init_database()
+    worker = None
+    if settings.LLM_WORKER_ENABLED:
+        from app.services.insight_service import run_worker
+        worker = asyncio.create_task(run_worker())
+    try:
+        yield
+    finally:
+        from app.services.feature_calculation.service import shutdown
+        await shutdown()
+        if worker:
+            worker.cancel()
+            with suppress(asyncio.CancelledError):
+                await worker
 
 app = FastAPI(
     title=settings.PROJECT_NAME,
@@ -46,6 +59,9 @@ app.include_router(studies.router, prefix=f"{settings.API_V1_STR}/studies", tags
 app.include_router(tasks.router, prefix=f"{settings.API_V1_STR}/tasks", tags=["分析调度与排队 (Tasks)"])
 app.include_router(results.router, prefix=f"{settings.API_V1_STR}/results", tags=["病灶与组学结果 (Results)"])
 app.include_router(reports.router, prefix=f"{settings.API_V1_STR}/reports", tags=["临床报告与协同 (Reports)"])
+app.include_router(insights.router, prefix=f"{settings.API_V1_STR}/insights", tags=["AI 洞察"])
+
+app.include_router(feature_calculation.router, prefix=f"{settings.API_V1_STR}/results")
 
 @app.get("/")
 async def root():

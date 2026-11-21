@@ -1,0 +1,30 @@
+/* Shared select appearance for controls and teleported option panels. */
+.clinical-ui .el-select {
+ --el-color-primary:var(--c-blue);--el-fill-color-blank:var(--c-panel);--el-text-color-regular:var(--c-text);--el-text-color-placeholder:var(--c-muted);--el-border-color:var(--c-line);--el-border-color-hover:var(--c-muted);
+ --select-ring:color-mix(in srgb,var(--c-muted) 45%,transparent);--select-shadow:color-mix(in srgb,var(--c-text) 16%,transparent);
+ font-size:13px;
+}
+.clinical-ui .el-select__wrapper{min-height:38px;border-radius:8px;padding:8px 11px;background:var(--c-panel);box-shadow:inset 0 0 0 1px var(--c-line);transition:box-shadow .16s ease}
+.clinical-ui .el-select__wrapper:not(.is-disabled):hover{box-shadow:0 2px 7px var(--select-shadow),inset 0 0 0 1px var(--select-ring)}
+.clinical-ui .el-select .el-select__wrapper:not(.is-disabled):is(.is-focused,:focus-within){outline:none;box-shadow:0 3px 10px var(--select-shadow),inset 0 0 0 1px var(--select-ring)}
+.clinical-ui .el-select .el-select__input:focus-visible{outline:none;box-shadow:none}
+.clinical-ui .el-select__caret{color:var(--c-muted);font-size:15px}
+.clinical-ui .clinical-select.c-sort{width:230px}
+.clinical-select-popper.el-popper{
+ --el-bg-color-overlay:#fff;--el-border-color-light:#dde5ef;--el-text-color-regular:#1b293d;--el-text-color-placeholder:#596a80;--select-panel:#fff;--select-text:#1b293d;--select-muted:#596a80;--select-line:#dde5ef;--select-hover:#f1f4f8;--select-selected:#eef2f7;--select-accent:#245fbd;
+ border:1px solid var(--select-line);border-radius:10px;background:var(--select-panel);box-shadow:0 8px 28px #1b293d1a,0 2px 6px #1b293d0a;overflow:hidden;
+}
+html:has(.clinical-ui[data-appearance=dark]) .clinical-select-popper.el-popper{
+ --el-bg-color-overlay:#181f2a;--el-border-color-light:#303d4f;--el-text-color-regular:#e6edf6;--el-text-color-placeholder:#a6b5c8;--select-panel:#181f2a;--select-text:#e6edf6;--select-muted:#a6b5c8;--select-line:#303d4f;--select-hover:#263241;--select-selected:#202c3b;--select-accent:#8ab8ff;box-shadow:0 10px 30px #0006;
+}
+.clinical-select-popper .el-popper__arrow{display:none}
+.clinical-select-popper .el-select-dropdown__list{padding:5px}
+.clinical-select-popper .el-select-dropdown__item{position:relative;height:auto;min-height:36px;line-height:1.5;margin:2px 0;padding:8px 34px 8px 12px;border-radius:6px;white-space:normal;overflow-wrap:anywhere;color:var(--select-text);font-size:13px;transition:background-color .12s ease}
+.clinical-select-popper .el-select-dropdown__item:is(:hover,.is-hovering){background:var(--select-hover);box-shadow:inset 0 0 0 1px var(--select-line)}
+.clinical-select-popper .el-select-dropdown__item.is-selected{background:var(--select-selected);color:var(--select-text);font-weight:600}
+.clinical-select-popper .el-select-dropdown__item.is-selected::after{content:'✓';position:absolute;right:12px;top:8px;color:var(--select-accent);font-size:15px;font-weight:600}
+.clinical-select-popper .clinical-option-label{display:block;line-height:1.5}
+.clinical-select-popper .clinical-option-description{display:block;margin-top:3px;font-size:12px;font-weight:400;line-height:1.6;color:var(--select-muted)}
+.clinical-select-popper .el-select-dropdown__item.is-disabled{opacity:.48;cursor:not-allowed;background:transparent;box-shadow:none}
+@media(max-width:480px){.clinical-ui .clinical-select.c-sort{max-width:100%;width:210px}.clinical-select-popper .el-select-dropdown__item{padding-left:10px}}
+@media(prefers-reduced-motion:reduce){.clinical-ui .el-select__wrapper,.clinical-select-popper .el-select-dropdown__item{transition:none}}
