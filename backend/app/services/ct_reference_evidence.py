@@ -110,26 +110,23 @@ def lobe_location(lobes, roi):
     return location, side
 
 
-def candidates(image, mask, lobes, lesions, anchors):
-    if not image.IsSameImageGeometryAs(mask, 1e-4, 1e-5):
+def candidate_components(image, mask, lesions):
+    """Resolve task candidates using the same component numbering and physical centers."""
+    if image.GetDimension() != 3 or not image.IsSameImageGeometryAs(mask, 1e-4, 1e-5):
         raise EvidenceUnavailable("候选掩膜与所选 CT 序列的物理空间不一致。")
-    lobe_array = None
-    if lobes is not None and image.IsSameImageGeometryAs(lobes, 1e-4, 1e-5):
-        computed = sitk.GetArrayViewFromImage(lobes)
-        if np.all(np.isin(computed, [0, *LOBE_LABELS])) and np.any(computed):
-            lobe_array = computed
-
-    labels, count = ndimage.label(sitk.GetArrayViewFromImage(mask) > 0)
-    counts = np.bincount(labels.ravel(), minlength=count + 1)
+    values = sitk.GetArrayViewFromImage(mask)
+    if not np.isfinite(values).all():
+        raise EvidenceUnavailable("候选掩膜含无效体素。")
+    labels, count = ndimage.label(values > 0)
+    counts = np.zeros(count + 1, dtype=np.int64)
+    for slab in labels:
+        counts += np.bincount(slab.ravel(), minlength=count + 1)
     voxel_volume = float(np.prod(image.GetSpacing()))
     keys = [label for label in range(1, count + 1) if counts[label] * voxel_volume >= MIN_CANDIDATE_VOLUME]
     keys.sort(key=lambda label: round(float(counts[label]) * voxel_volume, 2), reverse=True)
     if len(keys) != len(lesions):
         raise EvidenceUnavailable("候选掩膜与已保存的病灶清单不一致。")
     bounds = ndimage.find_objects(labels)
-    direction = np.array(image.GetDirection()).reshape(3, 3)
-    axial = abs(direction[2, 2]) >= 0.999
-    findings = []
     for index, (label, saved) in enumerate(zip(keys, lesions), start=1):
         region = bounds[label - 1]
         roi = labels[region] == label
@@ -137,6 +134,20 @@ def candidates(image, mask, lobes, lesions, anchors):
         world = image.TransformContinuousIndexToPhysicalPoint(center.tolist())
         if index != saved[0] or not np.allclose(world, saved[1:], rtol=0, atol=0.04):
             raise EvidenceUnavailable("候选掩膜与已保存的病灶定位不一致。")
+        yield saved, region, roi
+
+
+def candidates(image, mask, lobes, lesions, anchors):
+    lobe_array = None
+    if lobes is not None and image.IsSameImageGeometryAs(lobes, 1e-4, 1e-5):
+        computed = sitk.GetArrayViewFromImage(lobes)
+        if np.all(np.isin(computed, [0, *LOBE_LABELS])) and np.any(computed):
+            lobe_array = computed
+    direction = np.array(image.GetDirection()).reshape(3, 3)
+    axial = abs(direction[2, 2]) >= 0.999
+    findings = []
+    for saved, region, roi in candidate_components(image, mask, lesions):
+        index = saved[0]
         lobe, side = lobe_location(lobe_array[region] if lobe_array is not None else None, roi)
         measurement = axial_measurement(roi, region, image.GetSpacing()[:2]) if axial else None
         anchor = None

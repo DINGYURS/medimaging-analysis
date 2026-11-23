@@ -6,7 +6,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.api.deps import get_db, require_doctor
 from app.core.config import settings
 from app.db.models import AnalysisTask, Study, User
-from app.services import ct_chest_trial, ct_reference
+from app.services import ct_chest_trial, ct_reference, ct_structured_report
 from app.services.insight_payload import InputUnavailable
 from app.services.insight_service import enqueue_task_insight, latest_insight
 
@@ -25,9 +25,16 @@ async def require_owned_task(task_id: int, db, doctor):
 async def get_insight(task_id: int, db: AsyncSession = Depends(get_db), doctor: User = Depends(require_doctor)):
     task = await require_owned_task(task_id, db, doctor)
     result = await latest_insight(task_id, db)
-    trial = await asyncio.to_thread(ct_chest_trial.result_for, task_id, await db.get(Study, task.study_id))
+    study = await db.get(Study, task.study_id)
+    trial = await asyncio.to_thread(ct_chest_trial.result_for, task_id, study)
+    preview = await asyncio.to_thread(ct_structured_report.preview_for, task, study)
     if trial is not None:
         result["chest_model_trial"] = trial
+    if preview is not None:
+        if result.get("clinical_report_preview") is None:
+            result["clinical_report_preview"] = preview
+        elif preview.get("basis_insight_id") != result["clinical_report_preview"].get("basis_insight_id"):
+            result["historical_clinical_report_preview"] = preview
     return result
 
 @router.post("/{task_id}/generate", status_code=202)

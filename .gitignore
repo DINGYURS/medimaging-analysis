@@ -48,6 +48,7 @@ frontend/*.pid
 .cache/
 tmp/
 temp/
+.tmp/*
 
 # ==============================================================================
 # Medical Imaging & Large Datasets (医学影像、体数据与数据集)

@@ -43,6 +43,8 @@ class Settings(BaseSettings):
     RADIOMICS_DIR: str = os.path.join(STORAGE_DIR, "radiomics")
     REPORTS_DIR: str = os.path.join(STORAGE_DIR, "reports")
 
+    CT_QUANTITATIVE_INSIGHT_ENABLED: bool = False
+    CT_QUANTITATIVE_MASK_DIR: str = ""
     CT_REFERENCE_ENABLED: bool = False
     CT_REFERENCE_LOBE_PYTHON: str = ""
     CT_REFERENCE_LOBE_WEIGHTS: str = ""

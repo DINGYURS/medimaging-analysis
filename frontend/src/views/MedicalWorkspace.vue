@@ -23,7 +23,7 @@
                 <line :x1="activeReferenceLine[0][0]+0.5" :y1="activeReferenceLine[0][1]+0.5"
                   :x2="activeReferenceLine[1][0]+0.5" :y2="activeReferenceLine[1][1]+0.5"
                   stroke="#ffc857" stroke-width="2" stroke-linecap="round" vector-effect="non-scaling-stroke" />
-              </svg><svg v-if="activeInsightBox" :aria-label="insightAnchor?.trial ? '胸部模型候选区' : '毛刺候选区域'"
+              </svg><svg v-if="activeInsightBox" :aria-label="insightAnchor?.trial ? '胸部模型候选区' : (insightAnchor?.label || '毛刺候选区域')"
                 viewBox="0 0 1 1" preserveAspectRatio="none"
                 style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none">
                 <rect :x="activeInsightBox[0]" :y="activeInsightBox[1]" :width="activeInsightBox[2]-activeInsightBox[0]"
@@ -130,7 +130,7 @@ function locateReferenceMeasurement(index: number, anchor: { slice: number; endp
   showMask.value = true;
   changeSlice(anchor.slice);
 }
-type InsightAnchor = {slice:number;box_xy:[number,number,number,number]};
+type InsightAnchor = {slice:number;box_xy:[number,number,number,number];label?:string };
 const insightAnchor = ref<(InsightAnchor & {taskId:number;trial?:boolean}) | null>(null);
 const activeInsightBox = computed(() => {
   const anchor = insightAnchor.value;

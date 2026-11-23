@@ -1,0 +1,847 @@
+{
+  "version": "ct-terminology-0.1.1",
+  "based_on": "ct-terminology-0.1.0-draft",
+  "sources": {
+    "ct_candidate": "candidate-mask-v1",
+    "ct_quantitative_insight": "ct-quantitative-insight-v2",
+    "ct_lobe_adapter": "ct-lobe-estimate-v1",
+    "ct_specialist_raw": "stage3-specialists-v1",
+    "ct_specialist_sparse_audit": "ct-quantitative-insight-v2",
+    "ct_chest_trial": "chest-trial-v1",
+    "ct_reference": "ct-reference-v1",
+    "ct_reference_research": "ct-reference-input-v2",
+    "review_alias": "review-v1"
+  },
+  "state_labels": {
+    "candidate": [
+      "算法候选",
+      "Algorithm candidate"
+    ],
+    "measured": [
+      "已测量",
+      "Measured"
+    ],
+    "geometry_estimate": [
+      "基于掩膜的定位",
+      "Mask-based localization"
+    ],
+    "model_hint": [
+      "模型提示",
+      "Model hint"
+    ],
+    "indeterminate": [
+      "结果不确定",
+      "Indeterminate"
+    ],
+    "not_emitted": [
+      "此来源未输出",
+      "Not emitted by source"
+    ],
+    "not_assessed": [
+      "未评估",
+      "Not assessed"
+    ],
+    "unavailable": [
+      "不可用",
+      "Unavailable"
+    ],
+    "research_prediction": [
+      "研究预测",
+      "Research prediction"
+    ],
+    "technical_test": [
+      "技术试验输出",
+      "Technical trial output"
+    ],
+    "empty_mask": [
+      "模型输出为空",
+      "Empty model mask"
+    ],
+    "unverified": [
+      "待复核",
+      "Unverified"
+    ]
+  },
+  "field_state_labels": {
+    "density": {
+      "indeterminate": [
+        "尚不确定",
+        "Indeterminate"
+      ]
+    },
+    "density_texture": {
+      "indeterminate": [
+        "尚不确定",
+        "Indeterminate"
+      ]
+    }
+  },
+  "ambiguous_lobe_aliases": [
+    "右上肺",
+    "左上肺",
+    "right upper lung",
+    "left upper lung"
+  ],
+  "concepts": {
+    "obs.pulmonary_nodule_candidate": {
+      "label_zh": "肺结节候选",
+      "label_en": "Pulmonary nodule candidate",
+      "external_codes": [
+        {
+          "system": "RadLex",
+          "version": "4.3",
+          "code": "RID50149",
+          "relation": "related"
+        }
+      ]
+    },
+    "anatomy.lung.right.upper": {
+      "label_zh": "右肺上叶",
+      "label_en": "Upper lobe of right lung",
+      "external_codes": [
+        {
+          "system": "RadLex",
+          "version": "4.3",
+          "code": "RID1303",
+          "relation": "exact"
+        }
+      ],
+      "laterality": "right"
+    },
+    "anatomy.lung.right.middle": {
+      "label_zh": "右肺中叶",
+      "label_en": "Middle lobe of right lung",
+      "external_codes": [
+        {
+          "system": "RadLex",
+          "version": "4.3",
+          "code": "RID1310",
+          "relation": "related"
+        }
+      ],
+      "laterality": "right"
+    },
+    "anatomy.lung.right.lower": {
+      "label_zh": "右肺下叶",
+      "label_en": "Lower lobe of right lung",
+      "external_codes": [
+        {
+          "system": "RadLex",
+          "version": "4.3",
+          "code": "RID1315",
+          "relation": "exact"
+        }
+      ],
+      "laterality": "right"
+    },
+    "anatomy.lung.left.upper": {
+      "label_zh": "左肺上叶",
+      "label_en": "Upper lobe of left lung",
+      "external_codes": [
+        {
+          "system": "RadLex",
+          "version": "4.3",
+          "code": "RID1327",
+          "relation": "exact"
+        }
+      ],
+      "laterality": "left"
+    },
+    "anatomy.lung.left.lower": {
+      "label_zh": "左肺下叶",
+      "label_en": "Lower lobe of left lung",
+      "external_codes": [
+        {
+          "system": "RadLex",
+          "version": "4.3",
+          "code": "RID1338",
+          "relation": "exact"
+        }
+      ],
+      "laterality": "left"
+    },
+    "anatomy.lung.left": {
+      "label_zh": "左肺",
+      "label_en": "Left lung",
+      "external_codes": [
+        {
+          "system": "RadLex",
+          "version": "4.3",
+          "code": "RID1326",
+          "relation": "exact"
+        }
+      ],
+      "laterality": "left"
+    },
+    "anatomy.lung.right": {
+      "label_zh": "右肺",
+      "label_en": "Right lung",
+      "external_codes": [
+        {
+          "system": "RadLex",
+          "version": "4.3",
+          "code": "RID1302",
+          "relation": "exact"
+        }
+      ],
+      "laterality": "right"
+    },
+    "measure.diameter.axial_max": {
+      "label_zh": "轴位最大径",
+      "label_en": "Maximum axial diameter",
+      "external_codes": []
+    },
+    "measure.diameter.sagittal_max": {
+      "label_zh": "矢状位最大径",
+      "label_en": "Maximum sagittal diameter",
+      "external_codes": []
+    },
+    "measure.diameter.coronal_max": {
+      "label_zh": "冠状位最大径",
+      "label_en": "Maximum coronal diameter",
+      "external_codes": []
+    },
+    "measure.diameter.3d_max": {
+      "label_zh": "三维最大径",
+      "label_en": "Maximum 3D diameter",
+      "external_codes": []
+    },
+    "measure.attenuation.mean": {
+      "label_zh": "ROI 平均 CT 值",
+      "label_en": "Mean ROI CT attenuation",
+      "external_codes": []
+    },
+    "measure.attenuation.median": {
+      "label_zh": "ROI 中位 CT 值",
+      "label_en": "Median ROI CT attenuation",
+      "external_codes": []
+    },
+    "measure.volume.voxel": {
+      "label_zh": "候选掩膜体素体积",
+      "label_en": "Candidate mask voxel volume",
+      "external_codes": []
+    },
+    "measure.volume.above_threshold_fraction": {
+      "label_zh": "掩膜内阈上体积分数",
+      "label_en": "Above-threshold volume fraction within the mask",
+      "external_codes": []
+    },
+    "hint.density.solid": {
+      "label_zh": "模型提示实性",
+      "label_en": "Model suggests solid attenuation",
+      "external_codes": [
+        {
+          "system": "RadLex",
+          "version": "4.3",
+          "code": "RID50151",
+          "relation": "related"
+        }
+      ]
+    },
+    "hint.density.non_solid": {
+      "label_zh": "模型提示非实性",
+      "label_en": "Model suggests non-solid attenuation",
+      "external_codes": [
+        {
+          "system": "RadLex",
+          "version": "4.3",
+          "code": "RID50153",
+          "relation": "related"
+        }
+      ]
+    },
+    "hint.calcification.present": {
+      "label_zh": "模型提示钙化",
+      "label_en": "Model suggests calcification",
+      "external_codes": [
+        {
+          "system": "RadLex",
+          "version": "4.3",
+          "code": "RID5196",
+          "relation": "related"
+        }
+      ]
+    },
+    "hint.calcification.not_indicated": {
+      "label_zh": "模型未提示钙化",
+      "label_en": "Calcification not indicated by the model",
+      "external_codes": [
+        {
+          "system": "RadLex",
+          "version": "4.3",
+          "code": "RID5196",
+          "relation": "related"
+        }
+      ]
+    },
+    "hint.spiculation.region": {
+      "label_zh": "毛刺候选区域",
+      "label_en": "Candidate spiculation region",
+      "external_codes": [
+        {
+          "system": "RadLex",
+          "version": "4.3",
+          "code": "RID34284",
+          "relation": "related"
+        }
+      ]
+    },
+    "obs.nodule.part_solid": {
+      "label_zh": "部分实性肺结节",
+      "label_en": "Part-solid pulmonary nodule",
+      "external_codes": [
+        {
+          "system": "RadLex",
+          "version": "4.3",
+          "code": "RID50152",
+          "relation": "exact"
+        }
+      ]
+    },
+    "obs.ground_glass_opacity": {
+      "label_zh": "磨玻璃密度影",
+      "label_en": "Ground-glass opacity",
+      "external_codes": [
+        {
+          "system": "RadLex",
+          "version": "4.3",
+          "code": "RID28531",
+          "relation": "exact"
+        }
+      ]
+    },
+    "obs.consolidation": {
+      "label_zh": "实变",
+      "label_en": "Consolidation",
+      "external_codes": [
+        {
+          "system": "RadLex",
+          "version": "4.3",
+          "code": "RID43255",
+          "relation": "exact"
+        }
+      ]
+    },
+    "obs.pleural_effusion": {
+      "label_zh": "胸腔积液",
+      "label_en": "Pleural effusion",
+      "external_codes": []
+    },
+    "obs.pericardial_effusion": {
+      "label_zh": "心包积液",
+      "label_en": "Pericardial effusion",
+      "external_codes": []
+    }
+  },
+  "measurement_rules": [
+    {
+      "source": "ct_quantitative_insight",
+      "field": "axial_diameter",
+      "concept": "measure.diameter.axial_max",
+      "kind": "length"
+    },
+    {
+      "source": "ct_quantitative_insight",
+      "field": "sagittal_diameter",
+      "concept": "measure.diameter.sagittal_max",
+      "kind": "length"
+    },
+    {
+      "source": "ct_quantitative_insight",
+      "field": "coronal_diameter",
+      "concept": "measure.diameter.coronal_max",
+      "kind": "length"
+    },
+    {
+      "source": "ct_quantitative_insight",
+      "field": "diameter_3d_mm",
+      "concept": "measure.diameter.3d_max",
+      "kind": "length"
+    },
+    {
+      "source": "ct_quantitative_insight",
+      "field": "mean_hu",
+      "concept": "measure.attenuation.mean",
+      "kind": "attenuation"
+    },
+    {
+      "source": "ct_quantitative_insight",
+      "field": "median_hu",
+      "concept": "measure.attenuation.median",
+      "kind": "attenuation"
+    },
+    {
+      "source": "ct_quantitative_insight",
+      "field": "voxel_volume_mm3",
+      "concept": "measure.volume.voxel",
+      "kind": "volume"
+    },
+    {
+      "source": "ct_quantitative_insight",
+      "field": "solid_volume_fraction_percent",
+      "concept": "measure.volume.above_threshold_fraction",
+      "kind": "threshold_fraction"
+    },
+    {
+      "source": "ct_reference",
+      "field": "diameter_mm",
+      "concept": "measure.diameter.axial_max",
+      "kind": "length",
+      "axial_context": true
+    },
+    {
+      "source": "ct_reference_research",
+      "field": "mean_hu",
+      "concept": "measure.attenuation.mean",
+      "kind": "attenuation"
+    },
+    {
+      "source": "ct_reference_research",
+      "field": "median_hu",
+      "concept": "measure.attenuation.median",
+      "kind": "attenuation"
+    }
+  ],
+  "term_rules": [
+    {
+      "source": "ct_candidate",
+      "field": "candidate",
+      "model": null,
+      "states": [
+        "candidate"
+      ],
+      "subject": "candidate",
+      "values": [
+        {
+          "concept": "obs.pulmonary_nodule_candidate",
+          "exact": [
+            "pulmonary_nodule_candidate",
+            "肺结节候选"
+          ],
+          "contextual": []
+        }
+      ]
+    },
+    {
+      "source": "ct_lobe_adapter",
+      "field": "lobe",
+      "model": null,
+      "states": [
+        "geometry_estimate"
+      ],
+      "subject": "candidate",
+      "values": [
+        {
+          "concept": "anatomy.lung.right.upper",
+          "exact": [
+            12,
+            "右肺上叶"
+          ],
+          "contextual": [
+            "RUL",
+            "right_upper_lobe",
+            "Upper lobe of right lung"
+          ]
+        },
+        {
+          "concept": "anatomy.lung.right.middle",
+          "exact": [
+            13,
+            "右肺中叶"
+          ],
+          "contextual": [
+            "RML",
+            "right_middle_lobe",
+            "Middle lobe of right lung"
+          ]
+        },
+        {
+          "concept": "anatomy.lung.right.lower",
+          "exact": [
+            14,
+            "右肺下叶"
+          ],
+          "contextual": [
+            "RLL",
+            "right_lower_lobe",
+            "Lower lobe of right lung"
+          ]
+        },
+        {
+          "concept": "anatomy.lung.left.upper",
+          "exact": [
+            10,
+            "左肺上叶"
+          ],
+          "contextual": [
+            "LUL",
+            "left_upper_lobe",
+            "Upper lobe of left lung"
+          ]
+        },
+        {
+          "concept": "anatomy.lung.left.lower",
+          "exact": [
+            11,
+            "左肺下叶"
+          ],
+          "contextual": [
+            "LLL",
+            "left_lower_lobe",
+            "Lower lobe of left lung"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "ct_lobe_adapter",
+      "field": "side",
+      "model": null,
+      "states": [
+        "geometry_estimate"
+      ],
+      "subject": "candidate",
+      "values": [
+        {
+          "concept": "anatomy.lung.left",
+          "exact": [
+            "left",
+            "左肺"
+          ],
+          "contextual": [
+            "left lung"
+          ]
+        },
+        {
+          "concept": "anatomy.lung.right",
+          "exact": [
+            "right",
+            "右肺"
+          ],
+          "contextual": [
+            "right lung"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "ct_specialist_raw",
+      "field": "density",
+      "model": "density-soft-tta",
+      "states": [
+        "model_hint"
+      ],
+      "subject": "candidate",
+      "values": [
+        {
+          "concept": "hint.density.solid",
+          "exact": [
+            "solid"
+          ],
+          "contextual": [
+            "实性",
+            "模型提示实性"
+          ]
+        },
+        {
+          "concept": "hint.density.non_solid",
+          "exact": [
+            "non_solid"
+          ],
+          "contextual": [
+            "非实性",
+            "模型提示非实性"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "ct_specialist_raw",
+      "field": "calcification",
+      "model": "cnn-v3",
+      "states": [
+        "model_hint"
+      ],
+      "subject": "candidate",
+      "values": [
+        {
+          "concept": "hint.calcification.present",
+          "exact": [
+            "present"
+          ],
+          "contextual": [
+            "有钙化",
+            "提示钙化",
+            "模型提示钙化"
+          ]
+        },
+        {
+          "concept": "hint.calcification.not_indicated",
+          "exact": [
+            "absent"
+          ],
+          "contextual": [
+            "未检出钙化",
+            "未提示钙化",
+            "模型未提示钙化"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "ct_specialist_raw",
+      "field": "spiculation",
+      "model": "shape-refine",
+      "states": [
+        "model_hint"
+      ],
+      "subject": "candidate",
+      "values": [
+        {
+          "concept": "hint.spiculation.region",
+          "exact": [
+            "localized",
+            "毛刺候选区域"
+          ],
+          "contextual": []
+        }
+      ]
+    },
+    {
+      "source": "ct_specialist_sparse_audit",
+      "field": "density",
+      "model": "density-soft-tta",
+      "states": [
+        "model_hint"
+      ],
+      "subject": "candidate",
+      "values": [
+        {
+          "concept": "hint.density.solid",
+          "exact": [],
+          "contextual": [
+            "实性",
+            "模型提示实性"
+          ]
+        },
+        {
+          "concept": "hint.density.non_solid",
+          "exact": [],
+          "contextual": [
+            "非实性",
+            "模型提示非实性"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "ct_specialist_sparse_audit",
+      "field": "calcification",
+      "model": "cnn-v3",
+      "states": [
+        "model_hint"
+      ],
+      "subject": "candidate",
+      "values": [
+        {
+          "concept": "hint.calcification.present",
+          "exact": [],
+          "contextual": [
+            "有钙化",
+            "提示钙化",
+            "模型提示钙化"
+          ]
+        },
+        {
+          "concept": "hint.calcification.not_indicated",
+          "exact": [],
+          "contextual": [
+            "未检出钙化",
+            "未提示钙化",
+            "模型未提示钙化"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "ct_specialist_sparse_audit",
+      "field": "spiculation",
+      "model": "shape-refine",
+      "states": [
+        "model_hint"
+      ],
+      "subject": "candidate",
+      "values": [
+        {
+          "concept": "hint.spiculation.region",
+          "exact": [
+            "毛刺候选区域"
+          ],
+          "contextual": []
+        }
+      ]
+    },
+    {
+      "source": "ct_reference_research",
+      "field": "density_texture",
+      "model": "Nodule-CADx:dd0b3d1",
+      "states": [
+        "research_prediction"
+      ],
+      "subject": "candidate",
+      "values": [
+        {
+          "concept": "hint.density.solid",
+          "exact": [
+            "solid"
+          ],
+          "contextual": []
+        },
+        {
+          "concept": "hint.density.non_solid",
+          "exact": [
+            "non_solid"
+          ],
+          "contextual": []
+        },
+        {
+          "concept": "obs.nodule.part_solid",
+          "exact": [
+            "part_solid"
+          ],
+          "contextual": []
+        }
+      ]
+    },
+    {
+      "source": "ct_chest_trial",
+      "field": "chest_trial_finding",
+      "model": "TotalSegmentator",
+      "states": [
+        "technical_test",
+        "empty_mask"
+      ],
+      "subject": "exam",
+      "values": [
+        {
+          "concept": "obs.pleural_effusion",
+          "exact": [
+            "胸腔积液",
+            "pleural_effusion"
+          ],
+          "contextual": []
+        },
+        {
+          "concept": "obs.pericardial_effusion",
+          "exact": [
+            "心包积液",
+            "pericardial_effusion"
+          ],
+          "contextual": []
+        }
+      ]
+    },
+    {
+      "source": "ct_chest_trial",
+      "field": "chest_trial_finding",
+      "model": "MEDPSeg",
+      "states": [
+        "technical_test",
+        "empty_mask"
+      ],
+      "subject": "exam",
+      "values": [
+        {
+          "concept": "obs.ground_glass_opacity",
+          "exact": [
+            "磨玻璃密度影",
+            "ground_glass_opacity"
+          ],
+          "contextual": [
+            "磨玻璃样影",
+            "GGO",
+            "Ground-glass opacity"
+          ]
+        },
+        {
+          "concept": "obs.consolidation",
+          "exact": [
+            "实变",
+            "consolidation"
+          ],
+          "contextual": []
+        }
+      ]
+    },
+    {
+      "source": "review_alias",
+      "field": "ct_finding",
+      "model": null,
+      "states": [
+        "unverified"
+      ],
+      "subject": "exam",
+      "values": [
+        {
+          "concept": "obs.ground_glass_opacity",
+          "exact": [
+            "磨玻璃密度影",
+            "ground_glass_opacity"
+          ],
+          "contextual": [
+            "GGO",
+            "Ground-glass opacity",
+            "磨玻璃样影"
+          ]
+        },
+        {
+          "concept": "obs.consolidation",
+          "exact": [
+            "实变",
+            "consolidation"
+          ],
+          "contextual": []
+        },
+        {
+          "concept": "obs.nodule.part_solid",
+          "exact": [
+            "部分实性肺结节"
+          ],
+          "contextual": [
+            "part-solid pulmonary nodule"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "review_alias",
+      "field": "nodule_density",
+      "model": null,
+      "states": [
+        "unverified"
+      ],
+      "subject": "candidate",
+      "values": [
+        {
+          "concept": "obs.nodule.part_solid",
+          "exact": [
+            "部分实性肺结节"
+          ],
+          "contextual": [
+            "part_solid",
+            "part-solid pulmonary nodule"
+          ]
+        }
+      ]
+    }
+  ],
+  "references": {
+    "radlex": "https://radlex.org/RID/",
+    "radlex_label_crosscheck": "https://github.com/RSNA/RadLex/blob/e35d2dc5cc075b08942f1a1f5bbe80719c92c6bd/RadLex.owl",
+    "ucum": {
+      "version": "2.2",
+      "url": "https://ucum.org/ucum"
+    },
+    "thoracic_glossary": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10902601/"
+  }
+}

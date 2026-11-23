@@ -41,10 +41,16 @@ def validate_output(content: str, payload: dict) -> dict:
     evidence = {v["evidence_id"]: x["lesion_id"] for x in lesions.values()
                 for group in ("measurements", "radiomics") for v in x[group]}
     references = {x["reference_id"]: x for x in payload["references"]}
+    is_ct_quantitative = payload.get("schema_version") == "ct-quantitative-insight-v1"
     for item in output.quantitative_interpretation:
         if item.lesion_id not in lesions or not item.evidence_ids or any(
                 evidence.get(ref) != item.lesion_id for ref in item.evidence_ids):
             raise ProviderError("模型引用了不存在或不属于该病灶的指标。", True)
+    if is_ct_quantitative:
+        interpreted = {item.lesion_id for item in output.quantitative_interpretation}
+        missing = set(evidence.values()) - interpreted
+        if missing:
+            raise ProviderError(f"模型未逐个解读具有可用指标的候选病灶（{', '.join(sorted(missing))}）。", True)
     for item in output.review_items:
         if any(ref not in evidence for ref in item.evidence_ids):
             raise ProviderError("待复核事项引用了不存在的指标。", True)
@@ -57,13 +63,20 @@ def validate_output(content: str, payload: dict) -> dict:
     fields += [text for x in output.review_items for text in [x.action, x.reason]]
     fields += output.limitations
     allowed = {}
+    for value in payload.get("exam", {}).get("measurements", []):
+        allowed.setdefault(value["unit"], []).append(value["value"])
+    if is_ct_quantitative:
+        units = r"HU/mm|mm²|mm2|mm³|mm3|mm|HU|mL|cm³|cm3|cm|%|bit"
+    else:
+        units = r"mm³|mm3|mm|HU|cm³|cm3|cm|%|bit"
+    aliases = {"mm³": "mm3", "mm²": "mm2", "hu": "HU", "hu/mm": "HU/mm", "ml": "mL"}
     for lesion in lesions.values():
         for group in ("measurements", "radiomics"):
             for value in lesion[group]:
                 allowed.setdefault(value["unit"], []).append(value["value"])
     for text in fields:
-        for value, unit in re.findall(r"([-+]?\d+(?:\.\d+)?)\s*(mm³|mm3|mm|HU|cm³|cm3|cm|%)", text, re.I):
-            normalized = {"mm³": "mm3", "hu": "HU"}.get(unit.lower(), unit.lower())
+        for value, unit in re.findall(rf"([-+]?\d+(?:\.\d+)?)\s*({units})", text, re.I):
+            normalized = aliases.get(unit.lower(), unit.lower())
             if not any(measurement_matches(value, x, normalized)
                        for x in allowed.get(normalized, [])):
                 raise ProviderError("模型输出包含不一致的测量值或单位。", True)
@@ -71,8 +84,8 @@ def validate_output(content: str, payload: dict) -> dict:
     for item in output.quantitative_interpretation:
         cited = [v for group in ("measurements", "radiomics")
                  for v in lesions[item.lesion_id][group] if v["evidence_id"] in item.evidence_ids]
-        for value, unit in re.findall(r"([-+]?\d+(?:\.\d+)?)\s*(mm³|mm3|mm|HU|bit)", item.text, re.I):
-            normalized = {"mm³": "mm3", "hu": "HU"}.get(unit.lower(), unit.lower())
+        for value, unit in re.findall(rf"([-+]?\d+(?:\.\d+)?)\s*({units})", item.text, re.I):
+            normalized = aliases.get(unit.lower(), unit.lower())
             if not any(v["unit"] == normalized and measurement_matches(value, v["value"], normalized) for v in cited):
                 raise ProviderError("定量解读的测量值与引用指标不一致。", True)
         for value in re.findall(r"(?<![A-Za-z0-9])[-+]?\d+\.\d+(?![A-Za-z0-9])", item.text):
